@@ -31,8 +31,10 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 
 /**
  * JWT payload structure
+ * Extends Hono's JWTPayload with index signature for compatibility
  */
 export interface JwtPayload {
+  [key: string]: unknown  // Required for Hono JWTPayload compatibility
   sub: number       // User ID
   tier: string      // User tier
   exp: number       // Expiration timestamp
