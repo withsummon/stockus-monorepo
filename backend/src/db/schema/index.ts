@@ -1,3 +1,5 @@
 // Schema barrel file for runtime imports
-// Note: drizzle.config.ts uses glob pattern to avoid ESM/CJS conflicts
+// Note: drizzle.config.ts uses explicit schema files to avoid ESM/CJS conflicts
 export * from './users.js'
+export * from './tokens.js'
+export * from './sessions.js'
