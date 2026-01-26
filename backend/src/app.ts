@@ -1,11 +1,22 @@
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
+import { cors } from 'hono/cors'
 import routes from './routes/index.js'
+import { env } from './config/env.js'
 
 const app = new Hono()
 
 // Middleware
 app.use('*', logger())
+
+// CORS configuration for cookie-based auth
+app.use('*', cors({
+  origin: env.FRONTEND_URL,
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowHeaders: ['Content-Type'],
+  maxAge: 86400,
+}))
 
 // Mount routes
 app.route('/', routes)
