@@ -1,6 +1,9 @@
 import { Context, Next } from 'hono'
 import { verify } from 'hono/jwt'
 import { getCookie } from 'hono/cookie'
+import { eq } from 'drizzle-orm'
+import { db } from '../db/index.js'
+import { admins } from '../db/schema/index.js'
 import { env } from '../config/env.js'
 import { JwtPayload, UserTier, TIER_LEVELS } from '../services/auth.service.js'
 
@@ -78,6 +81,30 @@ export function requireTier(minTier: UserTier) {
         required: minTier,
         current: userTier || 'anonymous'
       }, 403)
+    }
+
+    await next()
+  }
+}
+
+/**
+ * Admin authorization middleware
+ * Use after authMiddleware to require admin access
+ */
+export function requireAdmin() {
+  return async (c: Context, next: Next) => {
+    const userId = c.get('userId') as number
+
+    if (!userId) {
+      return c.json({ error: 'Authentication required' }, 401)
+    }
+
+    const admin = await db.query.admins.findFirst({
+      where: eq(admins.userId, userId),
+    })
+
+    if (!admin) {
+      return c.json({ error: 'Admin access required' }, 403)
     }
 
     await next()
