@@ -13,6 +13,10 @@ export default defineConfig({
     './src/db/schema/templates.ts',
     './src/db/schema/images.ts',
     './src/db/schema/cohorts.ts',
+    './src/db/schema/payments.ts',
+    './src/db/schema/subscriptions.ts',
+    './src/db/schema/promo-codes.ts',
+    './src/db/schema/referrals.ts',
   ],
   dialect: 'postgresql',
   dbCredentials: {
