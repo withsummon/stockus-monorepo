@@ -19,7 +19,7 @@ StockUs launches as a complete investment education platform for Indonesian inve
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Backend Foundation** - Hono API setup with PostgreSQL, Drizzle ORM, and project structure
-- [ ] **Phase 2: Authentication System** - User registration, login, JWT sessions, email verification, password reset
+- [x] **Phase 2: Authentication System** - User registration, login, JWT sessions, email verification, password reset
 - [ ] **Phase 3: Content API** - Courses, research reports, templates, cohorts CRUD endpoints
 - [ ] **Phase 4: Payment Integration** - Midtrans subscriptions, workshops, promo codes, referral system
 - [ ] **Phase 5: Video & Storage** - Cloudflare R2 integration, signed URLs for video access
@@ -57,11 +57,11 @@ Plans:
   5. System correctly distinguishes between anonymous, free, and member tiers
 **Plans:** 5 plans
 Plans:
-- [ ] 02-01-PLAN.md — Database schema (tokens, sessions, tier column)
-- [ ] 02-02-PLAN.md — Foundation services (env config, token service, email service)
-- [ ] 02-03-PLAN.md — Auth infrastructure (auth service, middleware)
-- [ ] 02-04-PLAN.md — Auth routes (signup, login, logout, refresh)
-- [ ] 02-05-PLAN.md — Verification flows (email verification, password reset)
+- [x] 02-01-PLAN.md — Database schema (tokens, sessions, tier column)
+- [x] 02-02-PLAN.md — Foundation services (env config, token service, email service)
+- [x] 02-03-PLAN.md — Auth infrastructure (auth service, middleware)
+- [x] 02-04-PLAN.md — Auth routes (signup, login, logout, refresh)
+- [x] 02-05-PLAN.md — Verification flows (email verification, password reset)
 
 ### Phase 3: Content API
 **Goal**: CRUD endpoints for all content types (courses, research, templates, cohorts)
@@ -156,7 +156,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Status | Completed |
 |-------|--------|-----------|
 | 1. Backend Foundation | ✓ Complete | 2026-01-26 |
-| 2. Authentication System | Planned | - |
+| 2. Authentication System | ✓ Complete | 2026-01-26 |
 | 3. Content API | Not started | - |
 | 4. Payment Integration | Not started | - |
 | 5. Video & Storage | Not started | - |
@@ -167,4 +167,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 ---
 *Roadmap created: 2025-01-25*
-*Last updated: 2026-01-26 — Phase 1 complete (verified)*
+*Last updated: 2026-01-26 — Phase 2 complete (verified)*
