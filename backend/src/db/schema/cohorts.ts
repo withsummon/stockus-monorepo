@@ -14,6 +14,7 @@ export const cohorts = pgTable('cohorts', {
   enrollmentCloseDate: timestamp('enrollment_close_date', { mode: 'date' }).notNull(),
   status: cohortStatusEnum('status').default('upcoming').notNull(),
   maxParticipants: integer('max_participants'),
+  price: integer('price'), // Price in IDR for workshop payment (null = included in subscription)
   deletedAt: timestamp('deleted_at', { mode: 'date' }),
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow().notNull(),
