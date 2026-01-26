@@ -40,7 +40,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Database migrations run successfully
   4. Project structure supports modular route organization
   5. Environment configuration loads from .env
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Project initialization, environment config, database connection
+- [ ] 01-02-PLAN.md — Hono app, health routes, schema, migrations
 
 ### Phase 2: Authentication System
 **Goal**: Users can register, login, verify email, and reset password with JWT sessions
@@ -146,7 +149,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Status | Completed |
 |-------|--------|-----------|
-| 1. Backend Foundation | Not started | - |
+| 1. Backend Foundation | Planned | - |
 | 2. Authentication System | Not started | - |
 | 3. Content API | Not started | - |
 | 4. Payment Integration | Not started | - |
@@ -158,4 +161,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 ---
 *Roadmap created: 2025-01-25*
-*Last updated: 2025-01-26 — Changed to Hono + Next.js + Docker Compose*
+*Last updated: 2025-01-26 — Phase 1 planned (2 plans)*
