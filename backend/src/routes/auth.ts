@@ -16,7 +16,7 @@ import {
   generateRefreshToken,
 } from '../services/auth.service.js'
 import { hashToken, hoursFromNow, generateToken } from '../services/token.service.js'
-import { sendVerificationEmail } from '../services/email.service.js'
+import { sendVerificationEmail, sendPasswordResetEmail, sendPasswordChangedEmail } from '../services/email.service.js'
 import { authMiddleware, AuthEnv } from '../middleware/auth.js'
 
 // Validation schemas
@@ -29,6 +29,11 @@ const signupSchema = z.object({
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string(),
+})
+
+const resetPasswordSchema = z.object({
+  token: z.string(),
+  newPassword: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
 // Cookie configuration
@@ -348,4 +353,108 @@ auth.post('/resend-verification', zValidator('json', z.object({
   }
 
   return c.json({ message: 'If your account exists and is unverified, a new verification email has been sent.' })
+})
+
+/**
+ * POST /auth/forgot-password
+ * Send password reset email
+ */
+auth.post('/forgot-password', zValidator('json', z.object({
+  email: z.string().email(),
+})), async (c) => {
+  const { email } = c.req.valid('json')
+
+  // Find user
+  const user = await db.query.users.findFirst({
+    where: eq(users.email, email.toLowerCase()),
+  })
+
+  // Always return success to prevent enumeration
+  if (user) {
+    // Delete any existing password reset tokens for this user
+    await db.delete(tokens).where(
+      and(
+        eq(tokens.userId, user.id),
+        eq(tokens.type, 'password_reset')
+      )
+    )
+
+    // Generate reset token
+    const resetToken = generateToken()
+    const tokenHash = hashToken(resetToken)
+
+    await db.insert(tokens).values({
+      userId: user.id,
+      type: 'password_reset',
+      tokenHash,
+      expiresAt: hoursFromNow(1), // 1 hour expiry for password reset
+    })
+
+    sendPasswordResetEmail(user.email, resetToken).catch(err => {
+      console.error('Failed to send password reset email:', err)
+    })
+  }
+
+  return c.json({ message: 'If an account exists with this email, a password reset link has been sent.' })
+})
+
+/**
+ * POST /auth/reset-password
+ * Reset password using token
+ */
+auth.post('/reset-password', zValidator('json', resetPasswordSchema), async (c) => {
+  const { token, newPassword } = c.req.valid('json')
+
+  const tokenHash = hashToken(token)
+
+  // Find valid token
+  const tokenRecord = await db.query.tokens.findFirst({
+    where: and(
+      eq(tokens.tokenHash, tokenHash),
+      eq(tokens.type, 'password_reset'),
+      gt(tokens.expiresAt, new Date())
+    ),
+  })
+
+  if (!tokenRecord) {
+    return c.json({ error: 'Invalid or expired reset token' }, 400)
+  }
+
+  // Get user for email notification
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, tokenRecord.userId),
+  })
+
+  if (!user) {
+    return c.json({ error: 'User not found' }, 400)
+  }
+
+  // Hash new password
+  const passwordHash = await hashPassword(newPassword)
+
+  // Update password, delete all tokens, invalidate all sessions
+  await db.transaction(async (tx) => {
+    // Update password
+    await tx.update(users)
+      .set({ passwordHash })
+      .where(eq(users.id, tokenRecord.userId))
+
+    // Delete ALL password reset tokens for this user
+    await tx.delete(tokens).where(
+      and(
+        eq(tokens.userId, tokenRecord.userId),
+        eq(tokens.type, 'password_reset')
+      )
+    )
+
+    // Invalidate all sessions (force re-login)
+    await tx.delete(sessions).where(eq(sessions.userId, tokenRecord.userId))
+  })
+
+  // Send notification email
+  sendPasswordChangedEmail(user.email).catch(err => {
+    console.error('Failed to send password changed email:', err)
+  })
+
+  return c.json({ message: 'Password reset successful. Please log in with your new password.' })
 })
