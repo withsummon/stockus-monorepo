@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2025-01-26)
 ## Current Position
 
 Phase: 2 of 9 (Authentication System)
-Plan: 3 of 4 in current phase
-Status: In progress
-Last activity: 2026-01-26 — Completed 02-03-PLAN.md (Auth Service and Middleware)
+Plan: 4 of 4 in current phase
+Status: Phase complete
+Last activity: 2026-01-26 — Completed 02-04-PLAN.md (Auth Routes)
 
-Progress: [███░░░░░░░] 30%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 3 min
-- Total execution time: 0.18 hours
+- Total execution time: 0.20 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-backend-foundation | 2 | 6 min | 3 min |
-| 02-authentication-system | 2 | 4 min | 2 min |
+| 02-authentication-system | 3 | 6 min | 2 min |
 
 **Recent Trend:**
-- Last completed: 02-03 (2 min)
-- Previous: 02-02 (2 min)
+- Last completed: 02-04 (2 min)
+- Previous: 02-03 (2 min)
 - Trend: Consistent velocity
 
 *Updated after each plan completion*
@@ -73,6 +73,12 @@ Recent decisions affecting current work:
 - Explicit HS256 in JWT verify — Prevents algorithm confusion attacks (02-03)
 - Numeric tier levels — TIER_LEVELS for easy comparison in authorization (02-03)
 
+**From 02-04:**
+- Email lowercase normalization — Prevents duplicate accounts with different case (02-04)
+- Refresh token path scope — Limits cookie to /auth/refresh for reduced XSS exposure (02-04)
+- Non-blocking email sends — Failures logged but don't block response (02-04)
+- CORS credentials exact origin — No wildcards when credentials enabled (02-04)
+
 ### Pending Todos
 
 None yet.
@@ -89,7 +95,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-26 (plan execution)
-Stopped at: Completed 02-03-PLAN.md
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None
 
 ---
