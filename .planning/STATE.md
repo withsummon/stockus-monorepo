@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2025-01-26)
 ## Current Position
 
 Phase: 4 of 9 (Payment Integration)
-Plan: 2 of 6 in current phase
+Plan: 3 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-26 - Completed 04-02-PLAN.md
+Last activity: 2026-01-26 - Completed 04-03-PLAN.md
 
-Progress: [████████░░] 79%
+Progress: [████████░░] 84%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 16
 - Average duration: 2.0 min
-- Total execution time: 0.50 hours
+- Total execution time: 0.55 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [████████░░] 79%
 | 01-backend-foundation | 2 | 6 min | 3 min |
 | 02-authentication-system | 5 | 10 min | 2 min |
 | 03-content-api | 6 | 11.5 min | 1.9 min |
-| 04-payment-integration | 2 | 4 min | 2 min |
+| 04-payment-integration | 3 | 7 min | 2.3 min |
 
 **Recent Trend:**
-- Last completed: 04-02 (1 min 54 sec)
-- Previous: 04-01 (2 min)
+- Last completed: 04-03 (3 min 6 sec)
+- Previous: 04-02 (1 min 54 sec)
 - Trend: Strong velocity maintained
 
 *Updated after each plan completion*
@@ -116,6 +116,12 @@ Recent decisions affecting current work:
 - Order ID format sub-{userId}-{timestamp}-{nanoid} - Unique IDs with embedded user context for webhook processing (04-02)
 - Custom fields for metadata - custom_field1/2 carry promo/referral IDs through webhook lifecycle (04-02)
 
+**From 04-03:**
+- Promo code uppercase normalization - Case-insensitive matching with consistent storage (04-03)
+- Referral collision retry - Up to 5 retries on nanoid collision for graceful handling (04-03)
+- Atomic counter increments - SQL template literals prevent race conditions (04-03)
+- Transaction for referral rewards - Ensures consistency between usage record and stats (04-03)
+
 ### Pending Todos
 
 None yet.
@@ -132,7 +138,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-26 (plan execution)
-Stopped at: Completed 04-02-PLAN.md
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
 
 ---
