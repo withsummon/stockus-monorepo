@@ -96,6 +96,10 @@ Recent decisions affecting current work:
 - UUID filenames for uploads - saveFile uses UUIDs to prevent path traversal and collisions (03-02)
 - Validation returns result objects - validateFile returns { valid, error? } consistent with 02-02 pattern (03-02)
 
+**From 03-04:**
+- Tier filtering in list endpoint - List endpoint returns all reports but marks restricted items, allowing discovery (03-04)
+- ID or slug lookup pattern - Single endpoint accepts numeric IDs or slugs for flexibility (03-04)
+
 **From 03-05:**
 - Files remain on disk after soft delete - Physical cleanup is v2 concern, simplifies v1 while preserving audit trail (03-05)
 - Template downloads tier-gated - Free users only access isFreePreview templates, members access all (03-05)
