@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-26)
 
 **Core value:** Indonesian investors can learn structured approaches to global equity investing through cohort-based courses, research, templates, and a professional community.
-**Current focus:** Phase 5 - Video & Storage
+**Current focus:** Phase 6 - Frontend Dashboard (Phase 5 complete)
 
 ## Current Position
 
-Phase: 5 of 9 (Video & Storage)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-01-27 — Completed 05-01-PLAN.md (R2 Infrastructure)
+Phase: 5 of 9 (Video & Storage) - COMPLETE
+Plan: 2 of 2 in current phase
+Status: Phase complete
+Last activity: 2026-01-27 — Completed 05-02-PLAN.md (Video API Routes)
 
-Progress: [████████░░] 47%
+Progress: [█████████░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
+- Total plans completed: 21
 - Average duration: 2.0 min
-- Total execution time: 0.70 hours
+- Total execution time: 0.73 hours
 
 **By Phase:**
 
@@ -31,12 +31,12 @@ Progress: [████████░░] 47%
 | 02-authentication-system | 5 | 10 min | 2 min |
 | 03-content-api | 6 | 11.5 min | 1.9 min |
 | 04-payment-integration | 6 | 11 min | 1.8 min |
-| 05-video-storage | 1 | 3 min | 3 min |
+| 05-video-storage | 2 | 5 min | 2.5 min |
 
 **Recent Trend:**
-- Last completed: 05-01 (3 min)
-- Previous: 04-06 (1 min)
-- Trend: Phase 5 started, R2 infrastructure ready
+- Last completed: 05-02 (2 min)
+- Previous: 05-01 (3 min)
+- Trend: Phase 5 complete, video storage ready
 
 *Updated after each plan completion*
 
@@ -144,6 +144,11 @@ Recent decisions affecting current work:
 - 1-hour playback URL expiry - Reasonable session length (05-01)
 - AWS SDK v3 pattern - S3Client + Commands + getSignedUrl for presigned URLs (05-01)
 
+**From 05-02:**
+- Inline video types in routes - Routes define their own validation for isolation, centralized constants available for future use (05-02)
+- Member tier for playback - Any member can access any video, course-level access control is v2 (05-02)
+- Session linking pattern - confirm-upload updates courseSessions.videoUrl for automatic video discovery (05-02)
+
 ### Pending Todos
 
 None yet.
@@ -160,7 +165,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-27 (plan execution)
-Stopped at: Completed 05-01-PLAN.md
+Stopped at: Completed 05-02-PLAN.md (Phase 5 complete)
 Resume file: None
 
 ---
