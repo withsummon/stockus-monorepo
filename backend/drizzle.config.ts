@@ -17,6 +17,7 @@ export default defineConfig({
     './src/db/schema/subscriptions.ts',
     './src/db/schema/promo-codes.ts',
     './src/db/schema/referrals.ts',
+    './src/db/schema/videos.ts',
   ],
   dialect: 'postgresql',
   dbCredentials: {
