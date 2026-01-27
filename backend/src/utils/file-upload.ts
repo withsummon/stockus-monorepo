@@ -22,6 +22,17 @@ export const ALLOWED_IMAGE_TYPES = [
   'image/webp',
 ];
 
+// Allowed MIME types for videos
+export const ALLOWED_VIDEO_TYPES = [
+  'video/mp4',
+  'video/webm',
+  'video/quicktime', // .mov
+  'video/x-msvideo', // .avi
+];
+
+// Video size limits (R2 single PUT limit is 5GB)
+export const MAX_VIDEO_SIZE = 5 * 1024 * 1024 * 1024; // 5GB
+
 /**
  * Validate file type and size
  * @param file - The file to validate
