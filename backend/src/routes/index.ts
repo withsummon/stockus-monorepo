@@ -7,6 +7,7 @@ import { templateRoutes } from './templates.js'
 import { imageRoutes } from './images.js'
 import { cohortRoutes } from './cohorts.js'
 import { referralRoutes } from './referrals.js'
+import { webhookRoutes } from './webhooks.js'
 
 const routes = new Hono()
 
@@ -33,5 +34,8 @@ routes.route('/cohorts', cohortRoutes)
 
 // Referral routes
 routes.route('/referrals', referralRoutes)
+
+// Webhook routes (external service callbacks)
+routes.route('/webhooks', webhookRoutes)
 
 export default routes
