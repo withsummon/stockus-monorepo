@@ -122,6 +122,12 @@ Recent decisions affecting current work:
 - Atomic counter increments - SQL template literals prevent race conditions (04-03)
 - Transaction for referral rewards - Ensures consistency between usage record and stats (04-03)
 
+**From 04-05:**
+- Idempotency via midtrans_transaction_id - Prevents duplicate webhook processing (04-05)
+- Settlement or capture+accept triggers success - Covers bank transfer and card payments (04-05)
+- Non-blocking email with catch handler - Failures logged but don't break webhook response (04-05)
+- Tier revert on payment failure - Handles rare settlement->deny edge case (04-05)
+
 **From 04-06:**
 - Auto-generate on access pattern - Referral codes created on first access for legacy members (04-06)
 - Self-referral prevention - Validation endpoint checks ownership and rejects own codes (04-06)
