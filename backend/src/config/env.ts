@@ -35,6 +35,14 @@ const envSchema = z.object({
 
   // Referral System
   REFERRAL_REWARD_AMOUNT: z.string().default('50000').transform(Number), // IDR 50,000 default
+
+  // Cloudflare R2 Storage
+  CLOUDFLARE_ACCOUNT_ID: z.string().min(10, 'CLOUDFLARE_ACCOUNT_ID is required'),
+  R2_ACCESS_KEY_ID: z.string().min(10, 'R2_ACCESS_KEY_ID is required'),
+  R2_SECRET_ACCESS_KEY: z.string().min(10, 'R2_SECRET_ACCESS_KEY is required'),
+  R2_BUCKET_NAME: z.string().min(1, 'R2_BUCKET_NAME is required'),
+  VIDEO_UPLOAD_URL_EXPIRY: z.string().default('900').transform(Number), // 15 minutes
+  VIDEO_PLAYBACK_URL_EXPIRY: z.string().default('3600').transform(Number), // 1 hour
 });
 
 export type Env = z.infer<typeof envSchema>;
