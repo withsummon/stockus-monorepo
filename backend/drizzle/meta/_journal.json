@@ -36,6 +36,13 @@
       "when": 1769480828431,
       "tag": "0004_wandering_echo",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1769704857821,
+      "tag": "0005_fresh_wolf_cub",
+      "breakpoints": true
     }
   ]
 }
