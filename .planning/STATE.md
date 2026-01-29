@@ -245,6 +245,11 @@ Recent decisions affecting current work:
 - Two-section form layout - Basic Info + Stock Analysis (optional) in separate Card components for visual clarity (08-05)
 - String input for targetPrice - Use string type in form, convert to number on submit to avoid complex Zod coercion types (08-05)
 
+
+**From 08-07:**
+- Tier change automatically manages subscription lifecycle - Changing to member creates 1-year subscription, changing to free cancels active subscription (08-07)
+- Admin-granted subscriptions have 1-year duration - Manual tier upgrade creates subscription with endDate set 1 year from now (08-07)
+- Payment history limited to 20 entries - User detail endpoint returns 20 most recent payments for performance and UI clarity (08-07)
 ### Pending Todos
 
 None yet.
@@ -261,7 +266,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-30 (plan execution)
-Stopped at: Completed 08-05-PLAN.md (Research Management)
+Stopped at: Completed 08-07-PLAN.md (User Management)
 Resume file: None
 
 ---
