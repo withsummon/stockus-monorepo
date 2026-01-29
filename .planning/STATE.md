@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2025-01-26)
 ## Current Position
 
 Phase: 7 of 9 (Frontend Member Area)
-Plan: 8 of 10 in current phase
+Plan: 9 of 10 in current phase
 Status: In progress
-Last activity: 2026-01-29 — Completed 07-06-PLAN.md (Research Library)
+Last activity: 2026-01-29 — Completed 07-05-PLAN.md (Course Pages with Video Playback)
 
 Progress: [█████████░] 92%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 33
-- Average duration: 2.0 min
-- Total execution time: 1.19 hours
+- Total plans completed: 34
+- Average duration: 2.3 min
+- Total execution time: 1.30 hours
 
 **By Phase:**
 
@@ -33,12 +33,12 @@ Progress: [█████████░] 92%
 | 04-payment-integration | 6 | 11 min | 1.8 min |
 | 05-video-storage | 2 | 5 min | 2.5 min |
 | 06-frontend-public-pages | 4 | 13.7 min | 3.4 min |
-| 07-frontend-member-area | 8 | 19.5 min | 2.4 min |
+| 07-frontend-member-area | 9 | 26.4 min | 2.9 min |
 
 **Recent Trend:**
-- Last completed: 07-06 (3.7 min)
-- Previous: 07-07 (3.2 min)
-- Trend: Phase 7 nearing completion, research library with tier filtering and stock analysis complete
+- Last completed: 07-05 (6.9 min)
+- Previous: 07-06 (3.7 min)
+- Trend: Phase 7 nearing completion, course pages with video playback and certificates complete
 
 *Updated after each plan completion*
 
@@ -208,6 +208,13 @@ Recent decisions affecting current work:
 - Tier filtering client-side - Fetch all reports, filter by tier client-side, show accessible and locked separately for discovery (07-06)
 - Stock rating badge colors - buy=default, hold=secondary, sell=destructive for consistent visual hierarchy (07-06)
 
+**From 07-05:**
+- react-player with dynamic import - Avoids SSR issues, widely used video player (07-05)
+- localStorage for progress tracking - Client-side only, v1 approach before backend tracking (07-05)
+- jsPDF for certificate generation - Client-side PDF generation, no server dependency (07-05)
+- Client component wrapper pattern - CoursePlayerClient wraps VideoPlayer for completion tracking (07-05)
+- Type assertion for dynamic ReactPlayer - Bypasses TypeScript issues with dynamic imports (07-05)
+
 ### Pending Todos
 
 None yet.
@@ -224,7 +231,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-29 (plan execution)
-Stopped at: Completed 07-06-PLAN.md (Research Library)
+Stopped at: Completed 07-05-PLAN.md (Course Pages with Video Playback)
 Resume file: None
 
 ---
