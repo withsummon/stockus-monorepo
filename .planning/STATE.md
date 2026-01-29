@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2025-01-26)
 ## Current Position
 
 Phase: 8 of 9 (Admin Dashboard)
-Plan: 8 of 8 in current phase
-Status: Phase 8 complete
-Last activity: 2026-01-29 — Completed 08-08-PLAN.md (Orders Management)
+Plan: 6 of 9 in current phase
+Status: In progress
+Last activity: 2026-01-30 — Completed 08-05-PLAN.md (Research Management)
 
-Progress: [█████████░] 99%
+Progress: [█████████░] 96%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 38
+- Total plans completed: 40
 - Average duration: 2.3 min
-- Total execution time: 1.52 hours
+- Total execution time: 1.7 hours
 
 **By Phase:**
 
@@ -34,12 +34,12 @@ Progress: [█████████░] 99%
 | 05-video-storage | 2 | 5 min | 2.5 min |
 | 06-frontend-public-pages | 4 | 13.7 min | 3.4 min |
 | 07-frontend-member-area | 9 | 26.4 min | 2.9 min |
-| 08-admin-dashboard | 4 | 14.1 min | 3.5 min |
+| 08-admin-dashboard | 6 | 24.4 min | 4.1 min |
 
 **Recent Trend:**
-- Last completed: 08-08 (4.3 min)
-- Previous: 08-06 (3.6 min)
-- Trend: Phase 8 complete, orders management with status filtering finished
+- Last completed: 08-05 (5.0 min)
+- Previous: 08-07 (5.3 min)
+- Trend: Phase 8 progressing, research management with optional stock analysis complete
 
 *Updated after each plan completion*
 
@@ -239,6 +239,12 @@ Recent decisions affecting current work:
 - IDR currency formatting - Intl.NumberFormat('id-ID') with currency: 'IDR' for Indonesian Rupiah display (08-08)
 - Filter reset pattern - setPage(1) when status filter changes to avoid pagination edge cases (08-08)
 
+**From 08-05:**
+- Optional stock fields pattern - All stock analysis fields nullable, empty string to null conversion on submit (08-05)
+- Rating badge color mapping - buy=default, hold=secondary, sell=destructive for consistent visual hierarchy in admin tables (08-05)
+- Two-section form layout - Basic Info + Stock Analysis (optional) in separate Card components for visual clarity (08-05)
+- String input for targetPrice - Use string type in form, convert to number on submit to avoid complex Zod coercion types (08-05)
+
 ### Pending Todos
 
 None yet.
@@ -254,9 +260,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-29 (plan execution)
-Stopped at: Completed 08-08-PLAN.md (Orders Management with Status Filtering)
+Last session: 2026-01-30 (plan execution)
+Stopped at: Completed 08-05-PLAN.md (Research Management)
 Resume file: None
 
 ---
-*Last updated: 2026-01-29*
+*Last updated: 2026-01-30*
