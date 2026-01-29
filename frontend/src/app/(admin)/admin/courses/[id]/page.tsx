@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { getAdminCourse, updateCourse, type CourseFormData } from '@/lib/api/admin'
+import { getAdminCourse, updateCourse } from '@/lib/api/admin'
 import { toast } from 'sonner'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
@@ -32,7 +32,9 @@ const courseSchema = z.object({
     message: 'Must be a valid URL',
   }).optional(),
   isFreePreview: z.boolean().optional(),
-}) satisfies z.ZodType<CourseFormData>
+})
+
+type FormValues = z.infer<typeof courseSchema>
 
 export default function EditCoursePage() {
   const router = useRouter()
@@ -41,7 +43,7 @@ export default function EditCoursePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  const form = useForm<CourseFormData>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(courseSchema),
     defaultValues: {
       title: '',
@@ -76,19 +78,17 @@ export default function EditCoursePage() {
     loadCourse()
   }, [courseId, form, router])
 
-  async function onSubmit(data: CourseFormData) {
+  async function onSubmit(data: FormValues) {
     setIsSubmitting(true)
     try {
       // Clean up payload
-      const payload: Partial<CourseFormData> = {
+      await updateCourse(courseId, {
         title: data.title,
         description: data.description,
         content: data.content,
         thumbnailUrl: data.thumbnailUrl || null,
         isFreePreview: data.isFreePreview,
-      }
-
-      await updateCourse(courseId, payload)
+      })
       toast.success('Course updated successfully')
       router.push('/admin/courses')
     } catch (error) {

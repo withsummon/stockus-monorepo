@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { createCourse, type CourseFormData } from '@/lib/api/admin'
+import { createCourse } from '@/lib/api/admin'
 import { toast } from 'sonner'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
@@ -32,13 +32,15 @@ const courseSchema = z.object({
     message: 'Must be a valid URL',
   }).optional(),
   isFreePreview: z.boolean().optional(),
-}) satisfies z.ZodType<CourseFormData>
+})
+
+type FormValues = z.infer<typeof courseSchema>
 
 export default function NewCoursePage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const form = useForm<CourseFormData>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(courseSchema),
     defaultValues: {
       title: '',
@@ -49,19 +51,17 @@ export default function NewCoursePage() {
     },
   })
 
-  async function onSubmit(data: CourseFormData) {
+  async function onSubmit(data: FormValues) {
     setIsSubmitting(true)
     try {
       // Clean up payload
-      const payload: CourseFormData = {
+      await createCourse({
         title: data.title,
         description: data.description,
         content: data.content,
         thumbnailUrl: data.thumbnailUrl || null,
         isFreePreview: data.isFreePreview,
-      }
-
-      await createCourse(payload)
+      })
       toast.success('Course created successfully')
       router.push('/admin/courses')
     } catch (error) {
