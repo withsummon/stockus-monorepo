@@ -226,6 +226,49 @@ export async function getAdminUsers(page = 1, limit = 20, search?: string) {
   return clientFetchAPI<{ users: AdminUser[]; total: number; page: number; limit: number }>(`/admin/users?${params}`)
 }
 
+export interface UserDetail {
+  user: {
+    id: number
+    email: string
+    name: string
+    tier: string
+    isVerified: boolean
+    createdAt: string
+    updatedAt: string
+  }
+  subscription?: {
+    id: number
+    userId: number
+    status: string
+    startDate: string
+    endDate: string
+    createdAt: string
+    updatedAt: string
+  } | null
+  payments: Array<{
+    id: number
+    midtransOrderId: string
+    type: string
+    status: string
+    amount: number
+    paymentMethod: string | null
+    createdAt: string
+    paidAt: string | null
+  }>
+}
+
+export async function getAdminUserDetail(id: number) {
+  return clientFetchAPI<UserDetail>(`/admin/users/${id}`)
+}
+
+export async function updateUserTier(id: number, data: { tier?: string; name?: string }) {
+  return clientFetchAPI(`/admin/users/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+}
+
 export async function getAdminOrders(page = 1, limit = 20, status?: string) {
   const params = new URLSearchParams({ page: String(page), limit: String(limit) })
   if (status) params.set('status', status)
