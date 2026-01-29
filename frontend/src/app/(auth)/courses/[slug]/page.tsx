@@ -6,6 +6,7 @@ import { fetchAPI } from '@/lib/api-client'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { CourseCertificate } from '@/components/member/CourseCertificate'
 import { SITE_NAME } from '@/lib/constants'
 import type { CourseWithSessions } from '@/types'
 import { Play, Lock, Clock, BookOpen } from 'lucide-react'
@@ -73,6 +74,15 @@ export default async function CourseDetailPage({ params }: PageProps) {
             )}
           </div>
           <p className="text-muted-foreground max-w-2xl">{course.description}</p>
+          {canAccess && (
+            <div className="pt-2">
+              <CourseCertificate
+                courseId={course.id}
+                courseTitle={course.title}
+                userName={user.name}
+              />
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <BookOpen className="h-4 w-4" />

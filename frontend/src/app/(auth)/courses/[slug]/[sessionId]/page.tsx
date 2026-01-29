@@ -5,7 +5,7 @@ import { getUser } from '@/lib/auth/dal'
 import { fetchAPI } from '@/lib/api-client'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { VideoPlayer } from '@/components/member/VideoPlayer'
+import { CoursePlayerClient } from '@/components/member/CoursePlayerClient'
 import { SITE_NAME } from '@/lib/constants'
 import type { CourseWithSessions, CourseSession } from '@/types'
 import { ArrowLeft, ArrowRight, BookOpen, Lock } from 'lucide-react'
@@ -95,7 +95,13 @@ export default async function CoursePlayerPage({ params }: PageProps) {
         <h1 className="text-2xl font-bold">{currentSession.title}</h1>
 
         {currentSession.videoUrl ? (
-          <VideoPlayer videoUrl={currentSession.videoUrl} title={currentSession.title} />
+          <CoursePlayerClient
+            videoUrl={currentSession.videoUrl}
+            title={currentSession.title}
+            courseId={course.id}
+            sessionId={currentSession.id}
+            totalSessions={sessions.length}
+          />
         ) : (
           <Card>
             <CardContent className="py-12 text-center">
