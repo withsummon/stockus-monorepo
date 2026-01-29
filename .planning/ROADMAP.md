@@ -167,7 +167,17 @@ Plans:
   2. Admin can view/edit users and subscriptions
   3. Admin can view orders and payment history
   4. Dashboard shows key metrics
-**Plans**: TBD
+**Plans:** 9 plans
+Plans:
+- [ ] 08-01-PLAN.md — Admin foundation (backend routes, layout, sidebar, auth helper)
+- [ ] 08-02-PLAN.md — Data table infrastructure (TanStack Table, shadcn/ui components)
+- [ ] 08-03-PLAN.md — Dashboard page with metrics cards
+- [ ] 08-04-PLAN.md — Course management (list, create, edit, delete)
+- [ ] 08-05-PLAN.md — Research management (list, create, edit, delete)
+- [ ] 08-06-PLAN.md — Template management (list, upload, edit, delete)
+- [ ] 08-07-PLAN.md — User management (list, detail, tier change)
+- [ ] 08-08-PLAN.md — Order management (list, filter by status)
+- [ ] 08-09-PLAN.md — Visual verification checkpoint
 
 ### Phase 9: Docker & Deployment
 **Goal**: Production-ready Docker Compose deployment
@@ -189,11 +199,11 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Status | Completed |
 |-------|--------|-----------|
-| 1. Backend Foundation | ✓ Complete | 2026-01-26 |
-| 2. Authentication System | ✓ Complete | 2026-01-26 |
-| 3. Content API | ✓ Complete | 2026-01-26 |
-| 4. Payment Integration | ✓ Complete | 2026-01-27 |
-| 5. Video & Storage | ✓ Complete | 2026-01-27 |
+| 1. Backend Foundation | Complete | 2026-01-26 |
+| 2. Authentication System | Complete | 2026-01-26 |
+| 3. Content API | Complete | 2026-01-26 |
+| 4. Payment Integration | Complete | 2026-01-27 |
+| 5. Video & Storage | Complete | 2026-01-27 |
 | 6. Frontend - Public Pages | In Progress | - |
 | 7. Frontend - Member Area | Not started | - |
 | 8. Admin Dashboard | Not started | - |
@@ -201,4 +211,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 ---
 *Roadmap created: 2025-01-25*
-*Last updated: 2026-01-27 — Phase 6 planned (5 plans in 3 waves)*
+*Last updated: 2026-01-30 — Phase 8 planned (9 plans in 3 waves)*
