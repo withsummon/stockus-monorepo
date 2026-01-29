@@ -180,3 +180,54 @@ export async function deleteResearch(id: number) {
     method: 'DELETE',
   })
 }
+
+// Admin-specific types
+export interface AdminUser {
+  id: number
+  email: string
+  name: string
+  tier: 'free' | 'member'
+  isVerified: boolean
+  createdAt: string
+  subscriptionStatus: string | null
+}
+
+export interface AdminOrder {
+  id: number
+  midtransOrderId: string
+  type: 'subscription' | 'workshop'
+  status: string
+  amount: number
+  paymentMethod: string | null
+  createdAt: string
+  paidAt: string | null
+  user: {
+    name: string
+    email: string
+  }
+}
+
+export interface AdminMetrics {
+  totalMembers: number
+  totalRevenue: number
+  activeSubscriptions: number
+  recentOrders: number
+}
+
+// Admin API functions
+export async function getAdminMetrics(): Promise<AdminMetrics> {
+  const data = await clientFetchAPI<{ metrics: AdminMetrics }>('/admin/metrics')
+  return data.metrics
+}
+
+export async function getAdminUsers(page = 1, limit = 20, search?: string) {
+  const params = new URLSearchParams({ page: String(page), limit: String(limit) })
+  if (search) params.set('search', search)
+  return clientFetchAPI<{ users: AdminUser[]; total: number; page: number; limit: number }>(`/admin/users?${params}`)
+}
+
+export async function getAdminOrders(page = 1, limit = 20, status?: string) {
+  const params = new URLSearchParams({ page: String(page), limit: String(limit) })
+  if (status) params.set('status', status)
+  return clientFetchAPI<{ orders: AdminOrder[]; total: number; page: number; limit: number }>(`/admin/orders?${params}`)
+}
