@@ -11,7 +11,7 @@ import { JwtPayload, UserTier, TIER_LEVELS } from '../services/auth.service.js'
  * Context variables set by auth middleware
  */
 export interface AuthVariables {
-  userId: number
+  userId: string  // ULID
   userTier: UserTier
   jwtPayload: JwtPayload
 }
@@ -93,7 +93,7 @@ export function requireTier(minTier: UserTier) {
  */
 export function requireAdmin() {
   return async (c: Context, next: Next) => {
-    const userId = c.get('userId') as number
+    const userId = c.get('userId') as string
 
     if (!userId) {
       return c.json({ error: 'Authentication required' }, 401)

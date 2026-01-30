@@ -16,6 +16,10 @@ const createReportSchema = z.object({
   content: z.string().optional(), // HTML content
   publishedAt: z.string().datetime().optional(), // ISO date string
   isFreePreview: z.boolean().default(false),
+  stockSymbol: z.string().max(20).optional(),
+  stockName: z.string().max(255).optional(),
+  analystRating: z.string().max(50).optional(),
+  targetPrice: z.number().int().positive().optional(),
 })
 
 const updateReportSchema = createReportSchema.partial()
@@ -64,14 +68,14 @@ research.get('/:idOrSlug', authMiddleware, async (c) => {
   const idOrSlug = c.req.param('idOrSlug')
   const userTier = c.get('userTier')
 
-  // Check if param is numeric (ID) or string (slug)
-  const isNumeric = /^\d+$/.test(idOrSlug)
+  // Check if param is ULID (26 chars) or string (slug)
+  const isUlid = /^[0-9A-HJKMNP-TV-Z]{26}$/i.test(idOrSlug)
 
   let report
-  if (isNumeric) {
+  if (isUlid) {
     report = await db.query.researchReports.findFirst({
       where: and(
-        eq(researchReports.id, parseInt(idOrSlug)),
+        eq(researchReports.id, idOrSlug),
         isNull(researchReports.deletedAt)
       ),
     })
@@ -123,6 +127,10 @@ research.post('/', authMiddleware, requireAdmin(), zValidator('json', createRepo
     publishedAt,
     status: 'published',
     isFreePreview: data.isFreePreview,
+    stockSymbol: data.stockSymbol,
+    stockName: data.stockName,
+    analystRating: data.analystRating,
+    targetPrice: data.targetPrice,
   }).returning()
 
   return c.json({ report }, 201)
@@ -134,7 +142,7 @@ research.post('/', authMiddleware, requireAdmin(), zValidator('json', createRepo
  * Admin only
  */
 research.patch('/:id', authMiddleware, requireAdmin(), zValidator('json', updateReportSchema), async (c) => {
-  const id = parseInt(c.req.param('id'))
+  const id = c.req.param('id')
   const data = c.req.valid('json')
 
   // Check if report exists
@@ -179,7 +187,7 @@ research.patch('/:id', authMiddleware, requireAdmin(), zValidator('json', update
  * Admin only
  */
 research.delete('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
+  const id = c.req.param('id')
 
   // Check if report exists
   const existing = await db.query.researchReports.findFirst({

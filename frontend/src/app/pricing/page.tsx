@@ -161,7 +161,7 @@ export default function PricingPage() {
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full" size="lg">
-                <Link href="/auth/register">Mulai Sekarang</Link>
+                <Link href="/checkout">Mulai Sekarang</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -324,7 +324,7 @@ export default function PricingPage() {
             </CardHeader>
             <CardContent>
               <Button asChild size="lg" className="text-lg px-8">
-                <Link href="/auth/register">Daftar Sekarang - {MEMBERSHIP_PRICE_FORMATTED}/tahun</Link>
+                <Link href="/checkout">Daftar Sekarang - {MEMBERSHIP_PRICE_FORMATTED}/tahun</Link>
               </Button>
               <p className="text-sm text-muted-foreground mt-4">
                 14 hari garansi uang kembali • Batalkan kapan saja

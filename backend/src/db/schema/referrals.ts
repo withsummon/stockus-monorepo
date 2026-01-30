@@ -1,10 +1,11 @@
-import { pgTable, integer, varchar, timestamp } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, integer, timestamp } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
+import { ulid } from 'ulid'
 import { users } from './users.js'
 
 export const referrals = pgTable('referrals', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-  userId: integer('user_id').notNull().references(() => users.id).unique(), // Each user has one code
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  userId: varchar('user_id', { length: 26 }).notNull().references(() => users.id).unique(), // Each user has one code
 
   // The referral code (auto-generated on member signup)
   code: varchar('code', { length: 20 }).notNull().unique(),
@@ -17,10 +18,10 @@ export const referrals = pgTable('referrals', {
 })
 
 export const referralUsages = pgTable('referral_usages', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-  referralId: integer('referral_id').notNull().references(() => referrals.id),
-  newUserId: integer('new_user_id').notNull().references(() => users.id),
-  paymentId: integer('payment_id'), // Links to the payment that triggered reward
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  referralId: varchar('referral_id', { length: 26 }).notNull().references(() => referrals.id),
+  newUserId: varchar('new_user_id', { length: 26 }).notNull().references(() => users.id),
+  paymentId: varchar('payment_id', { length: 26 }), // Links to the payment that triggered reward
   rewardAmount: integer('reward_amount').notNull(), // In IDR
 
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),

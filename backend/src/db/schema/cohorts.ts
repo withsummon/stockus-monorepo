@@ -1,12 +1,13 @@
-import { pgTable, serial, integer, varchar, timestamp, pgEnum } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, integer, timestamp, pgEnum } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
+import { ulid } from 'ulid'
 import { courses, courseSessions } from './courses.js'
 
 export const cohortStatusEnum = pgEnum('cohort_status', ['upcoming', 'open', 'closed', 'completed'])
 
 export const cohorts = pgTable('cohorts', {
-  id: serial('id').primaryKey(),
-  courseId: integer('course_id').notNull().references(() => courses.id, { onDelete: 'cascade' }),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  courseId: varchar('course_id', { length: 26 }).notNull().references(() => courses.id, { onDelete: 'cascade' }),
   name: varchar('name', { length: 255 }).notNull(),
   startDate: timestamp('start_date', { mode: 'date' }).notNull(),
   endDate: timestamp('end_date', { mode: 'date' }).notNull(),
@@ -21,9 +22,9 @@ export const cohorts = pgTable('cohorts', {
 })
 
 export const cohortSessions = pgTable('cohort_sessions', {
-  id: serial('id').primaryKey(),
-  cohortId: integer('cohort_id').notNull().references(() => cohorts.id, { onDelete: 'cascade' }),
-  courseSessionId: integer('course_session_id').references(() => courseSessions.id, { onDelete: 'set null' }),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  cohortId: varchar('cohort_id', { length: 26 }).notNull().references(() => cohorts.id, { onDelete: 'cascade' }),
+  courseSessionId: varchar('course_session_id', { length: 26 }).references(() => courseSessions.id, { onDelete: 'set null' }),
   title: varchar('title', { length: 255 }).notNull(),
   scheduledAt: timestamp('scheduled_at', { mode: 'date' }).notNull(),
   zoomLink: varchar('zoom_link', { length: 500 }),

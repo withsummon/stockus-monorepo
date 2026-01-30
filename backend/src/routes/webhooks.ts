@@ -4,7 +4,6 @@ import { eq, and } from 'drizzle-orm'
 import { db } from '../db/index.js'
 import { payments, subscriptions, users } from '../db/schema/index.js'
 import { env } from '../config/env.js'
-import { extractUserIdFromOrderId } from '../services/payment.service.js'
 import { applyPromoCode } from '../services/promo.service.js'
 import { recordReferralReward, generateReferralCode } from '../services/referral.service.js'
 import { sendPaymentReceiptEmail } from '../services/email.service.js'
@@ -96,6 +95,9 @@ webhookRoutes.post('/midtrans', async (c) => {
     return c.json({ error: 'Payment not found' }, 404)
   }
 
+  // Get userId from the payment record
+  const userId = payment.userId
+
   // 3. Idempotency check - if transaction_id already recorded, skip processing
   if (payment.midtransTransactionId === transactionId) {
     console.log('Webhook already processed:', transactionId)
@@ -127,8 +129,6 @@ webhookRoutes.post('/midtrans', async (c) => {
 
     // 6. Handle successful payment
     if (isPaymentSuccess(transactionStatus, fraudStatus)) {
-      const userId = extractUserIdFromOrderId(orderId)
-
       // Get user for email
       const user = await tx.query.users.findFirst({
         where: eq(users.id, userId),
@@ -192,7 +192,6 @@ webhookRoutes.post('/midtrans', async (c) => {
     if (isPaymentFailed(transactionStatus)) {
       // Note: This handles the rare settlement->deny case
       // If user was upgraded, downgrade them
-      const userId = extractUserIdFromOrderId(orderId)
 
       // Check if this was a subscription that upgraded the user
       const existingSubscription = await tx.query.subscriptions.findFirst({

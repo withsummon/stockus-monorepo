@@ -1,4 +1,5 @@
-import { pgTable, integer, timestamp, pgEnum } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, timestamp, pgEnum } from 'drizzle-orm/pg-core'
+import { ulid } from 'ulid'
 import { users } from './users.js'
 
 export const subscriptionStatusEnum = pgEnum('subscription_status', [
@@ -6,13 +7,13 @@ export const subscriptionStatusEnum = pgEnum('subscription_status', [
 ])
 
 export const subscriptions = pgTable('subscriptions', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-  userId: integer('user_id').notNull().references(() => users.id),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  userId: varchar('user_id', { length: 26 }).notNull().references(() => users.id),
 
   status: subscriptionStatusEnum('status').notNull().default('active'),
 
   // Payment reference
-  paymentId: integer('payment_id'), // Links to original payment
+  paymentId: varchar('payment_id', { length: 26 }), // Links to original payment
 
   // Subscription period
   startDate: timestamp('start_date', { mode: 'date' }).notNull(),

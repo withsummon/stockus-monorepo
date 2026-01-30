@@ -1,4 +1,5 @@
-import { pgTable, integer, varchar, timestamp, text, pgEnum } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, timestamp, text, integer, pgEnum } from 'drizzle-orm/pg-core'
+import { ulid } from 'ulid'
 import { users } from './users.js'
 
 export const paymentStatusEnum = pgEnum('payment_status', [
@@ -10,8 +11,8 @@ export const paymentTypeEnum = pgEnum('payment_type', [
 ])
 
 export const payments = pgTable('payments', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-  userId: integer('user_id').notNull().references(() => users.id),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  userId: varchar('user_id', { length: 26 }).notNull().references(() => users.id),
 
   // Midtrans identifiers (unique for idempotency)
   midtransOrderId: varchar('midtrans_order_id', { length: 100 }).notNull().unique(),
@@ -23,9 +24,9 @@ export const payments = pgTable('payments', {
   amount: integer('amount').notNull(), // In IDR (smallest unit)
 
   // Optional references (workshopId references cohorts.id - cohorts serve as "workshops")
-  workshopId: integer('workshop_id'), // If type = 'workshop' (references cohorts.id)
-  promoCodeId: integer('promo_code_id'), // If promo applied
-  referralId: integer('referral_id'), // If referral code used
+  workshopId: varchar('workshop_id', { length: 26 }), // If type = 'workshop' (references cohorts.id)
+  promoCodeId: varchar('promo_code_id', { length: 26 }), // If promo applied
+  referralId: varchar('referral_id', { length: 26 }), // If referral code used
 
   // Midtrans response data
   paymentMethod: varchar('payment_method', { length: 50 }),

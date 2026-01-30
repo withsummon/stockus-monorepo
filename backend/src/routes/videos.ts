@@ -41,7 +41,7 @@ const requestUploadSchema = z.object({
   sizeBytes: z.number().int().positive().max(MAX_VIDEO_SIZE, {
     message: `File size must not exceed 5GB`,
   }),
-  sessionId: z.number().int().positive().optional(),
+  sessionId: z.string().length(26).optional(), // ULID
 })
 
 // Confirm upload schema
@@ -58,7 +58,7 @@ const confirmUploadSchema = z.object({
   ),
   sizeBytes: z.number().int().positive(),
   durationSeconds: z.number().int().positive().optional(),
-  sessionId: z.number().int().positive().optional(),
+  sessionId: z.string().length(26).optional(), // ULID
 })
 
 const videoRoutes = new Hono<AuthEnv>()
@@ -163,10 +163,8 @@ videoRoutes.get(
     const conditions = [isNull(videos.deletedAt)]
 
     if (sessionIdParam) {
-      const sessionId = parseInt(sessionIdParam)
-      if (!isNaN(sessionId)) {
-        conditions.push(eq(videos.sessionId, sessionId))
-      }
+      // sessionIdParam is a ULID string
+      conditions.push(eq(videos.sessionId, sessionIdParam))
     }
 
     const videoList = await db.query.videos.findMany({
@@ -201,11 +199,7 @@ videoRoutes.delete(
   authMiddleware,
   requireAdmin(),
   async (c) => {
-    const id = parseInt(c.req.param('id'))
-
-    if (isNaN(id)) {
-      return c.json({ error: 'Invalid video ID' }, 400)
-    }
+    const id = c.req.param('id')
 
     const existingVideo = await db.query.videos.findFirst({
       where: and(
@@ -235,11 +229,7 @@ videoRoutes.get(
   authMiddleware,
   requireTier('member'),
   async (c) => {
-    const id = parseInt(c.req.param('id'))
-
-    if (isNaN(id)) {
-      return c.json({ error: 'Invalid video ID' }, 400)
-    }
+    const id = c.req.param('id')
 
     const video = await db.query.videos.findFirst({
       where: and(

@@ -268,8 +268,8 @@ export default function NewResearchPage() {
                     <FormItem>
                       <FormLabel>Analyst Rating</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        onValueChange={(value) => field.onChange(value === 'none' ? '' : value)}
+                        defaultValue={field.value || 'none'}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -277,10 +277,10 @@ export default function NewResearchPage() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="">None</SelectItem>
-                          <SelectItem value="buy">Buy</SelectItem>
-                          <SelectItem value="hold">Hold</SelectItem>
-                          <SelectItem value="sell">Sell</SelectItem>
+                          <SelectItem value="none">None</SelectItem>
+                          <SelectItem value="Buy">Buy</SelectItem>
+                          <SelectItem value="Hold">Hold</SelectItem>
+                          <SelectItem value="Sell">Sell</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

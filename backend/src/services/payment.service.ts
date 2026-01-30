@@ -19,48 +19,23 @@ interface PaymentResult {
 }
 
 interface PaymentParams {
-  userId: number
+  userId: string // ULID
   userEmail: string
   userName: string
   amount: number // In IDR
-  promoCodeId?: number
-  referralId?: number
+  promoCodeId?: string // ULID
+  referralId?: string // ULID
 }
 
 /**
- * Generate unique order ID with timestamp and random suffix
- * Format: sub-{userId}-{timestamp}-{nanoid} for subscriptions
- *         ws-{userId}-{workshopId}-{timestamp}-{nanoid} for workshops
+ * Generate unique order ID
+ * Midtrans max order_id length is 50 characters
+ * Format: SUB-{nanoid(16)} for subscriptions (20 chars)
+ *         WS-{nanoid(16)} for workshops (19 chars)
+ * We store the actual userId/workshopId in the payment record, not in the order_id
  */
-function generateOrderId(prefix: string, userId: number, itemId?: number): string {
-  const timestamp = Date.now()
-  const suffix = nanoid(6)
-  if (itemId !== undefined) {
-    return `${prefix}-${userId}-${itemId}-${timestamp}-${suffix}`
-  }
-  return `${prefix}-${userId}-${timestamp}-${suffix}`
-}
-
-/**
- * Extract userId from order ID
- * Used in webhook handler to identify the user
- */
-export function extractUserIdFromOrderId(orderId: string): number {
-  const parts = orderId.split('-')
-  // Format: prefix-userId-... or prefix-userId-itemId-...
-  return parseInt(parts[1], 10)
-}
-
-/**
- * Extract workshop ID from order ID (if present)
- */
-export function extractWorkshopIdFromOrderId(orderId: string): number | null {
-  const parts = orderId.split('-')
-  // Workshop format: ws-userId-workshopId-timestamp-suffix
-  if (parts[0] === 'ws' && parts.length >= 4) {
-    return parseInt(parts[2], 10)
-  }
-  return null
+function generateOrderId(prefix: string): string {
+  return `${prefix}-${nanoid(16)}`
 }
 
 /**
@@ -70,9 +45,9 @@ export function extractWorkshopIdFromOrderId(orderId: string): number | null {
 export async function createSubscriptionPayment(
   params: PaymentParams
 ): Promise<PaymentResult> {
-  const { userId, userEmail, userName, amount, promoCodeId, referralId } = params
+  const { userEmail, userName, amount, promoCodeId, referralId } = params
 
-  const orderId = generateOrderId('sub', userId)
+  const orderId = generateOrderId('SUB')
 
   try {
     const parameter = {
@@ -90,9 +65,15 @@ export async function createSubscriptionPayment(
         quantity: 1,
         name: 'StockUs Annual Membership',
       }],
-      // Store metadata for webhook processing
-      custom_field1: promoCodeId?.toString() || '',
-      custom_field2: referralId?.toString() || '',
+      // Callback URLs for redirect mode
+      callbacks: {
+        finish: `${env.FRONTEND_URL}/checkout/success`,
+        unfinish: `${env.FRONTEND_URL}/checkout/pending`,
+        error: `${env.FRONTEND_URL}/checkout?error=payment_failed`,
+      },
+      // Store metadata for webhook processing (optional, for reference)
+      custom_field1: promoCodeId || '',
+      custom_field2: referralId || '',
     }
 
     const transaction = await snap.createTransaction(parameter)
@@ -116,11 +97,11 @@ export async function createSubscriptionPayment(
  * Create Midtrans Snap transaction for workshop purchase
  */
 export async function createWorkshopPayment(
-  params: PaymentParams & { workshopId: number; workshopName: string }
+  params: PaymentParams & { workshopId: string; workshopName: string }
 ): Promise<PaymentResult> {
-  const { userId, userEmail, userName, amount, workshopId, workshopName, promoCodeId, referralId } = params
+  const { userEmail, userName, amount, workshopId, workshopName, promoCodeId, referralId } = params
 
-  const orderId = generateOrderId('ws', userId, workshopId)
+  const orderId = generateOrderId('WS')
 
   try {
     const parameter = {
@@ -133,14 +114,20 @@ export async function createWorkshopPayment(
         email: userEmail,
       },
       item_details: [{
-        id: `workshop-${workshopId}`,
+        id: `workshop-${workshopId.substring(0, 10)}`, // Truncate for item_id length limits
         price: amount,
         quantity: 1,
-        name: workshopName,
+        name: workshopName.substring(0, 50), // Midtrans item name limit
       }],
-      // Store metadata for webhook processing
-      custom_field1: promoCodeId?.toString() || '',
-      custom_field2: referralId?.toString() || '',
+      // Callback URLs for redirect mode
+      callbacks: {
+        finish: `${env.FRONTEND_URL}/checkout/success`,
+        unfinish: `${env.FRONTEND_URL}/checkout/pending`,
+        error: `${env.FRONTEND_URL}/checkout?error=payment_failed`,
+      },
+      // Store metadata for webhook processing (optional, for reference)
+      custom_field1: promoCodeId || '',
+      custom_field2: referralId || '',
     }
 
     const transaction = await snap.createTransaction(parameter)

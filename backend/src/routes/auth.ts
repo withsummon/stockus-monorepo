@@ -59,6 +59,38 @@ auth.post('/signup', zValidator('json', signupSchema), async (c) => {
   })
 
   if (existingUser) {
+    // If user exists but not verified, resend verification email
+    if (!existingUser.isVerified) {
+      // Delete any existing verification tokens
+      await db.delete(tokens).where(
+        and(
+          eq(tokens.userId, existingUser.id),
+          eq(tokens.type, 'email_verification')
+        )
+      )
+
+      // Generate new verification token
+      const verificationToken = generateToken()
+      const tokenHash = hashToken(verificationToken)
+
+      await db.insert(tokens).values({
+        userId: existingUser.id,
+        type: 'email_verification',
+        tokenHash,
+        expiresAt: hoursFromNow(24),
+      })
+
+      // Resend verification email
+      sendVerificationEmail(existingUser.email, verificationToken, existingUser.name).catch(err => {
+        console.error('Failed to send verification email:', err)
+      })
+
+      return c.json({
+        message: 'Account exists but not verified. Verification email has been resent.',
+        user: { id: existingUser.id, email: existingUser.email, name: existingUser.name }
+      }, 200)
+    }
+
     return c.json({ error: 'Email already registered' }, 409)
   }
 

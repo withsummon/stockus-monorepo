@@ -18,7 +18,7 @@ const initiateSubscriptionSchema = z.object({
 })
 
 const initiateWorkshopSchema = z.object({
-  cohortId: z.number().int().positive(), // Workshop = cohort with price
+  cohortId: z.string().length(26), // ULID - Workshop = cohort with price
   promoCode: z.string().optional(),
   referralCode: z.string().optional(),
 })
@@ -61,8 +61,8 @@ paymentRoutes.post(
 
     // Calculate final amount with discounts
     let finalAmount = SUBSCRIPTION_PRICE
-    let promoCodeId: number | undefined
-    let referralId: number | undefined
+    let promoCodeId: string | undefined
+    let referralId: string | undefined
 
     // Validate and apply promo code
     if (body.promoCode) {
@@ -173,8 +173,8 @@ paymentRoutes.post(
     const workshopName = cohort.name || `${cohort.course.title} - Cohort`
 
     let finalAmount = workshopPrice
-    let promoCodeId: number | undefined
-    let referralId: number | undefined
+    let promoCodeId: string | undefined
+    let referralId: string | undefined
 
     // Validate and apply promo code
     if (body.promoCode) {

@@ -25,7 +25,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
 const templateSchema = z.object({
   title: z.string().min(3, 'Judul minimal 3 karakter').max(255, 'Judul maksimal 255 karakter'),
   description: z.string().optional(),
-  isFreePreview: z.boolean().default(false),
+  isFreePreview: z.boolean(),
 })
 
 type TemplateFormData = z.infer<typeof templateSchema>

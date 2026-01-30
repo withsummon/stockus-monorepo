@@ -2,7 +2,7 @@ import { clientFetchAPI } from '../api-client'
 
 // Course types
 export interface Course {
-  id: number
+  id: string  // ULID
   title: string
   slug: string
   description: string
@@ -16,8 +16,8 @@ export interface Course {
 }
 
 export interface CourseSession {
-  id: number
-  courseId: number
+  id: string  // ULID
+  courseId: string  // ULID
   title: string
   description: string | null
   sessionOrder: number
@@ -41,7 +41,7 @@ export async function getAdminCourses() {
   return data.courses
 }
 
-export async function getAdminCourse(id: number) {
+export async function getAdminCourse(id: string) {
   const data = await clientFetchAPI<{ course: Course }>(`/courses/${id}`)
   return data.course
 }
@@ -54,7 +54,7 @@ export async function createCourse(data: CourseFormData) {
   })
 }
 
-export async function updateCourse(id: number, data: Partial<CourseFormData>) {
+export async function updateCourse(id: string, data: Partial<CourseFormData>) {
   return clientFetchAPI(`/courses/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -62,7 +62,7 @@ export async function updateCourse(id: number, data: Partial<CourseFormData>) {
   })
 }
 
-export async function deleteCourse(id: number) {
+export async function deleteCourse(id: string) {
   return clientFetchAPI(`/courses/${id}`, {
     method: 'DELETE',
   })
@@ -70,7 +70,7 @@ export async function deleteCourse(id: number) {
 
 // Template types
 export interface Template {
-  id: number
+  id: string  // ULID
   title: string
   slug: string
   description: string | null
@@ -81,7 +81,7 @@ export interface Template {
   mimeType: string
   isFreePreview: boolean
   downloadCount: number
-  uploadedBy: number
+  uploadedBy: string  // ULID
   createdAt: string
   updatedAt: string
   deletedAt: string | null
@@ -92,7 +92,7 @@ export async function getAdminTemplates() {
   return data.templates
 }
 
-export async function getAdminTemplate(id: number) {
+export async function getAdminTemplate(id: string) {
   const data = await clientFetchAPI<{ template: Template }>(`/templates/${id}`)
   return data.template
 }
@@ -101,7 +101,7 @@ export async function getAdminTemplate(id: number) {
 // This is handled separately in the client component
 
 export async function updateTemplate(
-  id: number,
+  id: string,
   data: { title?: string; description?: string; isFreePreview?: boolean }
 ) {
   return clientFetchAPI(`/templates/${id}`, {
@@ -111,7 +111,7 @@ export async function updateTemplate(
   })
 }
 
-export async function deleteTemplate(id: number) {
+export async function deleteTemplate(id: string) {
   return clientFetchAPI(`/templates/${id}`, {
     method: 'DELETE',
   })
@@ -119,7 +119,7 @@ export async function deleteTemplate(id: number) {
 
 // Research types
 export interface Research {
-  id: number
+  id: string  // ULID
   title: string
   slug: string
   summary: string
@@ -131,7 +131,7 @@ export interface Research {
   // Stock-specific fields (nullable)
   stockSymbol: string | null
   stockName: string | null
-  analystRating: string | null // 'buy' | 'hold' | 'sell'
+  analystRating: string | null // 'Buy' | 'Hold' | 'Sell'
   targetPrice: number | null
   createdAt: string
   updatedAt: string
@@ -154,7 +154,7 @@ export async function getAdminResearch() {
   return data.reports
 }
 
-export async function getAdminResearchById(id: number) {
+export async function getAdminResearchById(id: string) {
   const data = await clientFetchAPI<{ report: Research }>(`/research/${id}`)
   return data.report
 }
@@ -167,7 +167,7 @@ export async function createResearch(data: ResearchFormData) {
   })
 }
 
-export async function updateResearch(id: number, data: Partial<ResearchFormData>) {
+export async function updateResearch(id: string, data: Partial<ResearchFormData>) {
   return clientFetchAPI(`/research/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -175,7 +175,7 @@ export async function updateResearch(id: number, data: Partial<ResearchFormData>
   })
 }
 
-export async function deleteResearch(id: number) {
+export async function deleteResearch(id: string) {
   return clientFetchAPI(`/research/${id}`, {
     method: 'DELETE',
   })
@@ -183,7 +183,7 @@ export async function deleteResearch(id: number) {
 
 // Admin-specific types
 export interface AdminUser {
-  id: number
+  id: string  // ULID
   email: string
   name: string
   tier: 'free' | 'member'
@@ -193,7 +193,7 @@ export interface AdminUser {
 }
 
 export interface AdminOrder {
-  id: number
+  id: string  // ULID
   midtransOrderId: string
   type: 'subscription' | 'workshop'
   status: string
@@ -228,7 +228,7 @@ export async function getAdminUsers(page = 1, limit = 20, search?: string) {
 
 export interface UserDetail {
   user: {
-    id: number
+    id: string  // ULID
     email: string
     name: string
     tier: string
@@ -237,8 +237,8 @@ export interface UserDetail {
     updatedAt: string
   }
   subscription?: {
-    id: number
-    userId: number
+    id: string  // ULID
+    userId: string  // ULID
     status: string
     startDate: string
     endDate: string
@@ -246,7 +246,7 @@ export interface UserDetail {
     updatedAt: string
   } | null
   payments: Array<{
-    id: number
+    id: string  // ULID
     midtransOrderId: string
     type: string
     status: string
@@ -257,11 +257,11 @@ export interface UserDetail {
   }>
 }
 
-export async function getAdminUserDetail(id: number) {
+export async function getAdminUserDetail(id: string) {
   return clientFetchAPI<UserDetail>(`/admin/users/${id}`)
 }
 
-export async function updateUserTier(id: number, data: { tier?: string; name?: string }) {
+export async function updateUserTier(id: string, data: { tier?: string; name?: string }) {
   return clientFetchAPI(`/admin/users/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },

@@ -60,14 +60,14 @@ courseRoutes.get('/:idOrSlug', authMiddleware, async (c) => {
   const idOrSlug = c.req.param('idOrSlug')
   const userTier = c.get('userTier')
 
-  // Check if param is numeric (id) or slug
-  const isNumeric = /^\d+$/.test(idOrSlug)
+  // Check if param is ULID (26 chars) or slug
+  const isUlid = /^[0-9A-HJKMNP-TV-Z]{26}$/i.test(idOrSlug)
 
   let course
-  if (isNumeric) {
+  if (isUlid) {
     course = await db.query.courses.findFirst({
       where: and(
-        eq(courses.id, parseInt(idOrSlug)),
+        eq(courses.id, idOrSlug),
         isNull(courses.deletedAt)
       ),
       with: {
@@ -141,7 +141,7 @@ courseRoutes.patch(
   requireAdmin(),
   zValidator('json', updateCourseSchema),
   async (c) => {
-    const id = parseInt(c.req.param('id'))
+    const id = c.req.param('id')
     const body = c.req.valid('json')
 
     // Check if course exists
@@ -182,7 +182,7 @@ courseRoutes.delete(
   authMiddleware,
   requireAdmin(),
   async (c) => {
-    const id = parseInt(c.req.param('id'))
+    const id = c.req.param('id')
 
     // Check if course exists
     const existingCourse = await db.query.courses.findFirst({
@@ -214,7 +214,7 @@ courseRoutes.post(
   requireAdmin(),
   zValidator('json', createSessionSchema),
   async (c) => {
-    const courseId = parseInt(c.req.param('courseId'))
+    const courseId = c.req.param('courseId')
     const body = c.req.valid('json')
 
     // Check if course exists
@@ -248,8 +248,8 @@ courseRoutes.patch(
   requireAdmin(),
   zValidator('json', updateSessionSchema),
   async (c) => {
-    const courseId = parseInt(c.req.param('courseId'))
-    const sessionId = parseInt(c.req.param('sessionId'))
+    const courseId = c.req.param('courseId')
+    const sessionId = c.req.param('sessionId')
     const body = c.req.valid('json')
 
     // Check if session exists and belongs to the course
@@ -279,8 +279,8 @@ courseRoutes.delete(
   authMiddleware,
   requireAdmin(),
   async (c) => {
-    const courseId = parseInt(c.req.param('courseId'))
-    const sessionId = parseInt(c.req.param('sessionId'))
+    const courseId = c.req.param('courseId')
+    const sessionId = c.req.param('sessionId')
 
     // Check if session exists and belongs to the course
     const existingSession = await db.query.courseSessions.findFirst({

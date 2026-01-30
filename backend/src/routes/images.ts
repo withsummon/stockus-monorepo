@@ -28,11 +28,7 @@ app.get('/', authMiddleware, requireAdmin(), async (c) => {
  * Auth: Admin only
  */
 app.get('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid image ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   const image = await db.query.images.findFirst({
     where: (images, { eq, and, isNull }) =>
@@ -100,11 +96,7 @@ app.post('/', authMiddleware, requireAdmin(), async (c) => {
  * Auth: Admin only
  */
 app.patch('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid image ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   try {
     const body = await c.req.json()
@@ -140,11 +132,7 @@ app.patch('/:id', authMiddleware, requireAdmin(), async (c) => {
  * Auth: Admin only
  */
 app.delete('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid image ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   const [image] = await db.update(images)
     .set({ deletedAt: new Date() })

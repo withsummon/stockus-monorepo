@@ -198,7 +198,7 @@ adminRoutes.get('/orders', async (c) => {
  * Get user details with subscription and payment history
  */
 adminRoutes.get('/users/:id', async (c) => {
-  const userId = parseInt(c.req.param('id'))
+  const userId = c.req.param('id')
 
   // Get user
   const user = await db.query.users.findFirst({
@@ -242,7 +242,7 @@ adminRoutes.patch('/users/:id', zValidator('json', z.object({
   tier: z.enum(['free', 'member']).optional(),
   name: z.string().min(1).max(255).optional(),
 })), async (c) => {
-  const userId = parseInt(c.req.param('id'))
+  const userId = c.req.param('id')
   const body = c.req.valid('json')
 
   // Check user exists

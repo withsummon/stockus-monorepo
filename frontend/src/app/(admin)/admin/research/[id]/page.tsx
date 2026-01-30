@@ -73,7 +73,7 @@ export default function EditResearchPage({ params }: { params: { id: string } })
   async function loadResearch() {
     try {
       setIsLoading(true)
-      const report = await getAdminResearchById(parseInt(params.id))
+      const report = await getAdminResearchById(params.id)
 
       // Pre-populate form with existing data
       form.reset({
@@ -113,7 +113,7 @@ export default function EditResearchPage({ params }: { params: { id: string } })
         targetPrice: data.targetPrice ? parseInt(data.targetPrice) : null,
       }
 
-      await updateResearch(parseInt(params.id), payload)
+      await updateResearch(params.id, payload)
       toast.success('Research report updated successfully')
       router.push('/admin/research')
     } catch (error) {
@@ -307,8 +307,8 @@ export default function EditResearchPage({ params }: { params: { id: string } })
                     <FormItem>
                       <FormLabel>Analyst Rating</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
+                        onValueChange={(value) => field.onChange(value === 'none' ? '' : value)}
+                        value={field.value || 'none'}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -316,10 +316,10 @@ export default function EditResearchPage({ params }: { params: { id: string } })
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="">None</SelectItem>
-                          <SelectItem value="buy">Buy</SelectItem>
-                          <SelectItem value="hold">Hold</SelectItem>
-                          <SelectItem value="sell">Sell</SelectItem>
+                          <SelectItem value="none">None</SelectItem>
+                          <SelectItem value="Buy">Buy</SelectItem>
+                          <SelectItem value="Hold">Hold</SelectItem>
+                          <SelectItem value="Sell">Sell</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

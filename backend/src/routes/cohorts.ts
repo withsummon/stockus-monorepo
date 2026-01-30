@@ -9,13 +9,14 @@ import { authMiddleware, requireAdmin, AuthEnv } from '../middleware/auth.js'
 
 // Validation schemas
 const createCohortSchema = z.object({
-  courseId: z.number().int().positive(),
+  courseId: z.string().length(26), // ULID
   name: z.string().min(1).max(255),
   startDate: z.string().datetime(),
   endDate: z.string().datetime(),
   enrollmentOpenDate: z.string().datetime(),
   enrollmentCloseDate: z.string().datetime(),
   maxParticipants: z.number().int().positive().optional(),
+  price: z.number().int().positive().optional(), // IDR for workshops
 })
 
 const updateCohortSchema = z.object({
@@ -26,10 +27,11 @@ const updateCohortSchema = z.object({
   enrollmentCloseDate: z.string().datetime().optional(),
   status: z.enum(['upcoming', 'open', 'closed', 'completed']).optional(),
   maxParticipants: z.number().int().positive().optional(),
+  price: z.number().int().positive().optional(),
 })
 
 const createSessionSchema = z.object({
-  courseSessionId: z.number().int().positive().optional(),
+  courseSessionId: z.string().length(26).optional(), // ULID
   title: z.string().min(1).max(255),
   scheduledAt: z.string().datetime(),
   zoomLink: z.string().url().max(500).optional(),
@@ -37,7 +39,7 @@ const createSessionSchema = z.object({
 })
 
 const updateSessionSchema = z.object({
-  courseSessionId: z.number().int().positive().optional(),
+  courseSessionId: z.string().length(26).optional(), // ULID
   title: z.string().min(1).max(255).optional(),
   scheduledAt: z.string().datetime().optional(),
   zoomLink: z.string().url().max(500).optional(),
@@ -74,11 +76,7 @@ cohorts_router.get('/', authMiddleware, async (c) => {
  * Get cohort details with sessions (auth required)
  */
 cohorts_router.get('/:id', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid cohort ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   const cohort = await db.query.cohorts.findFirst({
     where: and(
@@ -143,12 +141,8 @@ cohorts_router.post('/', authMiddleware, requireAdmin(), zValidator('json', crea
  * Update cohort (admin only)
  */
 cohorts_router.patch('/:id', authMiddleware, requireAdmin(), zValidator('json', updateCohortSchema), async (c) => {
-  const id = parseInt(c.req.param('id'))
+  const id = c.req.param('id')
   const data = c.req.valid('json')
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid cohort ID' }, 400)
-  }
 
   // Check cohort exists and not deleted
   const existing = await db.query.cohorts.findFirst({
@@ -185,11 +179,7 @@ cohorts_router.patch('/:id', authMiddleware, requireAdmin(), zValidator('json', 
  * Soft delete cohort (admin only)
  */
 cohorts_router.delete('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid cohort ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   // Check cohort exists and not already deleted
   const existing = await db.query.cohorts.findFirst({
@@ -216,12 +206,8 @@ cohorts_router.delete('/:id', authMiddleware, requireAdmin(), async (c) => {
  * Add session to cohort (admin only)
  */
 cohorts_router.post('/:cohortId/sessions', authMiddleware, requireAdmin(), zValidator('json', createSessionSchema), async (c) => {
-  const cohortId = parseInt(c.req.param('cohortId'))
+  const cohortId = c.req.param('cohortId')
   const data = c.req.valid('json')
-
-  if (isNaN(cohortId)) {
-    return c.json({ error: 'Invalid cohort ID' }, 400)
-  }
 
   // Verify cohort exists and not deleted
   const cohort = await db.query.cohorts.findFirst({
@@ -253,13 +239,9 @@ cohorts_router.post('/:cohortId/sessions', authMiddleware, requireAdmin(), zVali
  * Update cohort session (admin only)
  */
 cohorts_router.patch('/:cohortId/sessions/:sessionId', authMiddleware, requireAdmin(), zValidator('json', updateSessionSchema), async (c) => {
-  const cohortId = parseInt(c.req.param('cohortId'))
-  const sessionId = parseInt(c.req.param('sessionId'))
+  const cohortId = c.req.param('cohortId')
+  const sessionId = c.req.param('sessionId')
   const data = c.req.valid('json')
-
-  if (isNaN(cohortId) || isNaN(sessionId)) {
-    return c.json({ error: 'Invalid cohort or session ID' }, 400)
-  }
 
   // Verify session exists and belongs to cohort
   const existing = await db.query.cohortSessions.findFirst({
@@ -291,12 +273,8 @@ cohorts_router.patch('/:cohortId/sessions/:sessionId', authMiddleware, requireAd
  * Delete cohort session (admin only)
  */
 cohorts_router.delete('/:cohortId/sessions/:sessionId', authMiddleware, requireAdmin(), async (c) => {
-  const cohortId = parseInt(c.req.param('cohortId'))
-  const sessionId = parseInt(c.req.param('sessionId'))
-
-  if (isNaN(cohortId) || isNaN(sessionId)) {
-    return c.json({ error: 'Invalid cohort or session ID' }, 400)
-  }
+  const cohortId = c.req.param('cohortId')
+  const sessionId = c.req.param('sessionId')
 
   // Verify session exists and belongs to cohort
   const existing = await db.query.cohortSessions.findFirst({

@@ -7,18 +7,18 @@ import { env } from '../config/env.js'
 // Alphabet without ambiguous characters (0, O, I, l)
 const generateCode = customAlphabet('ABCDEFGHJKLMNPQRSTUVWXYZ23456789', 8)
 
-// Result types
+// Result types - using string for ULID IDs
 interface ReferralResult {
   success: boolean
-  referralId?: number
+  referralId?: string
   code?: string
   error?: string
 }
 
 interface ReferralValidationResult {
   success: boolean
-  referralId?: number
-  referrerId?: number
+  referralId?: string
+  referrerId?: string
   error?: string
 }
 
@@ -26,7 +26,7 @@ interface ReferralValidationResult {
  * Generate a unique referral code for a user
  * Called when user becomes a member (after first subscription payment)
  */
-export async function generateReferralCode(userId: number): Promise<ReferralResult> {
+export async function generateReferralCode(userId: string): Promise<ReferralResult> {
   // Check if user already has a referral code
   const existing = await db.query.referrals.findFirst({
     where: eq(referrals.userId, userId),
@@ -107,9 +107,9 @@ export async function validateReferralCode(code: string): Promise<ReferralValida
  * 2. Update referral stats
  */
 export async function recordReferralReward(
-  referralId: number,
-  newUserId: number,
-  paymentId: number
+  referralId: string,
+  newUserId: string,
+  paymentId: string
 ): Promise<{ success: boolean; error?: string }> {
   const rewardAmount = env.REFERRAL_REWARD_AMOUNT
 
@@ -146,7 +146,7 @@ export async function recordReferralReward(
  * Get referral stats for a user
  * Used in member dashboard to show referral performance
  */
-export async function getReferralStats(userId: number) {
+export async function getReferralStats(userId: string) {
   const referral = await db.query.referrals.findFirst({
     where: eq(referrals.userId, userId),
     with: {

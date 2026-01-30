@@ -1,7 +1,8 @@
-import { pgTable, integer, varchar, timestamp, boolean } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, integer, timestamp, boolean } from 'drizzle-orm/pg-core'
+import { ulid } from 'ulid'
 
 export const promoCodes = pgTable('promo_codes', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
 
   // Code details
   code: varchar('code', { length: 50 }).notNull().unique(), // e.g., "NEWYEAR2026"

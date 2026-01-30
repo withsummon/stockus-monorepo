@@ -1,8 +1,9 @@
-import { pgTable, serial, varchar, text, timestamp, boolean, integer } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, text, timestamp, boolean, integer } from 'drizzle-orm/pg-core'
+import { ulid } from 'ulid'
 import { contentStatusEnum } from './courses.js'
 
 export const researchReports = pgTable('research_reports', {
-  id: serial('id').primaryKey(),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
   title: varchar('title', { length: 255 }).notNull(),
   slug: varchar('slug', { length: 255 }).notNull().unique(),
   summary: text('summary').notNull(),

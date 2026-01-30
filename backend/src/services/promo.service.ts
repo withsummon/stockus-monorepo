@@ -5,7 +5,7 @@ import { promoCodes } from '../db/schema/index.js'
 // Result types following existing pattern
 interface PromoValidationResult {
   success: boolean
-  promoCodeId?: number
+  promoCodeId?: string // ULID
   discountPercent?: number
   error?: string
 }
@@ -55,7 +55,7 @@ export async function validatePromoCode(code: string): Promise<PromoValidationRe
  * Call this AFTER successful payment confirmation
  * Uses atomic increment to prevent race conditions
  */
-export async function applyPromoCode(promoCodeId: number): Promise<{ success: boolean; error?: string }> {
+export async function applyPromoCode(promoCodeId: string): Promise<{ success: boolean; error?: string }> {
   try {
     await db.update(promoCodes)
       .set({
@@ -95,7 +95,7 @@ export function calculateDiscountedAmount(
  * Get promo code by ID
  * Used for displaying applied discount in UI
  */
-export async function getPromoCode(id: number) {
+export async function getPromoCode(id: string) {
   return db.query.promoCodes.findFirst({
     where: eq(promoCodes.id, id),
   })

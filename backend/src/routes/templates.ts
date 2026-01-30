@@ -28,11 +28,7 @@ app.get('/', authMiddleware, async (c) => {
  * Auth: Required
  */
 app.get('/:id', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid template ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   const template = await db.query.templates.findFirst({
     where: (templates, { eq, and, isNull }) =>
@@ -51,12 +47,8 @@ app.get('/:id', authMiddleware, async (c) => {
  * Auth: Required, tier-gated
  */
 app.get('/:id/download', authMiddleware, async (c) => {
-  const id = parseInt(c.req.param('id'))
+  const id = c.req.param('id')
   const userTier = c.get('userTier')
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid template ID' }, 400)
-  }
 
   const template = await db.query.templates.findFirst({
     where: eq(templates.id, id),
@@ -151,11 +143,7 @@ app.post('/', authMiddleware, requireAdmin(), async (c) => {
  * Auth: Admin only
  */
 app.patch('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid template ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   try {
     const body = await c.req.json()
@@ -192,11 +180,7 @@ app.patch('/:id', authMiddleware, requireAdmin(), async (c) => {
  * Auth: Admin only
  */
 app.delete('/:id', authMiddleware, requireAdmin(), async (c) => {
-  const id = parseInt(c.req.param('id'))
-
-  if (isNaN(id)) {
-    return c.json({ error: 'Invalid template ID' }, 400)
-  }
+  const id = c.req.param('id')
 
   const [template] = await db.update(templates)
     .set({ deletedAt: new Date() })

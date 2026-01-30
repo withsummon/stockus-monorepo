@@ -35,7 +35,7 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
  */
 export interface JwtPayload {
   [key: string]: unknown  // Required for Hono JWTPayload compatibility
-  sub: number       // User ID
+  sub: string       // User ID (ULID)
   tier: string      // User tier
   exp: number       // Expiration timestamp
   iat: number       // Issued at timestamp
@@ -45,7 +45,7 @@ export interface JwtPayload {
  * Generate JWT access token (short-lived, 15 min default)
  */
 export async function generateAccessToken(
-  userId: number,
+  userId: string,  // ULID
   tier: string
 ): Promise<string> {
   const now = Math.floor(Date.now() / 1000)

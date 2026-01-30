@@ -1,10 +1,11 @@
-import { pgTable, serial, varchar, text, timestamp, boolean, integer, pgEnum } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, text, timestamp, boolean, integer, pgEnum } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
+import { ulid } from 'ulid'
 
 export const contentStatusEnum = pgEnum('content_status', ['published', 'archived'])
 
 export const courses = pgTable('courses', {
-  id: serial('id').primaryKey(),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
   title: varchar('title', { length: 255 }).notNull(),
   slug: varchar('slug', { length: 255 }).notNull().unique(),
   description: text('description').notNull(),
@@ -18,8 +19,8 @@ export const courses = pgTable('courses', {
 })
 
 export const courseSessions = pgTable('course_sessions', {
-  id: serial('id').primaryKey(),
-  courseId: integer('course_id').notNull().references(() => courses.id, { onDelete: 'cascade' }),
+  id: varchar('id', { length: 26 }).primaryKey().$defaultFn(() => ulid()),
+  courseId: varchar('course_id', { length: 26 }).notNull().references(() => courses.id, { onDelete: 'cascade' }),
   title: varchar('title', { length: 255 }).notNull(),
   description: text('description'),
   sessionOrder: integer('session_order').notNull(),
