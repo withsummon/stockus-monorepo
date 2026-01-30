@@ -1,7 +1,7 @@
 import { Hero } from '@/components/sections/Hero'
 import { CoursesShowcase } from '@/components/sections/CoursesShowcase'
 import { CommunityFeatures } from '@/components/sections/CommunityFeatures'
-import { Testimonials } from '@/components/sections/Testimonials'
+import { WhatPeopleSay } from '@/components/sections/WhatPeopleSay'
 import { FAQ } from '@/components/sections/FAQ'
 import { fetchAPI } from '@/lib/api'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
@@ -11,6 +11,7 @@ import { WhyIndonesian } from '@/components/sections/WhyIndonesian'
 import { IsRightForU } from '@/components/sections/IsRightForU'
 import { Fundamentals } from '@/components/sections/fundamentals'
 import { WhatYouGet } from '@/components/sections/WhatYouGet'
+import { Community } from '@/components/sections/Community'
 
 async function getCourses(): Promise<Course[]> {
   try {
@@ -59,9 +60,10 @@ export default async function HomePage() {
       <WhyIndonesian />
       <Fundamentals />
       <WhatYouGet />
-      <CoursesShowcase courses={courses} />
+      <Community />
       <CommunityFeatures />
-      <Testimonials />
+      <WhatPeopleSay />
+      <CoursesShowcase courses={courses} />
       <FAQ />
     </>
   )

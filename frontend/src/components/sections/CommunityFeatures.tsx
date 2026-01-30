@@ -1,63 +1,92 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { BookOpen, FileText, TrendingUp, Users } from 'lucide-react'
+import React from 'react'
+import { Check, Crown } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 const features = [
   {
-    icon: BookOpen,
-    title: 'Cohort-Based Courses',
-    description:
-      'Learn with peers in structured programs led by experienced investors. Engage in discussions, case studies, and practical exercises.',
+    title: 'Member-only discussion channels',
+    description: 'Share ideas, ask questions, and learn from others at different stages of their journey',
+    isPremium: false,
   },
   {
-    icon: FileText,
-    title: 'Professional Research',
-    description:
-      'Access in-depth research reports on global equities, sectors, and market trends to inform your investment decisions.',
+    title: 'Networking',
+    description: 'Connect with investors, founders, and professionals who share an interest in global markets.',
+    isPremium: false,
   },
   {
-    icon: Users,
-    title: 'Vibrant Community',
-    description:
-      'Connect with fellow Indonesian investors, share insights, and learn from each other\'s experiences in a supportive environment.',
+    title: 'Live events & workshops',
+    description: 'Regular sessions where we break down earnings, macro events, and individual stocks.',
+    isPremium: false,
   },
   {
-    icon: TrendingUp,
-    title: 'Investment Templates',
-    description:
-      'Download practical templates for financial analysis, portfolio tracking, and investment planning to streamline your workflow.',
+    title: 'Private Review Session',
+    description: 'Get structured feedback on your portfolio framework and positioning.',
+    isPremium: true,
+  },
+  {
+    title: 'Guest speakers',
+    description: 'Hear from global fund managers and practitioners who manage real portfolios and navigate markets.',
+    isPremium: false,
+  },
+  {
+    title: 'AMA & Q&A sessions',
+    description: 'Bring your questions about process, mindset, or specific challenges and get them answered live.',
+    isPremium: true,
   },
 ]
 
 export function CommunityFeatures() {
   return (
-    <section className="py-16 sm:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Everything You Need to Succeed
+    <section className="bg-main-black py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto container">
+        {/* Header */}
+        <div className="text-center space-y-8 mb-16 md:mb-24">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white">
+            Community Features
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            A comprehensive platform for serious investors who want to improve
-            their global equity investing skills.
-          </p>
+          <div className="w-full h-[1px] bg-white/20"></div>
         </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => {
-            const Icon = feature.icon
-            return (
-              <Card key={feature.title}>
-                <CardHeader>
-                  <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                    <Icon className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <CardTitle>{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-slate-600">{feature.description}</p>
-                </CardContent>
-              </Card>
-            )
-          })}
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 md:gap-y-16">
+          {features.map((feature, index) => (
+            <div key={index} className="flex gap-6 items-start group">
+              <div className={cn(
+                "flex-shrink-0 mt-1",
+                feature.isPremium ? "text-brand" : "text-white"
+              )}>
+                <Check className="w-8 h-8 md:w-10 md:h-10 border-2 rounded-full p-1 border-current" />
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-3">
+                  <h3 className={cn(
+                    "text-xl md:text-2xl font-bold font-montserrat",
+                    feature.isPremium ? "text-brand" : "text-white"
+                  )}>
+                    {feature.title}
+                  </h3>
+                  {feature.isPremium && (
+                    <Crown className="w-5 h-5 text-brand fill-brand" />
+                  )}
+                </div>
+                <p className="text-slate-400 font-montserrat text-base md:text-lg font-light leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Button */}
+        <div className="mt-20 md:mt-32 flex justify-center">
+          <Button
+            variant="outline"
+            className="w-full border-brand bg-transparent py-8 text-2xl font-montserrat font-semibold text-brand border-2 rounded-[30px]"
+          >
+            Learn More
+          </Button>
         </div>
       </div>
     </section>
