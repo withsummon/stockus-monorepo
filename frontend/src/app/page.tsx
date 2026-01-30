@@ -6,9 +6,10 @@ import { FAQ } from '@/components/sections/FAQ'
 import { fetchAPI } from '@/lib/api'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
 import type { Course } from '@/types'
-import Image from 'next/image'
 import { TrustedBy } from '@/components/sections/TrustedBy'
+import { WhyIndonesian } from '@/components/sections/WhyIndonesian'
 import { IsRightForU } from '@/components/sections/IsRightForU'
+import { Fundamentals } from '@/components/sections/fundamentals'
 
 async function getCourses(): Promise<Course[]> {
   try {
@@ -54,6 +55,8 @@ export default async function HomePage() {
       <Hero />
       <TrustedBy />
       <IsRightForU />
+      <WhyIndonesian />
+      <Fundamentals />
       <CoursesShowcase courses={courses} />
       <CommunityFeatures />
       <Testimonials />
