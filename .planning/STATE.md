@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-26)
 
 **Core value:** Indonesian investors can learn structured approaches to global equity investing through cohort-based courses, research, templates, and a professional community.
-**Current focus:** Phase 8 - Admin Dashboard (Phase 7 complete)
+**Current focus:** Phase 9 - Docker & Deployment
 
 ## Current Position
 
-Phase: 8 of 9 (Admin Dashboard)
-Plan: 8 of 9 in current phase
+Phase: 9 of 9 (Docker & Deployment)
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-01-30 — Completed 08-03-PLAN.md (Dashboard Metrics)
+Last activity: 2026-01-30 — Completed 09-02-PLAN.md (Frontend Docker Configuration)
 
-Progress: [█████████░] 91%
+Progress: [█████████░] 93%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 41
+- Total plans completed: 42
 - Average duration: 2.3 min
-- Total execution time: 1.8 hours
+- Total execution time: 1.9 hours
 
 **By Phase:**
 
@@ -35,11 +35,12 @@ Progress: [█████████░] 91%
 | 06-frontend-public-pages | 4 | 13.7 min | 3.4 min |
 | 07-frontend-member-area | 9 | 26.4 min | 2.9 min |
 | 08-admin-dashboard | 8 | 30.4 min | 3.8 min |
+| 09-docker-deployment | 2 | 3.5 min | 1.8 min |
 
 **Recent Trend:**
-- Last completed: 08-03 (6.0 min)
-- Previous: 08-05 (5.0 min)
-- Trend: Phase 8 progressing, dashboard metrics with IDR formatting complete
+- Last completed: 09-02 (1.5 min)
+- Previous: 08-03 (6.0 min)
+- Trend: Phase 9 Docker deployment progressing, frontend container configuration complete
 
 *Updated after each plan completion*
 
@@ -256,6 +257,11 @@ Recent decisions affecting current work:
 - Split api-client into server/client files - Fixes Next.js import error when client components import server-only code (08-03)
 - IDR currency formatting - Uses Indonesian locale (id-ID) for revenue display matching target audience (08-03)
 
+**From 09-02:**
+- Standalone output mode - Next.js output: 'standalone' reduces Docker image from 1.2GB to 300-450MB by tracing actual dependencies (09-02)
+- Alpine for frontend - node:20-alpine acceptable since no native dependencies like argon2, smaller than slim (09-02)
+- Node.js http for health checks - HEALTHCHECK uses require('http').get() instead of curl/wget, no additional packages needed (09-02)
+
 ### Pending Todos
 
 None yet.
@@ -272,7 +278,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-30 (plan execution)
-Stopped at: Completed 08-03-PLAN.md (Dashboard Metrics)
+Stopped at: Completed 09-02-PLAN.md (Frontend Docker Configuration)
 Resume file: None
 
 ---
