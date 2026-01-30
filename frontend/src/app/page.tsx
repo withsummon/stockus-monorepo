@@ -10,6 +10,7 @@ import { TrustedBy } from '@/components/sections/TrustedBy'
 import { WhyIndonesian } from '@/components/sections/WhyIndonesian'
 import { IsRightForU } from '@/components/sections/IsRightForU'
 import { Fundamentals } from '@/components/sections/fundamentals'
+import { WhatYouGet } from '@/components/sections/WhatYouGet'
 
 async function getCourses(): Promise<Course[]> {
   try {
@@ -57,6 +58,7 @@ export default async function HomePage() {
       <IsRightForU />
       <WhyIndonesian />
       <Fundamentals />
+      <WhatYouGet />
       <CoursesShowcase courses={courses} />
       <CommunityFeatures />
       <Testimonials />
