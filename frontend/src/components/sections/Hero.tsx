@@ -4,29 +4,26 @@ import Link from 'next/link'
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-16 sm:py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-main-black py-16 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
-            Master Global Equity Investing{' '}
-            <span className="text-blue-600">With Confidence</span>
+        <div className="mx-auto max-w-3xl text-center ">
+          <h1 className="font-montserrat text-2xl sm:text-4xl font-semibold leading-none text-white">
+            The Bridge Between Indonesian Investors And Global Stock Markets
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Learn structured approaches to global equity investing through
-            cohort-based courses, professional research, and a supportive
-            community of Indonesian investors.
+          <p className="mt-6 text-lg leading-relaxed sm:text-md text-main-white opacity-75 font-light">
+          Learn how professionals analyse businesses, value companies, and build portfolios from a team that has helped manage more than $12 billion across global markets.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" asChild>
               <Link href="/courses">
-                Explore Courses
+                View Curriculum
                 <ArrowRight className="ml-2" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/pricing">
                 <Users className="mr-2" />
-                Join Community
+                Join the Next Cohor
               </Link>
             </Button>
           </div>
