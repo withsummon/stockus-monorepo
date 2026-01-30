@@ -34,8 +34,8 @@ export function IsRightForU() {
     }, [])
 
     return (
-        <section className="bg-white py-12 px-4 sm:px-6">
-            <div className="max-w-6xl mx-auto bg-custom-secondary rounded-[40px] p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center">
+        <section className="bg-custom-secondary py-12 px-4 sm:px-6">
+            <div className="max-w-6xl mx-auto bg-white rounded-[20px] p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center">
                 {/* Left Content */}
                 <div className="w-full md:w-1/2 space-y-6">
                     <div className="w-16 h-16 bg-main-black rounded-2xl flex items-center justify-center p-3">
