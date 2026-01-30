@@ -3,6 +3,7 @@ import { CoursesShowcase } from '@/components/sections/CoursesShowcase'
 import { CommunityFeatures } from '@/components/sections/CommunityFeatures'
 import { WhatPeopleSay } from '@/components/sections/WhatPeopleSay'
 import { WhosBehind } from '@/components/sections/WhosBehind'
+import { JoinMembership } from '@/components/sections/JoinMembership'
 import { FAQ } from '@/components/sections/FAQ'
 import { fetchAPI } from '@/lib/api'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
@@ -65,6 +66,7 @@ export default async function HomePage() {
       <CommunityFeatures />
       <WhatPeopleSay />
       <WhosBehind />
+      <JoinMembership />
       <CoursesShowcase courses={courses} />
       <FAQ />
     </>

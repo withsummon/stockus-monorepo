@@ -41,7 +41,7 @@ export function WhatPeopleSay() {
                     {testimonials.map((testimonial, index) => (
                         <div
                             key={index}
-                            className="bg-[#F1F1F1] rounded-[20px] p-4 md:px-8 md:py-6 flex flex-col items-start text-left space-y-6 shadow-lg"
+                            className="bg-white rounded-[20px] p-4 md:px-8 md:py-6 flex flex-col items-start text-left space-y-6 shadow-lg"
                         >
                             {/* Avatar */}
                             <div className="relative w-12 h-12 md:w-20 md:h-20 rounded-full overflow-hidden border-4 border-white shadow-md">
