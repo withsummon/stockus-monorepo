@@ -67,8 +67,8 @@ export default async function HomePage() {
       <WhatPeopleSay />
       <WhosBehind />
       <JoinMembership />
-      <CoursesShowcase courses={courses} />
       <FAQ />
+      <CoursesShowcase courses={courses} />
     </>
   )
 }
