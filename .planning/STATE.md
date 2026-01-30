@@ -257,6 +257,13 @@ Recent decisions affecting current work:
 - Split api-client into server/client files - Fixes Next.js import error when client components import server-only code (08-03)
 - IDR currency formatting - Uses Indonesian locale (id-ID) for revenue display matching target audience (08-03)
 
+**From 09-01:**
+- node:20-slim over alpine - Better argon2 native dependency support on Debian-based images (09-01)
+- Multi-stage build pattern - Separate prod-deps, build, and runner stages for optimal caching and size (09-01)
+- Non-root user (hono:1001) - Security best practice for production containers (09-01)
+- Port 3000 in container - Docker standard, overrideable via PORT env var at runtime (09-01)
+- HTTP-based health check - Uses Node.js http module to call /health endpoint every 12s (09-01)
+
 **From 09-02:**
 - Standalone output mode - Next.js output: 'standalone' reduces Docker image from 1.2GB to 300-450MB by tracing actual dependencies (09-02)
 - Alpine for frontend - node:20-alpine acceptable since no native dependencies like argon2, smaller than slim (09-02)
