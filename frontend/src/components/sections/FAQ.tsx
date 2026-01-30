@@ -32,12 +32,12 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(1) // Defaulting to the 2nd one as per screenshot
 
   return (
-    <section className="bg-main-white py-12 md:py-32 px-4 sm:px-6 lg:px-8">
+    <section className="bg-main-white py-12 md:py-24 xl:py-32 px-4 sm:px-6 lg:px-8">
       <div className="w-full mx-auto container">
-        <div className="bg-white rounded-[40px] md:rounded-[60px] p-8 md:p-16 lg:p-24 flex flex-col lg:flex-row gap-16 lg:gap-32 items-center">
+        <div className="bg-white rounded-[40px] md:rounded-[60px] p-8 md:p-12 lg:p-16 xl:p-24 flex flex-col lg:flex-row gap-12 lg:gap-20 xl:gap-32 items-center">
           {/* Left Column: Title */}
-          <div className="w-full lg:w-5/12">
-            <h2 className="text-4xl md:text-5xl lg:text-[80px] font-bold font-montserrat text-main-black leading-[1.1]">
+          <div className="w-full lg:w-5/12 xl:w-5/12">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-[80px] font-bold font-montserrat text-main-black leading-[1.1]">
               <span className="text-brand">Frequently</span> <br />
               Asked <br />
               Questions
@@ -45,7 +45,7 @@ export function FAQ() {
           </div>
 
           {/* Right Column: Accordion */}
-          <div className="w-full lg:w-7/12 space-y-4">
+          <div className="w-full lg:w-7/12 xl:w-7/12 space-y-4">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index
               return (

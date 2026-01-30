@@ -7,7 +7,7 @@ import { motion } from 'motion/react'
 export function Hero() {
   return (
 
-    <section className="relative overflow-hidden bg-main-black pt-8 sm:pt-12  sm:max-h-[900px]  lg:max-h-[700px] xl:max-h-[990px]">
+    <section className="relative overflow-hidden bg-main-black pt-8 sm:pt-12  sm:max-h-[900px]  lg:max-h-[900px] 2xl:max-h-[990px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="font-montserrat text-2xl sm:text-5xl font-semibold leading-none text-white">

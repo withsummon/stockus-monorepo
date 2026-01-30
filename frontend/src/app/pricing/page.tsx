@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Check, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -7,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { SITE_NAME, MEMBERSHIP_PRICE, MEMBERSHIP_PRICE_FORMATTED } from '@/lib/constants'
+import { FAQ } from '@/components/sections/FAQ'
 
 export const metadata: Metadata = {
   title: 'Pricing - StockUs Membership',
@@ -103,236 +105,149 @@ export default function PricingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="container mx-auto px-4 py-12 max-w-7xl">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <Badge className="mb-4" variant="outline">
-            Investasi Terbaik untuk Masa Depan Anda
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Satu Membership, Akses Semua
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Bergabung dengan ratusan investor yang belajar pendekatan terstruktur investasi saham global
-          </p>
-        </div>
+      <div
+        className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8"
+        style={{
+          background: 'linear-gradient(0deg, #F96E00 0%, #000000 69.13%)'
+        }}
+      >
+        <div className="container mx-auto max-w-7xl">
+          {/* Hero Header */}
+          <div className="text-center mb-16 space-y-4">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-montserrat text-white leading-tight tracking-tight text-wrap-balance">
+              Join Our Membership
+            </h1>
+            <p className="text-white text-lg md:text-2xl font-montserrat font-light text-wrap-balance">
+              Get started to learn StockUs <span className="text-[#F96E00] font-bold">Fundamentals Course</span>
+            </p>
+          </div>
 
-        {/* Pricing Card */}
-        <div className="max-w-md mx-auto mb-20">
-          <Card className="border-2 border-primary shadow-lg">
-            <CardHeader className="text-center pb-8">
-              <CardTitle className="text-3xl mb-2">StockUs Member</CardTitle>
-              <CardDescription>Akses penuh ke semua fitur</CardDescription>
-              <div className="mt-6">
-                <div className="text-5xl font-bold">{MEMBERSHIP_PRICE_FORMATTED}</div>
-                <div className="text-muted-foreground mt-2">per tahun</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  ~{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(MEMBERSHIP_PRICE / 12)}/bulan
+          {/* New Membership Card */}
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-[40px] shadow-2xl overflow-hidden border-2 border-brand/20 p-8 md:p-16 flex flex-col items-center space-y-12 transition-all duration-300 hover:scale-[1.01]">
+              {/* Card Header */}
+              <div className="text-center space-y-2">
+                <h2 className="text-3xl md:text-5xl font-bold font-montserrat text-main-black tracking-tight">
+                  StockUs Fundamentals
+                </h2>
+                <p className="text-slate-500 text-lg md:text-xl font-montserrat italic font-light">
+                  5-Day Intensive
+                </p>
+              </div>
+
+              {/* Price */}
+              <div className="text-center space-y-1">
+                <div className="text-3xl md:text-5xl font-bold font-montserrat text-main-black">
+                  IDR {MEMBERSHIP_PRICE_FORMATTED.replace('Rp ', '')}
                 </div>
               </div>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <Check className="mr-3 h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span>Akses semua video kursus selamanya</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="mr-3 h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span>Semua research reports & analysis</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="mr-3 h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span>Investment templates & tools</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="mr-3 h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span>Private Discord community</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="mr-3 h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span>Monthly live Q&A sessions</span>
-                </li>
-                <li className="flex items-start">
-                  <Check className="mr-3 h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span>14 hari garansi uang kembali</span>
-                </li>
-              </ul>
-            </CardContent>
-            <CardFooter>
-              <Button asChild className="w-full" size="lg">
-                <Link href="/auth/register">Mulai Sekarang</Link>
-              </Button>
-            </CardFooter>
-          </Card>
-        </div>
 
-        {/* Features by Category */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Apa yang Anda Dapatkan</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {Object.entries(features).map(([key, category]) => (
-              <Card key={key}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-3xl">{category.icon}</span>
-                    <span>{category.title}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="text-sm font-semibold text-muted-foreground mb-2">Gratis:</div>
-                      <ul className="space-y-1">
-                        {category.free.map((item, idx) => (
-                          <li key={idx} className="text-sm flex items-start">
-                            {item === '-' ? (
-                              <span className="text-muted-foreground italic">{item}</span>
-                            ) : (
-                              <>
-                                <span className="mr-2 text-muted-foreground">•</span>
-                                <span>{item}</span>
-                              </>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-primary mb-2">Member:</div>
-                      <ul className="space-y-1">
-                        {category.member.map((item, idx) => (
-                          <li key={idx} className="text-sm flex items-start">
-                            <Check className="mr-2 h-4 w-4 text-primary shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+              {/* What's Included */}
+              <div className="w-full max-w-2xl space-y-6">
+                <h3 className="text-xl md:text-2xl font-bold font-montserrat text-main-black">
+                  What&apos;s Included:
+                </h3>
+                <ul className="space-y-4">
+                  {[
+                    '5 Days Of Live, Instructor-Led Sessions',
+                    'Full Breakdown Of The StockUs Framework: Business, Industry, Valuation, And Portfolio Construction',
+                    'Live Case Study On A Real Global Stock',
+                    'Course Materials, Slides, And Templates',
+                    'Investment Checklist, Valuation Template, And Journal Template (SOON!)',
+                    'Access To Member Discussion Channels During The Cohort',
+                    'Limited-Time Access To Session Recordings (T&C Applied)',
+                  ].map((item, index) => (
+                    <li key={index} className="flex gap-4 text-slate-600 text-base md:text-lg font-light leading-snug font-montserrat">
+                      <span className="flex-shrink-0 mt-2.5 w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* CTA Button */}
+              <div className="w-full pt-4 text-center space-y-4">
+                <Button
+                  asChild
+                  className="bg-brand hover:bg-[#e06300] text-white rounded-[20px] py-8 px-12 text-xl md:text-2xl font-bold font-montserrat shadow-xl transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] w-full max-w-md"
+                >
+                  <Link href="/auth/register">Join StockUs Now</Link>
+                </Button>
+                <p className="text-slate-400 text-sm md:text-base font-montserrat font-light">
+                  Limited Seats Per Cohort To Keep Sessions Interactive
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Comparison Table */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Gratis vs Member</h2>
-          <div className="max-w-3xl mx-auto">
-            <Card>
-              <CardContent className="p-0">
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left p-4 font-semibold">Fitur</th>
-                        <th className="text-center p-4 font-semibold">Gratis</th>
-                        <th className="text-center p-4 font-semibold bg-primary/5">Member</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="border-b">
-                        <td className="p-4">Video kursus</td>
-                        <td className="text-center p-4">
-                          <span className="text-sm text-muted-foreground">Intro only</span>
-                        </td>
-                        <td className="text-center p-4 bg-primary/5">
-                          <Check className="h-5 w-5 text-primary inline" />
-                        </td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="p-4">Research reports</td>
-                        <td className="text-center p-4">
-                          <span className="text-sm text-muted-foreground">Preview</span>
-                        </td>
-                        <td className="text-center p-4 bg-primary/5">
-                          <Check className="h-5 w-5 text-primary inline" />
-                        </td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="p-4">Investment templates</td>
-                        <td className="text-center p-4">
-                          <span className="text-sm text-muted-foreground">Basic</span>
-                        </td>
-                        <td className="text-center p-4 bg-primary/5">
-                          <Check className="h-5 w-5 text-primary inline" />
-                        </td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="p-4">Private community</td>
-                        <td className="text-center p-4">
-                          <X className="h-5 w-5 text-muted-foreground inline" />
-                        </td>
-                        <td className="text-center p-4 bg-primary/5">
-                          <Check className="h-5 w-5 text-primary inline" />
-                        </td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="p-4">Live Q&A sessions</td>
-                        <td className="text-center p-4">
-                          <X className="h-5 w-5 text-muted-foreground inline" />
-                        </td>
-                        <td className="text-center p-4 bg-primary/5">
-                          <Check className="h-5 w-5 text-primary inline" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="p-4">Certificate</td>
-                        <td className="text-center p-4">
-                          <X className="h-5 w-5 text-muted-foreground inline" />
-                        </td>
-                        <td className="text-center p-4 bg-primary/5">
-                          <Check className="h-5 w-5 text-primary inline" />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Pertanyaan Umum</h2>
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.map((faq, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`}>
-                  <AccordionTrigger className="text-left">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <Card className="max-w-2xl mx-auto border-2 border-primary/20 bg-primary/5">
-            <CardHeader>
-              <CardTitle className="text-2xl">Siap Memulai Perjalanan Investasi Anda?</CardTitle>
-              <CardDescription className="text-base">
-                Bergabung sekarang dan dapatkan akses penuh ke semua konten premium
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button asChild size="lg" className="text-lg px-8">
-                <Link href="/auth/register">Daftar Sekarang - {MEMBERSHIP_PRICE_FORMATTED}/tahun</Link>
-              </Button>
-              <p className="text-sm text-muted-foreground mt-4">
-                14 hari garansi uang kembali • Batalkan kapan saja
-              </p>
-            </CardContent>
-          </Card>
-        </div>
       </div>
+      <section className="relative w-full py-24 md:py-48 overflow-hidden min-h-[700px] 2xl:min-h-[900px] flex items-center">
+        {/* Background Image and Blending Overlays */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/background.png"
+            alt="Advanced Investing Background"
+            fill
+            className="object-cover opacity-90"
+            priority
+          />
+          <div
+            className="absolute inset-0 z-0 h-1/2"
+            style={{
+              background: 'linear-gradient(180deg, #F96E00 19.19%, rgba(249, 110, 0, 0) 100%)'
+            }}
+          />
+        </div>
+
+        {/* Instructor Overlay */}
+        <div className="absolute bottom-0 left-0 w-full h-full z-0 pointer-events-none hidden lg:block pt-10 ">
+          <div className="relative w-full h-full max-w-7xl mx-auto">
+            <div className="absolute bottom-20 left-[5%] w-[60%] h-[90%] 2xl:h-full 2xl:scale-150 2xl:bottom-[-20%] 2xl:left-0">
+              <Image
+                src="/imageonly.png"
+                alt="Instructors"
+                fill
+                className="object-contain object-left-bottom"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row justify-end items-center">
+          {/* CTA Card */}
+          <div className="bg-white rounded-[40px] shadow-2xl p-8 md:p-12 lg:p-14 max-w-xl w-full space-y-6 transition-all duration-300 hover:scale-[1.01] border border-slate-50 border-opacity-50">
+            <div className="space-y-2">
+              <h2 className="text-3xl md:text-5xl font-bold font-montserrat text-brand tracking-tight leading-tight">
+                Ready For More?
+              </h2>
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-montserrat text-main-black tracking-tight">
+                Advanced Investing Course
+              </h3>
+            </div>
+
+            <p className="text-slate-500 text-base md:text-lg lg:text-xl font-montserrat font-light leading-relaxed">
+              We offer an Advanced course covering complex valuation, sector specialization, and portfolio construction for graduates ready for the next level.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button
+                variant="outline"
+                className="border-brand text-brand hover:bg-brand/5 rounded-full py-7 px-8 text-base md:text-lg font-bold font-montserrat flex-1 shadow-sm transition-all duration-300 hover:scale-105"
+              >
+                Talk To Our Team
+              </Button>
+              <Button
+                className="bg-brand hover:bg-[#e06300] text-white rounded-full py-7 px-8 text-base md:text-lg font-bold font-montserrat flex-1 shadow-md transition-all duration-300 hover:scale-105"
+              >
+                Email Us
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <FAQ />
     </>
   )
 }
