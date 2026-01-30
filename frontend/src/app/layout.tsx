@@ -6,9 +6,9 @@ import { Footer } from '@/components/layout/Footer'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
 
 const inter = Inter({ subsets: ['latin'] })
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['400', '600'],
+  weight: ['300', '400', '600'],
   variable: '--font-montserrat',
 })
 
