@@ -1,155 +1,122 @@
 import { Metadata } from 'next'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SITE_NAME } from '@/lib/constants'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Tentang Kami',
-  description: 'Pelajari lebih lanjut tentang StockUs, misi kami, dan tim di balik platform pendidikan investasi untuk investor Indonesia.',
-  openGraph: {
-    title: 'Tentang Kami | StockUs',
-    description: 'Pelajari lebih lanjut tentang StockUs, misi kami, dan tim di balik platform pendidikan investasi untuk investor Indonesia.',
-  },
+  title: `About Us | ${SITE_NAME}`,
+  description: 'Meet the team behind StockUs and learn about our mission to empower Indonesian investors.',
 }
 
-const teamMembers = [
+const team = [
   {
-    name: 'Jefta Linus',
-    role: 'Founder',
-    bio: 'Passionate about democratizing investment education for Indonesian investors. With years of experience in global equity markets, Jefta founded StockUs to bridge the knowledge gap and empower retail investors.',
-    image: '/team/jefta.jpg',
+    name: 'Jefta Ongkodiputra',
+    role: '10+ years experiences as Investment Analyst',
+    description: `A seasoned investor with over a decade of experience in hedge funds and global equities. Focused on deep fundamental research and long term quality compounding. 
+    
+    Coupled with university level teaching experience, Jefta brings a combination of years of real world investing and a way to distill complex information into actionable ideas and skills.`,
+    image: '/jo.webp',
+    layout: 'text-left'
   },
   {
-    name: 'Yosua Heriel',
-    role: 'Co-Founder',
-    bio: 'Expert in financial research and data analysis. Yosua brings deep expertise in equity valuation and portfolio construction, helping members make informed investment decisions.',
-    image: '/team/yosua.jpg',
-  },
-]
-
-const values = [
-  {
-    title: 'Education First',
-    description: 'We believe in empowering investors through structured, high-quality education that builds real understanding.',
-  },
-  {
-    title: 'Community Driven',
-    description: 'Learning happens best together. Our community fosters collaboration, discussion, and shared growth.',
-  },
-  {
-    title: 'Practical Approach',
-    description: 'Theory meets practice. We provide actionable frameworks, templates, and research you can use immediately.',
-  },
+    name: 'Yosua Kho',
+    role: '10+ years experiences as Investment Analyst',
+    description: `A seasoned investor with over a decade of experience in hedge funds and global equities. Focused on deep fundamental research and long term quality compounding. 
+    
+    Coupled with university level teaching experience, Jefta brings a combination of years of real world investing and a way to distill complex information into actionable ideas and skills.`,
+    image: '/jo2.webp',
+    layout: 'image-left'
+  }
 ]
 
 export default function AboutPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': teamMembers.map((member) => ({
-      '@type': 'Person',
-      name: member.name,
-      jobTitle: member.role,
-      description: member.bio,
-      worksFor: {
-        '@type': 'Organization',
-        name: SITE_NAME,
-      },
-    })),
-  }
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      <div className="flex flex-col">
-        {/* Hero Section */}
-        <section className="border-b bg-gradient-to-b from-slate-50 to-white px-6 py-16 md:py-24">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">
-              Tentang StockUs
-            </h1>
-            <p className="text-lg text-slate-600 md:text-xl">
-              Platform pendidikan investasi saham global untuk investor Indonesia
-            </p>
-          </div>
-        </section>
-
-        {/* Mission Section */}
-        <section className="px-6 py-16 md:py-20">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="mb-8 text-center text-3xl font-bold">Misi Kami</h2>
-            <div className="space-y-6 text-lg leading-relaxed text-slate-700">
-              <p>
-                StockUs didirikan dengan misi untuk memberikan akses pendidikan investasi saham global
-                yang terstruktur dan berkualitas tinggi kepada investor Indonesia. Kami percaya bahwa
-                setiap investor berhak mendapatkan pengetahuan dan alat yang tepat untuk membuat keputusan
-                investasi yang informed.
-              </p>
-              <p>
-                Melalui program cohort-based learning, riset mendalam, template praktis, dan komunitas
-                profesional, kami membantu investor retail membangun pemahaman fundamental tentang pasar
-                saham global dan menerapkannya dalam strategi investasi mereka.
-              </p>
-              <p>
-                Kami tidak hanya mengajarkan teori, tetapi juga memberikan framework dan tools yang dapat
-                langsung diterapkan. Dari analisis fundamental hingga konstruksi portfolio, setiap materi
-                dirancang untuk memberikan value praktis yang nyata.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Team Section */}
-        <section className="border-y bg-slate-50 px-6 py-16 md:py-20">
-          <div className="mx-auto max-w-6xl">
-            <h2 className="mb-12 text-center text-3xl font-bold">Tim Kami</h2>
-            <div className="grid gap-8 md:grid-cols-2">
-              {teamMembers.map((member) => (
-                <Card key={member.name} className="overflow-hidden">
-                  <CardHeader>
-                    <div className="mb-4 flex items-center gap-4">
-                      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-200 text-2xl font-bold text-slate-600">
-                        {member.name.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div>
-                        <CardTitle className="text-xl">{member.name}</CardTitle>
-                        <p className="mt-1 text-sm text-slate-600">{member.role}</p>
-                      </div>
+    <main className="bg-main-white min-h-screen py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto space-y-12">
+        {team.map((member, index) => (
+          <div
+            key={index}
+            className="bg-brand rounded-[30px] md:rounded-[40px] p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-xl"
+          >
+            {member.layout === 'image-left' ? (
+              <>
+                {/* Image Section (Desktop: Left) */}
+                <div className="w-full lg:w-1/2 flex justify-center">
+                  <div className="relative w-full aspect-[4/5] rounded-[20px] md:rounded-[30px] overflow-hidden bg-white/10">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                </div>
+                {/* Content Section (Desktop: Right) */}
+                <div className="w-full lg:w-1/2 text-white space-y-8">
+                  <div className="space-y-4">
+                    <span className="text-sm md:text-base font-medium tracking-widest opacity-80 font-montserrat uppercase">
+                      GET TO KNOW US
+                    </span>
+                    <div className="space-y-6">
+                      {member.description.split('\n\n').map((para, i) => (
+                        <p key={i} className="text-lg md:text-xl font-normal font-montserrat leading-relaxed">
+                          {para.trim()}
+                        </p>
+                      ))}
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="leading-relaxed text-slate-700">{member.bio}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Values Section */}
-        <section className="px-6 py-16 md:py-20">
-          <div className="mx-auto max-w-6xl">
-            <h2 className="mb-12 text-center text-3xl font-bold">Nilai-Nilai Kami</h2>
-            <div className="grid gap-8 md:grid-cols-3">
-              {values.map((value, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-2xl font-bold text-blue-600">
-                      {index + 1}
+                  </div>
+                  <div className="pt-8">
+                    <h2 className="text-3xl md:text-3xl font-bold font-montserrat">
+                      {member.name}
+                    </h2>
+                    <p className="text-lg md:text-xl opacity-80 font-montserrat mt-2">
+                      {member.role}
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Content Section (Desktop: Left) */}
+                <div className="w-full lg:w-1/2 text-white space-y-8 order-2 lg:order-1">
+                  <div className="space-y-4">
+                    <span className="text-sm md:text-base font-medium tracking-widest opacity-80 font-montserrat uppercase">
+                      GET TO KNOW US
+                    </span>
+                    <div className="space-y-6">
+                      {member.description.split('\n\n').map((para, i) => (
+                        <p key={i} className="text-lg md:text-xl font-normal font-montserrat leading-relaxed">
+                          {para.trim()}
+                        </p>
+                      ))}
                     </div>
-                    <CardTitle className="text-xl">{value.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="leading-relaxed text-slate-700">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </div>
+                  <div className="pt-8">
+                    <h2 className="text-3xl md:text-3xl font-bold font-montserrat">
+                      {member.name}
+                    </h2>
+                    <p className="text-lg md:text-xl opacity-80 font-montserrat mt-2">
+                      {member.role}
+                    </p>
+                  </div>
+                </div>
+                {/* Image Section (Desktop: Right) */}
+                <div className="w-full lg:w-1/2 flex justify-center order-1 lg:order-2">
+                  <div className="relative w-full aspect-[4/5] rounded-[20px] md:rounded-[30px] overflow-hidden bg-white/10">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </section>
+        ))}
       </div>
-    </>
+    </main>
   )
 }

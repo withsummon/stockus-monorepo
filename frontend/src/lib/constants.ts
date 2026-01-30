@@ -12,9 +12,9 @@ export const COLORS = {
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/courses', label: 'Courses' },
+  { href: '/about', label: 'About us' },
   { href: '/research', label: 'Research' },
   { href: '/community', label: 'Community' },
-  { href: '/about', label: 'About' },
-  { href: '/pricing', label: 'Pricing' },
+  { href: "/pricing", label: "Pricing" },
+  { href: '/faq', label: 'FAQ' },
 ]
