@@ -23,10 +23,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Content API** - Courses, research reports, templates, cohorts CRUD endpoints
 - [x] **Phase 4: Payment Integration** - Midtrans subscriptions, workshops, promo codes, referral system
 - [x] **Phase 5: Video & Storage** - Cloudflare R2 integration, signed URLs for video access
-- [ ] **Phase 6: Frontend - Public Pages** - Next.js setup, landing, about, pricing, research preview pages
-- [ ] **Phase 7: Frontend - Member Area** - Dashboard, course player, downloads, profile management
-- [ ] **Phase 8: Admin Dashboard** - Content management UI, user management, order history
-- [ ] **Phase 9: Docker & Deployment** - Docker Compose setup, production configuration, CI/CD
+- [x] **Phase 6: Frontend - Public Pages** - Next.js setup, landing, about, pricing, research preview pages
+- [x] **Phase 7: Frontend - Member Area** - Dashboard, course player, downloads, profile management
+- [x] **Phase 8: Admin Dashboard** - Content management UI, user management, order history
+- [ ] **Phase 9: Docker & Deployment** - Docker Compose setup, production configuration
 
 ## Phase Details
 
@@ -128,11 +128,11 @@ Plans:
   6. Mobile responsive, SEO optimized
 **Plans:** 5 plans
 Plans:
-- [ ] 06-01-PLAN.md — Next.js project setup, shadcn/ui, Header, Footer, mobile nav
-- [ ] 06-02-PLAN.md — Landing page with Hero, Courses, Community, Testimonials, FAQ
-- [ ] 06-03-PLAN.md — About Us and Community pages
-- [ ] 06-04-PLAN.md — Pricing and Research preview pages
-- [ ] 06-05-PLAN.md — Visual verification checkpoint
+- [x] 06-01-PLAN.md — Next.js project setup, shadcn/ui, Header, Footer, mobile nav
+- [x] 06-02-PLAN.md — Landing page with Hero, Courses, Community, Testimonials, FAQ
+- [x] 06-03-PLAN.md — About Us and Community pages
+- [x] 06-04-PLAN.md — Pricing and Research preview pages
+- [x] 06-05-PLAN.md — Visual verification checkpoint
 
 ### Phase 7: Frontend - Member Area
 **Goal**: Authenticated member experience with dashboard and course access
@@ -147,16 +147,16 @@ Plans:
   6. Profile management
 **Plans:** 10 plans
 Plans:
-- [ ] 07-01-PLAN.md — Auth infrastructure (DAL, middleware, API client)
-- [ ] 07-02-PLAN.md — Login and signup pages
-- [ ] 07-03-PLAN.md — Member layout with sidebar
-- [ ] 07-04-PLAN.md — Dashboard page with stats
-- [ ] 07-05-PLAN.md — Course list, detail, and player pages
-- [ ] 07-06-PLAN.md — Research library and detail pages
-- [ ] 07-07-PLAN.md — Downloads page with templates
-- [ ] 07-08-PLAN.md — Cohorts page with schedule
-- [ ] 07-09-PLAN.md — Profile management page
-- [ ] 07-10-PLAN.md — Visual verification checkpoint
+- [x] 07-01-PLAN.md — Auth infrastructure (DAL, middleware, API client)
+- [x] 07-02-PLAN.md — Login and signup pages
+- [x] 07-03-PLAN.md — Member layout with sidebar
+- [x] 07-04-PLAN.md — Dashboard page with stats
+- [x] 07-05-PLAN.md — Course list, detail, and player pages
+- [x] 07-06-PLAN.md — Research library and detail pages
+- [x] 07-07-PLAN.md — Downloads page with templates
+- [x] 07-08-PLAN.md — Cohorts page with schedule
+- [x] 07-09-PLAN.md — Profile management page
+- [x] 07-10-PLAN.md — Visual verification checkpoint
 
 ### Phase 8: Admin Dashboard
 **Goal**: Admin interface for content and user management
@@ -169,15 +169,15 @@ Plans:
   4. Dashboard shows key metrics
 **Plans:** 9 plans
 Plans:
-- [ ] 08-01-PLAN.md — Admin foundation (backend routes, layout, sidebar, auth helper)
-- [ ] 08-02-PLAN.md — Data table infrastructure (TanStack Table, shadcn/ui components)
-- [ ] 08-03-PLAN.md — Dashboard page with metrics cards
-- [ ] 08-04-PLAN.md — Course management (list, create, edit, delete)
-- [ ] 08-05-PLAN.md — Research management (list, create, edit, delete)
-- [ ] 08-06-PLAN.md — Template management (list, upload, edit, delete)
-- [ ] 08-07-PLAN.md — User management (list, detail, tier change)
-- [ ] 08-08-PLAN.md — Order management (list, filter by status)
-- [ ] 08-09-PLAN.md — Visual verification checkpoint
+- [x] 08-01-PLAN.md — Admin foundation (backend routes, layout, sidebar, auth helper)
+- [x] 08-02-PLAN.md — Data table infrastructure (TanStack Table, shadcn/ui components)
+- [x] 08-03-PLAN.md — Dashboard page with metrics cards
+- [x] 08-04-PLAN.md — Course management (list, create, edit, delete)
+- [x] 08-05-PLAN.md — Research management (list, create, edit, delete)
+- [x] 08-06-PLAN.md — Template management (list, upload, edit, delete)
+- [x] 08-07-PLAN.md — User management (list, detail, tier change)
+- [x] 08-08-PLAN.md — Order management (list, filter by status)
+- [x] 08-09-PLAN.md — Visual verification checkpoint
 
 ### Phase 9: Docker & Deployment
 **Goal**: Production-ready Docker Compose deployment
@@ -188,14 +188,17 @@ Plans:
   2. Backend, frontend, PostgreSQL containers configured
   3. Environment variables managed via .env
   4. Health checks configured
-  5. Nginx or Traefik for routing (optional)
-  6. Production build optimizations applied
-**Plans**: TBD
+  5. Production build optimizations applied
+**Plans:** 3 plans
+Plans:
+- [ ] 09-01-PLAN.md — Backend Dockerfile with multi-stage build
+- [ ] 09-02-PLAN.md — Frontend Dockerfile with standalone output
+- [ ] 09-03-PLAN.md — Docker Compose orchestration and verification
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 
 | Phase | Status | Completed |
 |-------|--------|-----------|
@@ -204,11 +207,11 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. Content API | Complete | 2026-01-26 |
 | 4. Payment Integration | Complete | 2026-01-27 |
 | 5. Video & Storage | Complete | 2026-01-27 |
-| 6. Frontend - Public Pages | In Progress | - |
-| 7. Frontend - Member Area | Not started | - |
-| 8. Admin Dashboard | Not started | - |
+| 6. Frontend - Public Pages | Complete | 2026-01-27 |
+| 7. Frontend - Member Area | Complete | 2026-01-29 |
+| 8. Admin Dashboard | Complete | 2026-01-30 |
 | 9. Docker & Deployment | Not started | - |
 
 ---
 *Roadmap created: 2025-01-25*
-*Last updated: 2026-01-30 — Phase 8 planned (9 plans in 3 waves)*
+*Last updated: 2026-01-30 — Phase 9 planned (3 plans in 2 waves)*
