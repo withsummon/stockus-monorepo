@@ -13,11 +13,11 @@ function ResourceItem({ title, description }: ResourceItemProps) {
             <div className="flex-shrink-0 mt-1">
                 <Image src="/files.svg" alt="File icon" width={24} height={24} className="w-6 h-auto" />
             </div>
-            <div className="space-y-3">
-                <h4 className="text-xl font-bold text-main-black font-montserrat leading-tight">
+            <div className="space-y-2 md:space-y-3">
+                <h4 className="text-lg md:text-xl font-bold text-main-black font-montserrat leading-tight">
                     {title}
                 </h4>
-                <p className="text-slate-400 font-light text-base leading-snug font-montserrat">
+                <p className="text-slate-400 font-light text-sm md:text-base leading-snug font-montserrat">
                     {description}
                 </p>
             </div>
@@ -32,11 +32,11 @@ interface ResourceCardProps {
 
 function ResourceCard({ title, items }: ResourceCardProps) {
     return (
-        <div className="bg-white rounded-[40px] p-8 md:p-12 shadow-sm border border-slate-100 h-full flex flex-col">
-            <div className="bg-brand text-white text-center py-4 px-8 rounded-full text-2xl font-bold font-montserrat mb-10 inline-block self-center w-full">
+        <div className="bg-white rounded-[25px] md:rounded-[40px] p-6 md:p-12 shadow-sm border border-slate-100 h-full flex flex-col">
+            <div className="bg-brand text-white text-center py-3 md:py-4 px-6 md:px-8 rounded-full text-lg md:text-2xl font-bold font-montserrat mb-6 md:mb-10 inline-block self-center w-full">
                 {title}
             </div>
-            <div className="space-y-8 flex-grow">
+            <div className="space-y-6 md:space-y-8 flex-grow">
                 {items.map((item, index) => (
                     <ResourceItem key={index} title={item.title} description={item.description} />
                 ))}
