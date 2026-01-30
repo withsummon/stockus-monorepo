@@ -6,6 +6,9 @@ import { FAQ } from '@/components/sections/FAQ'
 import { fetchAPI } from '@/lib/api'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
 import type { Course } from '@/types'
+import Image from 'next/image'
+import { TrustedBy } from '@/components/sections/TrustedBy'
+import { IsRightForU } from '@/components/sections/IsRightForU'
 
 async function getCourses(): Promise<Course[]> {
   try {
@@ -49,6 +52,8 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <Hero />
+      <TrustedBy />
+      <IsRightForU />
       <CoursesShowcase courses={courses} />
       <CommunityFeatures />
       <Testimonials />
