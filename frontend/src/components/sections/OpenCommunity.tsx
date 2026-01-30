@@ -90,12 +90,12 @@ export function OpenCommunity() {
 
                     {/* Right Image */}
                     <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-full">
-                        <div className="absolute inset-0 lg:left-[-10%] z-0 scale-300">
+                        <div className="absolute inset-0 lg:left-[-10%] z-0 scale-300 2xl:scale-250">
                             <Image
                                 src="/community.webp"
                                 alt="Discord Community Preview"
                                 fill
-                                className="object-contain object-right translate-y-[3%] translate-x-[7%]"
+                                className="object-contain object-right translate-y-[3%] translate-x-[7%] 2xl:translate-y-[4%]"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
 
                                 loading="lazy"

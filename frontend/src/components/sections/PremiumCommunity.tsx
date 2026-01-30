@@ -96,7 +96,7 @@ export function PremiumCommunity() {
                 {/* CTA Button */}
                 <div className="w-full pt-8">
                     <Button
-                        className="bg-brand hover:bg-[#e06300] text-white rounded-[40px] py-10 text-2xl md:text-3xl font-bold font-montserrat shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full"
+                        className="bg-brand hover:bg-[#e06300] text-white rounded-[40px] py-8 text-2xl md:text-3xl font-bold font-montserrat shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full"
                     >
                         Become A Member
                     </Button>
