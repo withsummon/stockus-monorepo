@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,6 +16,7 @@ import { NAV_LINKS, SITE_NAME } from '@/lib/constants'
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -29,16 +31,23 @@ export function MobileNav() {
           <SheetTitle>{SITE_NAME}</SheetTitle>
         </SheetHeader>
         <nav className="mt-8 flex flex-col gap-4">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="text-lg font-medium text-slate-600 transition-colors hover:text-slate-900"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href ||
+              (link.href !== '/' && pathname.startsWith(link.href))
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`text-lg font-medium transition-colors hover:text-slate-900 ${
+                  isActive ? 'text-brand' : 'text-slate-600'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
           <div className="mt-4 flex flex-col gap-2">
             <Button variant="outline" asChild>
               <Link href="/login" onClick={() => setOpen(false)}>Masuk</Link>

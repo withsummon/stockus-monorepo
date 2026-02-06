@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { Check, Crown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -79,7 +80,7 @@ export function CommunityFeatures() {
                       <Crown className="w-5 h-5 text-brand fill-brand" />
                     )}
                   </div>
-                  <p className="text-slate-400 font-montserrat text-base md:text-lg font-light leading-relaxed">
+                  <p className="text-slate-300 font-montserrat text-base md:text-lg font-light leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -94,8 +95,9 @@ export function CommunityFeatures() {
             <Button
               variant="outline"
               className="w-full border-brand bg-transparent py-8 text-2xl font-montserrat font-semibold text-brand border-2 rounded-[30px] transition-all duration-300 hover:bg-brand hover:text-white hover:scale-[1.02]"
+              asChild
             >
-              Learn More
+              <Link href="/community">Learn More</Link>
             </Button>
           </div>
         </ScrollReveal>

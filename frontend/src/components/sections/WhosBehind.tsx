@@ -39,11 +39,11 @@ export function WhosBehind() {
                                 <span className="text-brand font-bold">StockUs</span> Was Created To Close The Gap Between How Professionals Think About Investing And What Retail Investors Usually See On Social Media. Our Goal Is Simple: Give Indonesian Investors A Clear, Honest, And Practical Way To Approach Global Stock Markets.
                             </p>
 
-                            <p className="text-slate-400 font-montserrat text-lg md:text-xl font-light leading-relaxed">
+                            <p className="text-slate-600 font-montserrat text-lg md:text-xl font-light leading-relaxed">
                                 The Curriculum Is Led By A Team With 10+ Years Of Hands-On Experience Across The Hedge Fund Industry, Family Offices, Private Equity, Superannuation, Investment Banking, And Crypto Asset Markets. Collectively, We've Been Involved In Managing Over $12 Billion In Funds Across Different Strategies And Market Cycles.
                             </p>
 
-                            <p className="text-slate-400 font-montserrat text-lg md:text-xl font-light leading-relaxed">
+                            <p className="text-slate-600 font-montserrat text-lg md:text-xl font-light leading-relaxed">
                                 All Of That Experience Is Boiled Down Into A Process You Can Actually Use As An Individual Investor: How To Think About Businesses, How To Judge Industries, How To Value Companies, And How To Build A Portfolio That Fits Your Goals.
                             </p>
                         </div>

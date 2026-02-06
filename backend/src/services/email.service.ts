@@ -3,6 +3,20 @@ import { env } from '../config/env.js'
 
 const resend = new Resend(env.RESEND_API_KEY)
 
+/**
+ * Escape HTML special characters to prevent HTML injection in emails
+ */
+function escapeHtml(str: string): string {
+  const htmlEscapes: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+  }
+  return str.replace(/[&<>"']/g, (char) => htmlEscapes[char])
+}
+
 interface EmailResult {
   success: boolean
   messageId?: string
@@ -143,8 +157,8 @@ export async function sendVerificationEmail(
   token: string,
   userName: string
 ): Promise<EmailResult> {
-  const verificationUrl = `${env.FRONTEND_URL}/verify-email?token=${token}`
-  const firstName = userName.split(' ')[0]
+  const verificationUrl = `${env.FRONTEND_URL}/verify-email?token=${encodeURIComponent(token)}`
+  const firstName = escapeHtml(userName.split(' ')[0])
 
   const content = `
     <h2 style="margin: 0 0 8px 0; color: #111827; font-size: 24px; font-weight: 600;">
@@ -204,7 +218,7 @@ export async function sendPasswordResetEmail(
   to: string,
   token: string
 ): Promise<EmailResult> {
-  const resetUrl = `${env.FRONTEND_URL}/reset-password?token=${token}`
+  const resetUrl = `${env.FRONTEND_URL}/reset-password?token=${encodeURIComponent(token)}`
 
   const content = `
     <h2 style="margin: 0 0 8px 0; color: #111827; font-size: 24px; font-weight: 600;">
@@ -329,7 +343,9 @@ export async function sendPaymentReceiptEmail(
     minimumFractionDigits: 0,
   }).format(amount)
 
-  const firstName = userName.split(' ')[0]
+  const firstName = escapeHtml(userName.split(' ')[0])
+  const safeOrderId = escapeHtml(orderId)
+  const safeItemName = escapeHtml(itemName)
   const currentDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -358,7 +374,7 @@ export async function sendPaymentReceiptEmail(
             <tr>
               <td style="padding-bottom: 16px; border-bottom: 1px dashed #e5e7eb;">
                 <p style="margin: 0 0 4px 0; color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Order ID</p>
-                <p style="margin: 0; color: #374151; font-size: 14px; font-family: monospace;">${orderId}</p>
+                <p style="margin: 0; color: #374151; font-size: 14px; font-family: monospace;">${safeOrderId}</p>
               </td>
             </tr>
             <tr>
@@ -370,7 +386,7 @@ export async function sendPaymentReceiptEmail(
             <tr>
               <td style="padding: 16px 0; border-bottom: 1px dashed #e5e7eb;">
                 <p style="margin: 0 0 4px 0; color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Item</p>
-                <p style="margin: 0; color: #374151; font-size: 14px; font-weight: 500;">${itemName}</p>
+                <p style="margin: 0; color: #374151; font-size: 14px; font-weight: 500;">${safeItemName}</p>
               </td>
             </tr>
             <tr>
@@ -407,7 +423,7 @@ export async function sendPaymentReceiptEmail(
     const { data, error } = await resend.emails.send({
       from: env.EMAIL_FROM,
       to,
-      subject: `✓ Payment Receipt - ${itemName}`,
+      subject: `✓ Payment Receipt - ${safeItemName}`,
       html: emailTemplate(content, `Thank you for your purchase! Your payment of ${formattedAmount} has been confirmed.`),
     })
 

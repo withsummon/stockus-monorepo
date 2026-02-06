@@ -11,7 +11,7 @@ import { sendPaymentReceiptEmail } from '../services/email.service.js'
 const webhookRoutes = new Hono()
 
 /**
- * Verify Midtrans webhook signature
+ * Verify Midtrans webhook signature using timing-safe comparison
  * Formula: SHA512(order_id + status_code + gross_amount + server_key)
  */
 function verifyMidtransSignature(
@@ -26,7 +26,16 @@ function verifyMidtransSignature(
     .update(signatureString)
     .digest('hex')
 
-  return computedSignature === receivedSignature
+  // Use timing-safe comparison to prevent timing attacks
+  const computedBuffer = Buffer.from(computedSignature, 'hex')
+  const receivedBuffer = Buffer.from(receivedSignature, 'hex')
+
+  // Ensure both buffers are the same length before comparison
+  if (computedBuffer.length !== receivedBuffer.length) {
+    return false
+  }
+
+  return crypto.timingSafeEqual(computedBuffer, receivedBuffer)
 }
 
 /**
@@ -237,13 +246,15 @@ webhookRoutes.post('/midtrans', async (c) => {
 /**
  * GET /webhooks/midtrans/test
  * Test endpoint to verify webhook URL is accessible
- * Remove in production
+ * Only available in development environment
  */
-webhookRoutes.get('/midtrans/test', (c) => {
-  return c.json({
-    message: 'Midtrans webhook endpoint is accessible',
-    timestamp: new Date().toISOString(),
+if (env.NODE_ENV === 'development') {
+  webhookRoutes.get('/midtrans/test', (c) => {
+    return c.json({
+      message: 'Midtrans webhook endpoint is accessible',
+      timestamp: new Date().toISOString(),
+    })
   })
-})
+}
 
 export { webhookRoutes }

@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
@@ -41,12 +42,16 @@ function DayCard({ day, title, desc, isActive, onClick }: {
     isActive: boolean,
     onClick: () => void
 }) {
+    const [isHovered, setIsHovered] = useState(false)
+
     return (
         <motion.div
             onClick={onClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             initial={false}
             animate={{
-                scale: isActive ? 1.05 : 0.95,
+                scale: isHovered ? 1.05 : (isActive ? 1.02 : 0.95),
                 opacity: isActive ? 1 : 1,
                 backgroundColor: "#ffffff",
             }}
@@ -90,12 +95,15 @@ function DayCard({ day, title, desc, isActive, onClick }: {
                 {desc}
             </p>
 
-            <button className={cn(
-                "font-semibold text-lg hover:underline text-left",
-                isActive ? "text-brand" : "text-main-black"
-            )}>
+            <Link
+                href="/pricing"
+                className={cn(
+                    "font-semibold text-lg hover:underline text-left",
+                    isActive ? "text-brand" : "text-main-black"
+                )}
+            >
                 Learn More..
-            </button>
+            </Link>
         </motion.div>
     )
 }

@@ -3,11 +3,15 @@ import { logger } from 'hono/logger'
 import { cors } from 'hono/cors'
 import routes from './routes/index.js'
 import { env } from './config/env.js'
+import { securityHeaders } from './middleware/security-headers.js'
 
 const app = new Hono()
 
 // Middleware
 app.use('*', logger())
+
+// Security headers
+app.use('*', securityHeaders)
 
 // CORS configuration for cookie-based auth
 app.use('*', cors({

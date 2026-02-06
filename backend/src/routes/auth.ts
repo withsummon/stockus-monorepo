@@ -18,6 +18,7 @@ import {
 import { hashToken, hoursFromNow, generateToken } from '../services/token.service.js'
 import { sendVerificationEmail, sendPasswordResetEmail, sendPasswordChangedEmail } from '../services/email.service.js'
 import { authMiddleware, AuthEnv } from '../middleware/auth.js'
+import { loginRateLimit, signupRateLimit, passwordResetRateLimit, authRateLimit } from '../middleware/rate-limit.js'
 
 // Validation schemas
 const signupSchema = z.object({
@@ -49,13 +50,18 @@ export const auth = new Hono<AuthEnv>()
 /**
  * POST /auth/signup
  * Create new user account, send verification email
+ * Returns consistent message to prevent user enumeration
  */
-auth.post('/signup', zValidator('json', signupSchema), async (c) => {
+auth.post('/signup', signupRateLimit, zValidator('json', signupSchema), async (c) => {
   const { email, password, name } = c.req.valid('json')
+  const normalizedEmail = email.toLowerCase()
+
+  // Generic success message to prevent user enumeration
+  const successMessage = 'If this email is not already registered, you will receive a verification email shortly.'
 
   // Check if email already exists
   const existingUser = await db.query.users.findFirst({
-    where: eq(users.email, email.toLowerCase()),
+    where: eq(users.email, normalizedEmail),
   })
 
   if (existingUser) {
@@ -84,14 +90,12 @@ auth.post('/signup', zValidator('json', signupSchema), async (c) => {
       sendVerificationEmail(existingUser.email, verificationToken, existingUser.name).catch(err => {
         console.error('Failed to send verification email:', err)
       })
-
-      return c.json({
-        message: 'Account exists but not verified. Verification email has been resent.',
-        user: { id: existingUser.id, email: existingUser.email, name: existingUser.name }
-      }, 200)
     }
+    // If user exists and is verified, don't reveal this - return same message
+    // This prevents attackers from knowing if an email is registered
 
-    return c.json({ error: 'Email already registered' }, 409)
+    // Return same response format and status for all cases to prevent enumeration
+    return c.json({ message: successMessage }, 200)
   }
 
   // Hash password
@@ -99,7 +103,7 @@ auth.post('/signup', zValidator('json', signupSchema), async (c) => {
 
   // Create user
   const [user] = await db.insert(users).values({
-    email: email.toLowerCase(),
+    email: normalizedEmail,
     name,
     passwordHash,
     isVerified: false,
@@ -122,17 +126,15 @@ auth.post('/signup', zValidator('json', signupSchema), async (c) => {
     console.error('Failed to send verification email:', err)
   })
 
-  return c.json({
-    message: 'Account created. Please check your email to verify.',
-    user: { id: user.id, email: user.email, name: user.name }
-  }, 201)
+  // Return same response as existing user case to prevent enumeration
+  return c.json({ message: successMessage }, 200)
 })
 
 /**
  * POST /auth/login
  * Authenticate user, issue JWT tokens in cookies
  */
-auth.post('/login', zValidator('json', loginSchema), async (c) => {
+auth.post('/login', loginRateLimit, zValidator('json', loginSchema), async (c) => {
   const { email, password } = c.req.valid('json')
 
   // Find user
@@ -348,7 +350,7 @@ auth.get('/verify-email', async (c) => {
  * POST /auth/resend-verification
  * Resend verification email for unverified user
  */
-auth.post('/resend-verification', zValidator('json', z.object({
+auth.post('/resend-verification', authRateLimit, zValidator('json', z.object({
   email: z.string().email(),
 })), async (c) => {
   const { email } = c.req.valid('json')
@@ -391,7 +393,7 @@ auth.post('/resend-verification', zValidator('json', z.object({
  * POST /auth/forgot-password
  * Send password reset email
  */
-auth.post('/forgot-password', zValidator('json', z.object({
+auth.post('/forgot-password', passwordResetRateLimit, zValidator('json', z.object({
   email: z.string().email(),
 })), async (c) => {
   const { email } = c.req.valid('json')
@@ -434,7 +436,7 @@ auth.post('/forgot-password', zValidator('json', z.object({
  * POST /auth/reset-password
  * Reset password using token
  */
-auth.post('/reset-password', zValidator('json', resetPasswordSchema), async (c) => {
+auth.post('/reset-password', authRateLimit, zValidator('json', resetPasswordSchema), async (c) => {
   const { token, newPassword } = c.req.valid('json')
 
   const tokenHash = hashToken(token)

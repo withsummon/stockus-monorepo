@@ -37,7 +37,7 @@ export function WhatPeopleSay() {
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.1}>
-                        <p className="text-slate-400 font-montserrat text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-slate-300 font-montserrat text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
                             Discover what our satisfied have to say about their experiences with our products
                         </p>
                     </ScrollReveal>
@@ -66,7 +66,7 @@ export function WhatPeopleSay() {
                                         <h3 className="text-2xl md:text-3xl font-bold font-montserrat text-brand">
                                             {testimonial.name}
                                         </h3>
-                                        <p className="text-slate-400 font-montserrat text-lg font-normal">
+                                        <p className="text-slate-600 font-montserrat text-lg font-normal">
                                             {testimonial.role}
                                         </p>
                                     </div>

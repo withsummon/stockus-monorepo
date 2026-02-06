@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
-import { motion } from "framer-motion"
 
 export function TrustedBy() {
     return (
@@ -11,25 +10,13 @@ export function TrustedBy() {
                 <h2>Trusted by Stock Company & Popular Universities</h2>
             </ScrollReveal>
 
-            {/* Infinite Marquee */}
+            {/* Infinite Marquee using CSS animation for reliable auto-scroll */}
             <div className="relative w-full overflow-hidden">
                 {/* Gradient overlays for smooth fade effect */}
                 <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-main-black to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-main-black to-transparent z-10 pointer-events-none" />
 
-                <motion.div
-                    className="flex gap-8 items-center"
-                    animate={{
-                        x: [0, -1920],
-                    }}
-                    transition={{
-                        x: {
-                            duration: 30,
-                            repeat: Infinity,
-                            ease: "linear",
-                        },
-                    }}
-                >
+                <div className="flex gap-8 items-center animate-marquee">
                     {/* First set of logos */}
                     <Image
                         src="/maskgroup.svg"
@@ -46,7 +33,7 @@ export function TrustedBy() {
                         height={1080}
                         className='w-auto h-16 sm:h-20 lg:h-24 flex-shrink-0'
                     />
-                </motion.div>
+                </div>
             </div>
         </div>
     )

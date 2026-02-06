@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { ResearchDetailCard } from '@/components/member/ResearchDetailCard'
 import { SITE_NAME } from '@/lib/constants'
+import { sanitizeHtml } from '@/lib/sanitize'
 import type { ResearchReportDetail } from '@/types'
 import { ArrowLeft, Calendar, Download, Lock } from 'lucide-react'
 
@@ -162,7 +163,7 @@ export default async function ResearchDetailPage({ params }: PageProps) {
               {report.content ? (
                 <div
                   className="prose prose-neutral dark:prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: report.content }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(report.content) }}
                 />
               ) : (
                 <p className="text-muted-foreground text-center py-8">

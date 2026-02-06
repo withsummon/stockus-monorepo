@@ -1,0 +1,62 @@
+#,Priority,Task,Category,Page/Section,Status,Notes
+"1,1",CRITICAL,Fix StockUs logo on white/clear background - logo tidak terlihat,Logo/Branding,All pages,Not Started,Use proper contrast colors
+"1,2",CRITICAL,Ensure logo uses proper contrast (no white on white),Logo/Branding,Header/Navbar,Not Started,
+"1,3",CRITICAL,Use SVG format for logos to prevent blurriness,Logo/Branding,All pages,Not Started,
+"1,4",CRITICAL,Apply logo fix consistently across all pages,Logo/Branding,All pages,Not Started,
+"2,1",CRITICAL,Make mobile view 100% client screen width,Responsive Design,All pages (mobile),Not Started,Currently not full width
+"2,2",CRITICAL,Test on various mobile devices,Testing,All pages,Not Started,iOS and Android
+"2,3",CRITICAL,Ensure all elements scale properly,Responsive Design,All pages,Not Started,
+"3,1",CRITICAL,"Fix ""Research"" link - doesn't change to orange when active",Navigation,Navbar,Done,Added active state styling to MobileNav and verified Header active state logic
+"3,2",CRITICAL,"Change ""Pricing"" to ""Membership"" in navigation",Navigation,Navbar,Done,Changed label in NAV_LINKS constant
+"3,3",CRITICAL,Fix navbar on scroll - StockUs logo not visible (white on white),Navigation,Navbar (scrolled),Done,Added drop-shadow to header logo for better visibility
+"4,1",CRITICAL,Change all font from Inter to Montserrat (currently inconsistent),Typography,All pages,Done,Changed default font in layout.tsx from Inter to Montserrat with proper weights
+"4,2",CRITICAL,Ensure all subtitle/subheader spacing is consistent (20px),Typography,All pages,Not Started,
+"4,3",CRITICAL,Make sure all subtitle fonts are 20px across the site,Typography,All pages,Not Started,
+"5,1",HIGH,"Reduce image size to match width of ""StockUs"" logo and ""Sign up"" button edges",Layout/Design,Homepage - Hero,Not Started,Image currently too wide
+"5,2",HIGH,Ensure image alignment is consistent,Layout/Design,Homepage - Hero,Not Started,
+"6,1",HIGH,"Fix auto-scroll - should scroll automatically, not just on manual scroll",Animation,Homepage - Partners,Done,Switched from framer-motion to CSS animate-marquee for reliable auto-scroll
+"6,2",HIGH,"If no auto-scroll, remove the bolding animation",Animation,Homepage - Partners,Done,Auto-scroll now works so this is resolved
+"6,3",HIGH,Make footer logo white (currently not visible on dark background),Logo/Branding,Footer,Done,Added brightness-0 invert filter to footer logo
+"6,4",HIGH,Use SVG format for company logos,Logo/Branding,Homepage - Partners,Not Started,Prevents blur on scaling
+"7,1",HIGH,"Change grey backgrounds in ""Community Features"" section to match StockUs orange theme",Design/Color,Homepage - Community,Not Started,Remove grey background from testimonials
+"7,2",HIGH,"Ensure ""Who's Behind StockUs"" section doesn't use grey background",Design/Color,About Us page,Not Started,Should match overall theme
+"8,1",HIGH,Remove light grey text color usage,Typography/Color,Multiple pages,Done,"Changed text-slate-400/500 to darker colors in WhosBehind.tsx, WhatYouGet.tsx, WhatPeopleSay.tsx"
+"8,2",HIGH,Change to default black for better readability,Typography/Color,Multiple pages,Done,Applied slate-600/slate-300 for light/dark backgrounds respectively
+"8,3",HIGH,"Apply to: ""What You Get Beyond The Course"" section descriptions",Typography/Color,Homepage,Done,Changed WhatYouGet.tsx description text from slate-400 to slate-600
+"9,1",HIGH,Ensure all cards are center-aligned,Layout/Design,Homepage - Course,Not Started,Center alignment for consistency
+"9,2",HIGH,"Make ""Learn More"" buttons functional/clickable",Functionality,Homepage - Course,Done,Added Link components to fundamentals.tsx and CommunityFeatures.tsx Learn More buttons
+"9,3",HIGH,Add proper interactivity to cards,Functionality,Homepage - Course,Not Started,
+"10,1",MEDIUM,Make all red-boxed sections have consistent height differences,Layout/Design,Multiple pages,Not Started,Visual consistency
+"10,2",MEDIUM,"Apply to: ""Is StockUs Right For You?"" section",Layout/Design,Homepage,Not Started,
+"10,3",MEDIUM,"Apply to: Between hero and ""Why Indonesian Investors Choose StockUs""",Layout/Design,Homepage,Not Started,
+"10,4",MEDIUM,"Apply to: ""5-Day Fundamentals"" section",Layout/Design,Homepage,Not Started,
+"11,1",MEDIUM,Review all clickable elements,UX/Functionality,All pages,Not Started,Check if click behavior is appropriate
+"11,2",MEDIUM,If element is clickable but has no popup/toggle: Remove click animation,UX/Functionality,All pages,Not Started,Don't mislead users
+"11,3",MEDIUM,If element is clickable but has no popup/toggle: Remove color change on click,UX/Functionality,All pages,Not Started,
+"11,4",MEDIUM,If element should expand: Add proper toggle/dropdown functionality,UX/Functionality,All pages,Not Started,
+"11,5",MEDIUM,"Example: ""Is StockUs Right For You?"" clickable boxes need proper interaction",UX/Functionality,Homepage,Done,Component already has auto-rotation and click-to-select behavior which is appropriate
+"12,1",MEDIUM,Fix card enlargement behavior - should enlarge on HOVER not CLICK,UX/Interaction,Multiple pages,Done,Added hover state to DayCard in fundamentals.tsx - cards now enlarge on hover
+"12,2",MEDIUM,Review all card components for consistent UX,UX/Interaction,All pages,Not Started,
+"12,3",MEDIUM,Create Indonesian version (they can switch),Content/Structure,All pages,Not Started,
+"13,1",LOW,Use suggested layout (reference provided in slide 22),Design,Login page,Not Started,New layout with left side content
+"13,2",LOW,Add report excerpt/cover on left side,Design,Login page,Not Started,Visual interest + content preview
+"13,3",LOW,Adapt orange color scheme and StockUs fonts,Design,Login page,Not Started,Brand consistency
+"13,4",LOW,Ensure it matches StockUs branding,Design,Login page,Not Started,
+"14,1",LOW,Create new structure with 3 sections,Content/Structure,About Us page,Not Started,See detailed breakdown below
+"14,2",LOW,"Section 1: Intro to StockUs (vision, mission, what we do)",Content/Structure,About Us page,Not Started,Use slide 22 content
+"14,3",LOW,Section 2: Jefta profile,Content/Structure,About Us page,Not Started,
+"14,4",LOW,Section 3: Yosua profile,Content/Structure,About Us page,Not Started,
+"14,5",LOW,Use slide 22 content for intro section,Content,About Us page,Not Started,
+"15,1",LOW,Make membership card info left and right aligned,Layout/Design,Membership page,Not Started,Reference: Ternakuang deck
+"15,2",LOW,"Separate ""What You Get"" from ""Pricing""",Layout/Design,Membership page,Not Started,Clear visual separation
+"15,3",LOW,"Focus on layout structure, not design mimicry",Layout/Design,Membership page,Not Started,"Adapt concept, not copy design"
+"16,1",LOW,Remove excessive use of em dashes (—),Copywriting,All pages,Not Started,Simplify punctuation
+"16,2",LOW,Review all copy for readability,Copywriting,All pages,Not Started,
+"16,3",LOW,Ensure consistent tone,Copywriting,All pages,Not Started,
+D1,DEV NOTE,Ensure membership card component is reused (not duplicated) across Homepage and Pricing/Membership page,Component Reusability,"Homepage, Membership",Not Started,This ensures consistency and reduces maintenance
+D2,DEV NOTE,"If one change impacts all other pages because components are reused, this is GOOD",Component Reusability,All pages,Not Started,Don't create separate components
+D3,DEV NOTE,Always use SVG format for logos and icons to prevent blur,Best Practice,All pages,Not Started,
+D4,DEV NOTE,"Test on: Desktop (various sizes), Mobile iOS, Mobile Android, Tablet",Testing Checklist,All pages,Not Started,
+D5,DEV NOTE,"Color Theme: Primary Orange (#FF6B35), Avoid grey backgrounds",Design System,All pages,Not Started,"Use White, Black, Orange primarily"
+D6,DEV NOTE,"Font Family: Montserrat site-wide, Subtitle size: 20px consistently",Typography System,All pages,Not Started,DO NOT USE Inter
+D7,DEV NOTE,"Hover = Preview/Enlarge, Click = Action/Navigate",Interaction Pattern,All pages,Done,Fixed fundamentals cards to enlarge on hover instead of click

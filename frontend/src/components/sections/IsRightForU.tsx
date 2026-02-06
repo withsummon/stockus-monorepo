@@ -54,7 +54,7 @@ export function IsRightForU() {
                         </ScrollReveal>
 
                         <ScrollReveal variant="fadeUp" delay={0.3}>
-                            <div className="space-y-4 text-slate-500 font-light leading-relaxed">
+                            <div className="space-y-4 text-slate-700 font-light leading-relaxed">
                                 <p>
                                     StockUs is built for Indonesians who want to take investing seriously. If any of these sound like you, you're in the right place.
                                 </p>

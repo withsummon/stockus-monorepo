@@ -14,14 +14,14 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 py-3">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-xl font-bold text-slate-900">
-            <Image
-              src="/stockus.webp"
-              alt="Logo"
-              width={100}
-              height={100}
-            />
-          </span>
+          <Image
+            src="/stockus.webp"
+            alt="StockUs Logo"
+            width={100}
+            height={40}
+            className="drop-shadow-sm"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}

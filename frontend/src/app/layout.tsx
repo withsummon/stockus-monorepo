@@ -1,14 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter, Montserrat } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
 
-const inter = Inter({ subsets: ['latin'] })
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['300', '400', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-montserrat',
 })
 
@@ -51,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className={`${inter.className} ${montserrat.variable}`}>
+      <body className={`${montserrat.className} ${montserrat.variable}`}>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

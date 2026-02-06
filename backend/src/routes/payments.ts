@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { db } from '../db/index.js'
 import { payments, users, cohorts } from '../db/schema/index.js'
 import { authMiddleware, AuthEnv } from '../middleware/auth.js'
+import { paymentRateLimit } from '../middleware/rate-limit.js'
 import { createSubscriptionPayment, createWorkshopPayment } from '../services/payment.service.js'
 import { validatePromoCode, calculateDiscountedAmount } from '../services/promo.service.js'
 import { validateReferralCode } from '../services/referral.service.js'
@@ -37,6 +38,7 @@ const paymentRoutes = new Hono<AuthEnv>()
 paymentRoutes.post(
   '/subscription',
   authMiddleware,
+  paymentRateLimit,
   zValidator('json', initiateSubscriptionSchema),
   async (c) => {
     const userId = c.get('userId')
@@ -131,6 +133,7 @@ paymentRoutes.post(
 paymentRoutes.post(
   '/workshop',
   authMiddleware,
+  paymentRateLimit,
   zValidator('json', initiateWorkshopSchema),
   async (c) => {
     const userId = c.get('userId')

@@ -32,6 +32,7 @@ export function Footer() {
                 alt="StockUs Logo"
                 width={120}
                 height={40}
+                className="brightness-0 invert"
               />
             </Link>
             <div className="space-y-4 max-w-2xl">

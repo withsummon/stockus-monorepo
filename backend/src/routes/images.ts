@@ -59,8 +59,8 @@ app.post('/', authMiddleware, requireAdmin(), async (c) => {
 
     const file = body.file as File
 
-    // Validate file type and size
-    const validation = validateFile(file, ALLOWED_IMAGE_TYPES)
+    // Validate file type, size, and magic bytes
+    const validation = await validateFile(file, ALLOWED_IMAGE_TYPES)
     if (!validation.valid) {
       return c.json({ error: validation.error }, 400)
     }

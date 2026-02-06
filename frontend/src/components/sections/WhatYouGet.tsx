@@ -19,7 +19,7 @@ function ResourceItem({ title, description }: ResourceItemProps) {
                 <h4 className="text-lg md:text-xl font-bold text-main-black font-montserrat leading-tight">
                     {title}
                 </h4>
-                <p className="text-slate-400 font-light text-sm md:text-base leading-snug font-montserrat">
+                <p className="text-slate-600 font-light text-sm md:text-base leading-snug font-montserrat">
                     {description}
                 </p>
             </div>

@@ -15,5 +15,5 @@ export const NAV_LINKS = [
   { href: '/about', label: 'About us' },
   { href: '/research', label: 'Research' },
   { href: '/community', label: 'Community' },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/pricing", label: "Membership" },
 ]
