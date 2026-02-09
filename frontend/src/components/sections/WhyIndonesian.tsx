@@ -15,7 +15,7 @@ export function WhyIndonesian() {
                 </ScrollReveal>
 
                 <ScrollReveal variant="fadeUp" delay={0.1}>
-                    <p className="text-lg md:text-xl text-slate-500 font-light max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl text-slate-600 font-light max-w-3xl mx-auto leading-relaxed">
                         Most investment classes tell you what to buy. StockUs teaches you <span className="text-main-black font-semibold">how to think</span> about global markets and decide with confidence.
                     </p>
                 </ScrollReveal>

@@ -72,7 +72,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <ScrollReveal variant="fadeUp" delay={0.3}>
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-slate-500 font-montserrat text-sm border-slate-800">
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-slate-400 font-montserrat text-sm border-slate-800">
               <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
               <span className="hidden md:inline">|</span>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
@@ -82,7 +82,7 @@ export function Footer() {
               <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
             </div>
 
-            <p className="text-slate-600 font-montserrat text-sm text-center md:text-right">
+            <p className="text-slate-400 font-montserrat text-sm text-center md:text-right">
               &copy; {new Date().getFullYear()} StockUs. All rights reserved.
             </p>
           </div>

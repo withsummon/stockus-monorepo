@@ -20,7 +20,7 @@
 "6,4",HIGH,Use SVG format for company logos,Logo/Branding,Homepage - Partners,Not Started,Prevents blur on scaling
 "7,1",HIGH,"Change grey backgrounds in ""Community Features"" section to match StockUs orange theme",Design/Color,Homepage - Community,Not Started,Remove grey background from testimonials
 "7,2",HIGH,"Ensure ""Who's Behind StockUs"" section doesn't use grey background",Design/Color,About Us page,Not Started,Should match overall theme
-"8,1",HIGH,Remove light grey text color usage,Typography/Color,Multiple pages,Done,"Changed text-slate-400/500 to darker colors in WhosBehind.tsx, WhatYouGet.tsx, WhatPeopleSay.tsx"
+"8,1",HIGH,Remove light grey text color usage,Typography/Color,Multiple pages,Done,"Fixed in WhosBehind.tsx, WhatYouGet.tsx, WhatPeopleSay.tsx, WhyIndonesian.tsx, OpenCommunity.tsx, fundamentals.tsx, FAQ.tsx, Footer.tsx"
 "8,2",HIGH,Change to default black for better readability,Typography/Color,Multiple pages,Done,Applied slate-600/slate-300 for light/dark backgrounds respectively
 "8,3",HIGH,"Apply to: ""What You Get Beyond The Course"" section descriptions",Typography/Color,Homepage,Done,Changed WhatYouGet.tsx description text from slate-400 to slate-600
 "9,1",HIGH,Ensure all cards are center-aligned,Layout/Design,Homepage - Course,Not Started,Center alignment for consistency
@@ -50,7 +50,7 @@
 "15,1",LOW,Make membership card info left and right aligned,Layout/Design,Membership page,Not Started,Reference: Ternakuang deck
 "15,2",LOW,"Separate ""What You Get"" from ""Pricing""",Layout/Design,Membership page,Not Started,Clear visual separation
 "15,3",LOW,"Focus on layout structure, not design mimicry",Layout/Design,Membership page,Not Started,"Adapt concept, not copy design"
-"16,1",LOW,Remove excessive use of em dashes (—),Copywriting,All pages,Not Started,Simplify punctuation
+"16,1",LOW,Remove excessive use of em dashes (—),Copywriting,All pages,Done,Replaced em dashes with regular dashes in FAQ.tsx and IsRightForU.tsx
 "16,2",LOW,Review all copy for readability,Copywriting,All pages,Not Started,
 "16,3",LOW,Ensure consistent tone,Copywriting,All pages,Not Started,
 D1,DEV NOTE,Ensure membership card component is reused (not duplicated) across Homepage and Pricing/Membership page,Component Reusability,"Homepage, Membership",Not Started,This ensures consistency and reduces maintenance

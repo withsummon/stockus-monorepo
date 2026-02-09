@@ -90,7 +90,7 @@ function DayCard({ day, title, desc, isActive, onClick }: {
 
             <p className={cn(
                 "text-md mb-8 font-light flex-grow font-montserrat",
-                isActive ? "text-slate-500" : "text-main-black/80"
+                isActive ? "text-slate-600" : "text-main-black/80"
             )}>
                 {desc}
             </p>

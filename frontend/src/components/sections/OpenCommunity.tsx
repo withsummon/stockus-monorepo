@@ -36,7 +36,7 @@ export function OpenCommunity() {
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.2}>
-                        <p className="text-lg md:text-xl text-slate-500 font-montserrat font-light max-w-2xl mx-auto">
+                        <p className="text-lg md:text-xl text-slate-600 font-montserrat font-light max-w-2xl mx-auto">
                             Anyone can join our open Discord Community
                         </p>
                     </ScrollReveal>

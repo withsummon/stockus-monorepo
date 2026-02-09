@@ -9,11 +9,11 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scr
 const faqs = [
   {
     question: "Who is StockUs for?",
-    answer: "StockUs is for Indonesian investors who want to seriously learn how to invest in global stocks — whether you're just starting or already investing but feel lost and want a proper framework."
+    answer: "StockUs is for Indonesian investors who want to seriously learn how to invest in global stocks - whether you're just starting or already investing but feel lost and want a proper framework."
   },
   {
     question: "Do you give stock recommendations or signals?",
-    answer: "StockUs is for Indonesian investors who want to seriously learn how to invest in global stocks — whether you're just starting or already investing but feel lost and want a proper framework." // Reusing text from screenshot if possible, though it seems they might be placeholders
+    answer: "StockUs is for Indonesian investors who want to seriously learn how to invest in global stocks - whether you're just starting or already investing but feel lost and want a proper framework." // Reusing text from screenshot if possible, though it seems they might be placeholders
   },
   {
     question: "I'm a complete beginner. Is this too advanced for me?",
@@ -55,7 +55,7 @@ export function FAQ() {
                   <div
                     className={cn(
                       "rounded-[20px] transition-all duration-300 overflow-hidden",
-                      isOpen ? "bg-brand text-white shadow-xl" : "bg-white text-slate-400"
+                      isOpen ? "bg-brand text-white shadow-xl" : "bg-white text-slate-600"
                     )}
                   >
                   <button
@@ -64,7 +64,7 @@ export function FAQ() {
                   >
                     <span className={cn(
                       "text-lg md:text-xl font-bold font-montserrat pr-8",
-                      isOpen ? "text-white" : "text-slate-400"
+                      isOpen ? "text-white" : "text-slate-600"
                     )}>
                       {faq.question}
                     </span>

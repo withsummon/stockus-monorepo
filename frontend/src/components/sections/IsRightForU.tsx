@@ -8,7 +8,7 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scr
 const steps = [
     {
         id: '01',
-        text: "You've been buying stocks or funds, but you don't really have a clear framework — you're still guessing.",
+        text: "You've been buying stocks or funds, but you don't really have a clear framework - you're still guessing.",
     },
     {
         id: '02',
