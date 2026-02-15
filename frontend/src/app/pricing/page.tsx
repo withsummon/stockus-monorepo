@@ -1,17 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
-import { Check, X } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { SITE_NAME, MEMBERSHIP_PRICE, MEMBERSHIP_PRICE_FORMATTED } from '@/lib/constants'
 import { FAQ } from '@/components/sections/FAQ'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
-import { motion } from 'framer-motion'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export default function PricingPage() {
@@ -59,12 +53,27 @@ export default function PricingPage() {
       />
 
       <div
-        className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8"
-        style={{
-          background: 'linear-gradient(0deg, #F96E00 0%, #000000 69.13%)'
-        }}
+        className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-main-black"
       >
-        <div className="container mx-auto max-w-7xl">
+        {/* SVG Pattern Background */}
+        <div className="absolute inset-0 z-0 opacity-[0.07]">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#F96E00" strokeWidth="1" />
+              </pattern>
+              <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+                <circle cx="30" cy="30" r="1.5" fill="#F96E00" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            <rect width="100%" height="100%" fill="url(#dots)" />
+          </svg>
+        </div>
+        {/* Radial glow accent */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-brand/10 blur-[150px] z-0" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-brand/5 blur-[120px] z-0" />
+        <div className="container mx-auto max-w-7xl relative z-10">
           {/* Hero Header */}
           <div className="text-center mb-16 space-y-4">
             <ScrollReveal variant="fadeUp">
@@ -79,147 +88,105 @@ export default function PricingPage() {
             </ScrollReveal>
           </div>
 
-          {/* New Membership Card */}
+          {/* Membership Card - Horizontal Layout */}
           <ScrollReveal variant="scale" delay={0.2}>
-            <div className="max-w-3xl mx-auto">
-              <motion.div
-                className="bg-white rounded-[40px] shadow-2xl overflow-hidden border-2 border-brand/20 p-8 md:p-16 flex flex-col items-center space-y-12"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {/* Card Header */}
+            <div className="max-w-7xl mx-auto rounded-[20px] border-2 border-brand p-8 md:p-12 lg:p-10 flex flex-col lg:flex-row gap-10 lg:gap-0 relative overflow-hidden bg-main-black">
+              {/* Left: What's Included */}
+              <div className="w-full lg:w-1/2 space-y-6 lg:pr-10 lg:border-r lg:border-white/20">
+                <div className="space-y-2">
+                  <h2 className="text-2xl md:text-3xl font-bold font-montserrat text-white italic">
+                    {t('pricing.whatsIncluded')}
+                  </h2>
+                </div>
+                <StaggerContainer staggerDelay={0.08} className="space-y-4">
+                  {inclusions.map((item, index) => (
+                    <StaggerItem key={index} variant="fadeLeft">
+                      <li className="flex gap-3 items-start text-white text-base md:text-lg font-light leading-snug font-montserrat list-none">
+                        <Check className="w-5 h-5 flex-shrink-0 mt-0.5 text-brand" />
+                        {item}
+                      </li>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+
+              {/* Right: Pricing & CTA */}
+              <div className="w-full lg:w-1/2 lg:pl-10 flex flex-col items-center justify-center space-y-8">
                 <div className="text-center space-y-2">
-                  <ScrollReveal variant="fadeUp" delay={0.3}>
-                    <h2 className="text-3xl md:text-5xl font-bold font-montserrat text-main-black tracking-tight">
-                      {t('pricing.cardTitle')}
-                    </h2>
-                  </ScrollReveal>
-                  <ScrollReveal variant="fadeUp" delay={0.4}>
-                    <p className="text-slate-500 text-lg md:text-xl font-montserrat italic font-light">
-                      {t('pricing.cardSubtitle')}
-                    </p>
-                  </ScrollReveal>
+                  <p className="text-white/60 text-lg font-montserrat font-medium">
+                    {t('pricing.cardSubtitle')}
+                  </p>
+                  <p className="text-white text-4xl md:text-5xl font-bold font-montserrat">
+                    IDR {MEMBERSHIP_PRICE_FORMATTED.replace('Rp ', '')}
+                  </p>
                 </div>
 
-                {/* Price */}
-                <ScrollReveal variant="scale" delay={0.45}>
-                  <div className="text-center space-y-1">
-                    <div className="text-3xl md:text-5xl font-bold font-montserrat text-main-black">
-                      IDR {MEMBERSHIP_PRICE_FORMATTED.replace('Rp ', '')}
-                    </div>
-                  </div>
-                </ScrollReveal>
+                <Button
+                  asChild
+                  className="bg-brand hover:bg-[#e06300] text-white rounded-full py-6 md:py-8 px-12 md:px-16 text-xl md:text-2xl font-bold font-montserrat w-full max-w-sm shadow-xl transition-transform hover:scale-105"
+                >
+                  <Link href="/auth/register">{t('pricing.joinNow')}</Link>
+                </Button>
 
-                {/* What's Included */}
-                <div className="w-full max-w-2xl space-y-6">
-                  <ScrollReveal variant="fadeUp" delay={0.5}>
-                    <h3 className="text-xl md:text-2xl font-bold font-montserrat text-main-black">
-                      {t('pricing.whatsIncluded')}
-                    </h3>
-                  </ScrollReveal>
-                  <StaggerContainer staggerDelay={0.08} className="space-y-4">
-                    {inclusions.map((item, index) => (
-                      <StaggerItem key={index} variant="fadeLeft">
-                        <li className="flex gap-4 text-slate-600 text-base md:text-lg font-light leading-snug font-montserrat list-none">
-                          <span className="flex-shrink-0 mt-2.5 w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
-                          <span>{item}</span>
-                        </li>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
-                </div>
-
-                {/* CTA Button */}
-                <ScrollReveal variant="fadeUp" delay={0.6}>
-                  <div className="w-full pt-4 text-center space-y-4">
-                    <Button
-                      asChild
-                      className="bg-brand hover:bg-[#e06300] text-white rounded-[20px] py-8 px-12 text-xl md:text-2xl font-bold font-montserrat shadow-xl transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] w-full max-w-md"
-                    >
-                      <Link href="/auth/register">{t('pricing.joinNow')}</Link>
-                    </Button>
-                    <p className="text-slate-400 text-sm md:text-base font-montserrat font-light">
-                      {t('pricing.limitedSeats')}
-                    </p>
-                  </div>
-                </ScrollReveal>
-              </motion.div>
+                <p className="text-white/60 text-sm font-montserrat text-center">
+                  {t('pricing.limitedSeats')}
+                </p>
+              </div>
             </div>
           </ScrollReveal>
         </div>
 
       </div>
-      <section className="relative w-full py-24 md:py-48 overflow-hidden min-h-[700px] 2xl:min-h-[900px] flex items-center">
-        {/* Background Image and Blending Overlays */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/background.png"
-            alt="Advanced Investing Background"
-            fill
-            className="object-cover opacity-90"
-            priority
-          />
-          <div
-            className="absolute inset-0 z-0 h-1/2"
-            style={{
-              background: 'linear-gradient(180deg, #F96E00 19.19%, rgba(249, 110, 0, 0) 100%)'
-            }}
-          />
-        </div>
 
-        {/* Instructor Overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-full z-0 pointer-events-none hidden lg:block pt-10 ">
-          <div className="relative w-full h-full max-w-7xl mx-auto">
-            <div className="absolute bottom-20 left-[5%] w-[60%] h-[90%] 2xl:h-full 2xl:scale-150 2xl:bottom-[-20%] 2xl:left-0">
-              <Image
-                src="/imageonly.png"
-                alt="Instructors"
-                fill
-                className="object-contain object-left-bottom"
-                priority
-              />
+      {/* Ready For More - CTA Section */}
+      <section className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-main-black overflow-hidden">
+        {/* SVG Pattern Background */}
+        <div className="absolute inset-0 z-0 opacity-[0.05]">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="cta-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="20" r="1" fill="#F96E00" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#cta-grid)" />
+          </svg>
+        </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand/10 blur-[200px] z-0" />
+
+        <div className="container mx-auto max-w-4xl relative z-10 text-center space-y-8">
+          <ScrollReveal variant="fadeUp">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white tracking-tight leading-tight">
+              {t('pricing.readyForMore')}
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" delay={0.1}>
+            <h3 className="text-2xl md:text-3xl font-bold font-montserrat text-brand tracking-tight">
+              {t('pricing.advancedCourse')}
+            </h3>
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" delay={0.2}>
+            <p className="text-white/70 text-lg md:text-xl font-montserrat font-light leading-relaxed max-w-2xl mx-auto">
+              {t('pricing.advancedDesc')}
+            </p>
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" delay={0.3}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 bg-transparent rounded-full py-7 px-10 text-base md:text-lg font-bold font-montserrat shadow-sm transition-all duration-300 hover:scale-105"
+              >
+                {t('pricing.talkToTeam')}
+              </Button>
+              <Button
+                className="bg-brand hover:bg-[#e06300] text-white rounded-full py-7 px-10 text-base md:text-lg font-bold font-montserrat shadow-md transition-all duration-300 hover:scale-105"
+              >
+                {t('pricing.emailUs')}
+              </Button>
             </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row justify-end items-center">
-          {/* CTA Card */}
-          <ScrollReveal variant="fadeLeft">
-            <motion.div
-              className="bg-white rounded-[40px] shadow-2xl p-8 md:p-12 lg:p-14 max-w-xl w-full space-y-6 border border-slate-50 border-opacity-50"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="space-y-2">
-                <h2 className="text-3xl md:text-5xl font-bold font-montserrat text-brand tracking-tight leading-tight">
-                  {t('pricing.readyForMore')}
-                </h2>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-montserrat text-main-black tracking-tight">
-                  {t('pricing.advancedCourse')}
-                </h3>
-              </div>
-
-              <p className="text-slate-500 text-base md:text-lg lg:text-xl font-montserrat font-light leading-relaxed">
-                {t('pricing.advancedDesc')}
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button
-                  variant="outline"
-                  className="border-brand text-brand hover:bg-brand/5 rounded-full py-7 px-8 text-base md:text-lg font-bold font-montserrat flex-1 shadow-sm transition-all duration-300 hover:scale-105"
-                >
-                  {t('pricing.talkToTeam')}
-                </Button>
-                <Button
-                  className="bg-brand hover:bg-[#e06300] text-white rounded-full py-7 px-8 text-base md:text-lg font-bold font-montserrat flex-1 shadow-md transition-all duration-300 hover:scale-105"
-                >
-                  {t('pricing.emailUs')}
-                </Button>
-              </div>
-            </motion.div>
           </ScrollReveal>
         </div>
       </section>
+
       <FAQ />
     </>
   )

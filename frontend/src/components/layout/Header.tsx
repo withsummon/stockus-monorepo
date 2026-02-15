@@ -39,7 +39,7 @@ export function Header() {
           : 'bg-main-black'
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6 relative">
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src={scrolled ? '/stockus_black.png' : '/stockus.webp'}
@@ -51,8 +51,8 @@ export function Header() {
           />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex md:items-center md:gap-6">
+        {/* Desktop Navigation - Absolutely centered */}
+        <nav className="hidden md:flex md:items-center md:gap-6 absolute left-1/2 -translate-x-1/2">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href ||
               (link.href !== '/' && pathname.startsWith(link.href))
