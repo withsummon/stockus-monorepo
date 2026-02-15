@@ -15,6 +15,7 @@ import { Fundamentals } from '@/components/sections/fundamentals'
 import { WhatYouGet } from '@/components/sections/WhatYouGet'
 import { Community } from '@/components/sections/Community'
 import { StockPerformance } from '@/components/sections/StockPerformance'
+import { ProofPerformance } from '@/components/sections/ProofPerformance'
 
 async function getCourses(): Promise<Course[]> {
   try {
@@ -61,6 +62,7 @@ export default async function HomePage() {
       <TrustedBy />
       <IsRightForU />
       <StockPerformance />
+      <ProofPerformance />
       <WhyIndonesian />
       <Fundamentals />
       <WhatYouGet />

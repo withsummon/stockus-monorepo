@@ -7,12 +7,12 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 const stocks = [
-    { ticker: 'V', name: 'Visa Inc.', gain: '+85.0%', buyPrice: '$176.70', currentPrice: '$327.00', icon: '/VISA.png' },
-    { ticker: 'FWONK', name: 'Formula One Group', gain: '+171.9%', buyPrice: '$31.50', currentPrice: '$85.80', icon: '/placeholder-stock.svg' },
-    { ticker: 'ADYEN', name: 'Adyen N.V.', gain: '+106.6%', buyPrice: '$646.90', currentPrice: '$1,336.60', icon: '/placeholder-stock.svg' },
-    { ticker: 'MSFT', name: 'Microsoft Corp.', gain: '+141.6%', buyPrice: '$199.70', currentPrice: '$482.60', icon: '/Microsoft.png' },
-    { ticker: 'NFLX', name: 'Netflix Inc.', gain: '+117.2%', buyPrice: '$47.50', currentPrice: '$103.20', icon: '/Netflix.png' },
-    { ticker: 'BRK.B', name: 'Berkshire Hathaway', gain: '+291.7%', buyPrice: '$128.50', currentPrice: '$503.20', icon: '/placeholder-stock.svg' },
+    { ticker: 'V', name: 'Visa Inc.', gain: '+85.0%', buyPrice: '$176.70', currentPrice: '$327.00', icon: '/coin-logo/VISA-coin.png' },
+    { ticker: 'FWONK', name: 'Formula One Group', gain: '+171.9%', buyPrice: '$31.50', currentPrice: '$85.80', icon: '/coin-logo/F1-Coin.png' },
+    { ticker: 'ADYEN', name: 'Adyen N.V.', gain: '+106.6%', buyPrice: '$646.90', currentPrice: '$1,336.60', icon: '/coin-logo/Adyen-Coin.png' },
+    { ticker: 'MSFT', name: 'Microsoft Corp.', gain: '+141.6%', buyPrice: '$199.70', currentPrice: '$482.60', icon: '/coin-logo/Microsoft-Coin.png' },
+    { ticker: 'NFLX', name: 'Netflix Inc.', gain: '+117.2%', buyPrice: '$47.50', currentPrice: '$103.20', icon: '/coin-logo/Netflix-Coin.png' },
+    { ticker: 'BRK.B', name: 'Berkshire Hathaway', gain: '+291.7%', buyPrice: '$128.50', currentPrice: '$503.20', icon: '/coin-logo/BH-Coin.png' },
 ]
 
 const VISIBLE_DESKTOP = 3

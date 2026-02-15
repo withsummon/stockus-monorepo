@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, Globe } from 'lucide-react'
+import { Menu, Globe, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -16,7 +16,7 @@ import { NAV_LINKS, SITE_NAME } from '@/lib/constants'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 import type { Locale } from '@/lib/i18n/translations'
 
-export function MobileNav({ scrolled = true }: { scrolled?: boolean }) {
+export function MobileNav({ scrolled = true, user }: { scrolled?: boolean; user?: { name: string; email: string } | null }) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const { t, locale, setLocale } = useTranslation()
@@ -71,12 +71,23 @@ export function MobileNav({ scrolled = true }: { scrolled?: boolean }) {
           </div>
 
           <div className="mt-4 flex flex-col gap-2">
-            <Button variant="outline" asChild>
-              <Link href="/login" onClick={() => setOpen(false)}>{t('mobileNav.login')}</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/pricing" onClick={() => setOpen(false)}>{t('mobileNav.signup')}</Link>
-            </Button>
+            {user ? (
+              <Button asChild>
+                <Link href="/dashboard" onClick={() => setOpen(false)} className="gap-2">
+                  <User className="w-4 h-4" />
+                  {user.name.split(' ')[0]}
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button variant="outline" asChild>
+                  <Link href="/login" onClick={() => setOpen(false)}>{t('mobileNav.login')}</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/pricing" onClick={() => setOpen(false)}>{t('mobileNav.signup')}</Link>
+                </Button>
+              </>
+            )}
           </div>
         </nav>
       </SheetContent>

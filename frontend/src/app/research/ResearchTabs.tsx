@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { AnimatePresence, motion } from 'framer-motion'
 import { FileText, Lock, TrendingUp, TrendingDown, Search, BarChart3, Briefcase } from 'lucide-react'
 import type { ResearchReport, WatchlistStock, PortfolioHolding } from '@/types'
 
@@ -30,9 +31,12 @@ const COIN_LOGOS: Record<string, string> = {
   AAPL: '/apple.png',
   AMZN: '/Amazon.png',
   META: '/meta.png',
-  MSFT: '/microsoft.png',
-  NFLX: '/netflix.png',
-  V: '/VISA.png',
+  MSFT: '/coin-logo/Microsoft-Coin.png',
+  NFLX: '/coin-logo/Netflix-Coin.png',
+  V: '/coin-logo/VISA-coin.png',
+  ADYEN: '/coin-logo/Adyen-Coin.png',
+  FWONK: '/coin-logo/F1-Coin.png',
+  'BRK.B': '/coin-logo/BH-Coin.png',
 }
 
 export function ResearchTabs({ reports, stocks, holdings, isLoggedIn, isMember }: ResearchTabsProps) {
@@ -78,24 +82,34 @@ export function ResearchTabs({ reports, stocks, holdings, isLoggedIn, isMember }
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white rounded-b-[20px] sm:rounded-b-[30px] shadow-sm border border-slate-100 border-t-0 p-4 sm:p-6 md:p-10 mb-12">
-        {activeTab === 'research' && (
-          <ResearchTab reports={reports} isMember={isMember} isLoggedIn={isLoggedIn} />
-        )}
-        {activeTab === 'watchlist' && (
-          <WatchlistTab
-            stocks={stocks}
-            isMember={isMember}
-            isLoggedIn={isLoggedIn}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
-        )}
-        {activeTab === 'portfolio' && (
-          <PortfolioTab holdings={holdings} isMember={isMember} isLoggedIn={isLoggedIn} />
-        )}
+      <div className="bg-white rounded-b-[20px] sm:rounded-b-[30px] shadow-sm border border-slate-100 border-t-0 p-4 sm:p-6 md:p-10 mb-12 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {activeTab === 'research' && (
+              <ResearchTab reports={reports} isMember={isMember} isLoggedIn={isLoggedIn} />
+            )}
+            {activeTab === 'watchlist' && (
+              <WatchlistTab
+                stocks={stocks}
+                isMember={isMember}
+                isLoggedIn={isLoggedIn}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            )}
+            {activeTab === 'portfolio' && (
+              <PortfolioTab holdings={holdings} isMember={isMember} isLoggedIn={isLoggedIn} />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
@@ -145,9 +159,14 @@ function ResearchTab({ reports, isMember, isLoggedIn }: { reports: ResearchRepor
         </div>
       </div>
 
-      <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        initial="hidden"
+        animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+      >
         {filteredReports.map((report) => (
-          <div key={report.id} className="relative group">
+          <motion.div key={report.id} className="relative group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } } }}>
             {report.restricted ? (
               <LockedCard>
                 <div className="p-5 sm:p-6">
@@ -182,9 +201,9 @@ function ResearchTab({ reports, isMember, isLoggedIn }: { reports: ResearchRepor
                 </div>
               </Link>
             )}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {!isMember && (
         <UpgradeBanner
@@ -267,9 +286,14 @@ function WatchlistTab({
       </div>
 
       {/* Stock Cards Grid */}
-      <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        initial="hidden"
+        animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+      >
         {filteredStocks.map((stock) => (
-          <div key={stock.id}>
+          <motion.div key={stock.id} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } } }}>
             {stock.restricted ? (
               <LockedCard>
                 <div className="p-5 sm:p-6">
@@ -343,9 +367,9 @@ function WatchlistTab({
                 )}
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {!isMember && (
         <UpgradeBanner
@@ -404,9 +428,12 @@ function PortfolioTab({ holdings, isMember, isLoggedIn }: { holdings: PortfolioH
 
       {/* Portfolio Allocation Chart — on top */}
       {holdings.length > 0 && (
-        <div className="bg-main-black rounded-[20px] sm:rounded-[30px] p-6 sm:p-8 md:p-10 mb-8 sm:mb-10">
-          <h3 className="text-white font-bold text-lg sm:text-xl mb-6 sm:mb-8">Portfolio Allocation</h3>
-          <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-10">
+        <div className="bg-main-black rounded-[20px] sm:rounded-[30px] p-6 sm:p-8 md:p-10 mb-8 sm:mb-10 relative overflow-hidden">
+          {/* Isometric grid mesh background — fills bottom of card */}
+          <IsometricGridBackground />
+
+          <h3 className="text-white font-bold text-lg sm:text-xl mb-6 sm:mb-8 relative z-10">Portfolio Allocation</h3>
+          <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-10 relative z-10">
             {/* 3D Donut Chart */}
             <div className="relative w-72 h-56 sm:w-80 sm:h-64 md:w-[400px] md:h-72">
               <DonutChart3D holdings={holdings} getColor={getHoldingColor} hoveredIdx={hoveredIdx} onHover={setHoveredIdx} />
@@ -437,6 +464,8 @@ function PortfolioTab({ holdings, isMember, isLoggedIn }: { holdings: PortfolioH
                         </div>
                       ) : holding.logoUrl ? (
                         <Image src={holding.logoUrl} alt={holding.stockName} width={24} height={24} className="rounded-[6px]" />
+                      ) : COIN_LOGOS[holding.stockSymbol] ? (
+                        <Image src={COIN_LOGOS[holding.stockSymbol]} alt={holding.stockSymbol} width={24} height={24} className="rounded-[6px] object-contain" />
                       ) : (
                         <div className="w-6 h-6 rounded-[6px] bg-white/10 flex items-center justify-center text-white text-[9px] font-bold flex-shrink-0">
                           {holding.stockSymbol.slice(0, 2)}
@@ -516,6 +545,8 @@ function PortfolioTab({ holdings, isMember, isLoggedIn }: { holdings: PortfolioH
                     <div className="flex items-center gap-3">
                       {holding.logoUrl ? (
                         <Image src={holding.logoUrl} alt={holding.stockName} width={36} height={36} className="rounded-[10px]" />
+                      ) : COIN_LOGOS[holding.stockSymbol] ? (
+                        <Image src={COIN_LOGOS[holding.stockSymbol]} alt={holding.stockSymbol} width={36} height={36} className="rounded-[10px] object-contain" />
                       ) : (
                         <div className="w-9 h-9 rounded-[10px] bg-brand/10 flex items-center justify-center text-brand font-bold text-xs">
                           {holding.stockSymbol.slice(0, 2)}
@@ -595,6 +626,8 @@ function PortfolioTab({ holdings, isMember, isLoggedIn }: { holdings: PortfolioH
                 <div className="flex items-center gap-3">
                   {holding.logoUrl ? (
                     <Image src={holding.logoUrl} alt={holding.stockName} width={36} height={36} className="rounded-[10px]" />
+                  ) : COIN_LOGOS[holding.stockSymbol] ? (
+                    <Image src={COIN_LOGOS[holding.stockSymbol]} alt={holding.stockSymbol} width={36} height={36} className="rounded-[10px] object-contain" />
                   ) : (
                     <div className="w-9 h-9 rounded-[10px] bg-brand/10 flex items-center justify-center text-brand font-bold text-xs">
                       {holding.stockSymbol.slice(0, 2)}
@@ -712,6 +745,58 @@ function RatingBadge({ rating }: { rating: string }) {
   )
 }
 
+function IsometricGridBackground() {
+  // Use a large viewBox so lines cover the entire card
+  const vw = 2000, vh = 1000
+  const spacing = 32
+  const lines: string[] = []
+
+  for (let i = -80; i <= 80; i++) {
+    const x = vw / 2 + i * spacing
+    lines.push(`M${x - vh * 1.2},0 L${x + vh * 1.2},${vh}`)
+    lines.push(`M${x + vh * 1.2},0 L${x - vh * 1.2},${vh}`)
+  }
+
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      viewBox={`0 0 ${vw} ${vh}`}
+      preserveAspectRatio="none"
+      style={{ opacity: 0.08 }}
+    >
+      <defs>
+        {/* Vertical fade: hidden at top, visible from middle down */}
+        <linearGradient id="meshFadeV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="white" stopOpacity="0" />
+          <stop offset="20%" stopColor="white" stopOpacity="0.2" />
+          <stop offset="45%" stopColor="white" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="white" stopOpacity="0.5" />
+        </linearGradient>
+        {/* Horizontal fade: full on left, fades out on right half */}
+        <linearGradient id="meshFadeH" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="white" stopOpacity="1" />
+          <stop offset="40%" stopColor="white" stopOpacity="1" />
+          <stop offset="70%" stopColor="white" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
+        </linearGradient>
+        <mask id="meshMaskV">
+          <rect width={vw} height={vh} fill="url(#meshFadeV)" />
+        </mask>
+        <mask id="meshMaskH">
+          <rect width={vw} height={vh} fill="url(#meshFadeH)" />
+        </mask>
+      </defs>
+      <g mask="url(#meshMaskV)">
+        <g mask="url(#meshMaskH)">
+          {lines.map((d, i) => (
+            <path key={i} d={d} stroke="white" strokeWidth="1.2" fill="none" />
+          ))}
+        </g>
+      </g>
+    </svg>
+  )
+}
+
 function DonutChart3D({
   holdings, getColor, hoveredIdx, onHover,
 }: {
@@ -722,13 +807,21 @@ function DonutChart3D({
 }) {
   const total = holdings.reduce((sum, h) => sum + parseFloat(h.allocationPercent || '0'), 0)
 
-  // Donut geometry — elliptical for isometric tilt
-  const cx = 200, cy = 120
-  const rx = 150, ry = 78
-  const irx = 75, iry = 39
-  const depth = 48
+  const cx = 200, cy = 115
+  const rx = 148, ry = 76
+  const irx = 74, iry = 38
+  const depth = 52
 
-  // Build segment angles (start from top, clockwise)
+  // Side wall layers — [yOffsetStart, yOffsetEnd, darkenAmount]
+  // Simulates a rounded torus cross-section with highlight band in the middle
+  const BANDS: [number, number, number][] = [
+    [0, depth * 0.15, 35],     // top lip — slightly dark
+    [depth * 0.15, depth * 0.35, 28],  // upper curve — lighter
+    [depth * 0.35, depth * 0.55, 22],  // middle — lightest (highlight band)
+    [depth * 0.55, depth * 0.75, 35],  // lower curve — darkening
+    [depth * 0.75, depth, 55],         // bottom lip — darkest
+  ]
+
   let cumAngle = -Math.PI / 2
   const segments = holdings.map((h, i) => {
     const frac = total > 0 ? parseFloat(h.allocationPercent || '0') / total : 0
@@ -756,34 +849,32 @@ function DonutChart3D({
     return `${cx + r * Math.cos(a)},${cy + ery * Math.sin(a) + dy}`
   }
 
-  // Top/bottom face ring segment
   function ringPath(s: number, e: number, oR: number, oRy: number, iR: number, iRy: number, dy = 0): string {
     const large = e - s > Math.PI ? 1 : 0
     return `M${ep(oR, oRy, s, dy)} A${oR},${oRy} 0 ${large} 1 ${ep(oR, oRy, e, dy)} L${ep(iR, iRy, e, dy)} A${iR},${iRy} 0 ${large} 0 ${ep(iR, iRy, s, dy)} Z`
   }
 
-  // Outer side wall — front-facing portion only (sin(a)>0 → angles 0..PI)
-  function outerWallPath(s: number, e: number): string | null {
+  // Outer side wall band — front-facing only
+  function outerBandPath(s: number, e: number, yTop: number, yBot: number): string | null {
     const cs = Math.max(s, 0), ce = Math.min(e, Math.PI)
     if (cs >= ce) return null
     const large = ce - cs > Math.PI ? 1 : 0
-    return `M${ep(rx, ry, cs, 0)} A${rx},${ry} 0 ${large} 1 ${ep(rx, ry, ce, 0)} L${ep(rx, ry, ce, depth)} A${rx},${ry} 0 ${large} 0 ${ep(rx, ry, cs, depth)} Z`
+    return `M${ep(rx, ry, cs, yTop)} A${rx},${ry} 0 ${large} 1 ${ep(rx, ry, ce, yTop)} L${ep(rx, ry, ce, yBot)} A${rx},${ry} 0 ${large} 0 ${ep(rx, ry, cs, yBot)} Z`
   }
 
   // Inner side wall — back-facing portion visible through hole
-  function innerWallPath(s: number, e: number): string | null {
+  function innerWallPath(s: number, e: number, yTop: number, yBot: number): string | null {
     const ranges: [number, number][] = [[-Math.PI / 2, 0], [Math.PI, 3 * Math.PI / 2]]
     const paths: string[] = []
     for (const [rs, re] of ranges) {
       const cs = Math.max(s, rs), ce = Math.min(e, re)
       if (cs >= ce) continue
       const large = ce - cs > Math.PI ? 1 : 0
-      paths.push(`M${ep(irx, iry, cs, 0)} A${irx},${iry} 0 ${large} 1 ${ep(irx, iry, ce, 0)} L${ep(irx, iry, ce, depth)} A${irx},${iry} 0 ${large} 0 ${ep(irx, iry, cs, depth)} Z`)
+      paths.push(`M${ep(irx, iry, cs, yTop)} A${irx},${iry} 0 ${large} 1 ${ep(irx, iry, ce, yTop)} L${ep(irx, iry, ce, yBot)} A${irx},${iry} 0 ${large} 0 ${ep(irx, iry, cs, yBot)} Z`)
     }
     return paths.length > 0 ? paths.join(' ') : null
   }
 
-  // Hover: pop segment outward from center
   function hoverOffset(seg: typeof segments[0]): string {
     if (hoveredIdx !== seg.idx) return ''
     const mid = (seg.start + seg.end) / 2
@@ -792,43 +883,48 @@ function DonutChart3D({
   }
 
   return (
-    <svg viewBox="0 0 400 290" className="w-full h-full">
+    <svg viewBox="-50 0 500 320" className="w-full h-full">
       <defs>
         <filter id="donutShadow"><feGaussianBlur in="SourceGraphic" stdDeviation="10" /></filter>
       </defs>
 
       {/* Shadow */}
-      <ellipse cx={cx} cy={cy + depth + 25} rx={rx * 0.85} ry={ry * 0.5} fill="black" opacity="0.25" filter="url(#donutShadow)" />
+      <ellipse cx={cx} cy={cy + depth + 20} rx={rx * 0.85} ry={ry * 0.5} fill="black" opacity="0.3" filter="url(#donutShadow)" />
 
       {/* Bottom ring */}
       {segments.map(seg => (
         <path key={`b-${seg.idx}`} d={ringPath(seg.start, seg.end, rx, ry, irx, iry, depth)} fill={darken(seg.color, 70)} transform={hoverOffset(seg)} className="transition-transform duration-200" />
       ))}
 
-      {/* Inner side walls */}
-      {segments.map(seg => {
-        const p = innerWallPath(seg.start, seg.end)
-        if (!p) return null
-        return <path key={`iw-${seg.idx}`} d={p} fill={darken(seg.color, 50)} transform={hoverOffset(seg)} className="transition-transform duration-200" />
-      })}
+      {/* Inner side walls — layered bands */}
+      {BANDS.map(([yTop, yBot, darkAmt], bIdx) =>
+        segments.map(seg => {
+          const p = innerWallPath(seg.start, seg.end, yTop, yBot)
+          if (!p) return null
+          return <path key={`iw-${seg.idx}-${bIdx}`} d={p} fill={darken(seg.color, darkAmt + 15)} transform={hoverOffset(seg)} className="transition-transform duration-200" />
+        })
+      )}
 
-      {/* Outer side walls */}
-      {segments.map(seg => {
-        const p = outerWallPath(seg.start, seg.end)
-        if (!p) return null
-        const hovered = hoveredIdx === seg.idx
-        return (
-          <path
-            key={`ow-${seg.idx}`}
-            d={p}
-            fill={hovered ? darken(seg.color, 25) : darken(seg.color, 45)}
-            transform={hoverOffset(seg)}
-            onMouseEnter={() => onHover(seg.idx)}
-            onMouseLeave={() => onHover(null)}
-            className="transition-all duration-200 cursor-pointer"
-          />
-        )
-      })}
+      {/* Outer side walls — layered bands for rounded look */}
+      {BANDS.map(([yTop, yBot, darkAmt], bIdx) =>
+        segments.map(seg => {
+          const p = outerBandPath(seg.start, seg.end, yTop, yBot)
+          if (!p) return null
+          const hovered = hoveredIdx === seg.idx
+          const baseDark = hovered ? Math.max(0, darkAmt - 15) : darkAmt
+          return (
+            <path
+              key={`ow-${seg.idx}-${bIdx}`}
+              d={p}
+              fill={darken(seg.color, baseDark)}
+              transform={hoverOffset(seg)}
+              onMouseEnter={() => onHover(seg.idx)}
+              onMouseLeave={() => onHover(null)}
+              className="transition-all duration-200 cursor-pointer"
+            />
+          )
+        })
+      )}
 
       {/* Top ring faces */}
       {segments.map(seg => {
@@ -838,7 +934,7 @@ function DonutChart3D({
             key={`t-${seg.idx}`}
             d={ringPath(seg.start, seg.end, rx, ry, irx, iry, 0)}
             fill={hovered ? lighten(seg.color, 25) : seg.color}
-            stroke={hovered ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.08)'}
+            stroke={hovered ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)'}
             strokeWidth={hovered ? 2 : 0.5}
             transform={hoverOffset(seg)}
             onMouseEnter={() => onHover(seg.idx)}
@@ -847,7 +943,6 @@ function DonutChart3D({
           />
         )
       })}
-
     </svg>
   )
 }

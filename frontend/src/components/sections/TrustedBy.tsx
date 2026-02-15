@@ -21,7 +21,7 @@ export function TrustedBy() {
                 <div className="flex items-center -space-x-13 animate-marquee">
                     {/* First set of logos */}
                     <Image
-                        src="/group.svg"
+                        src="/newgroup.svg"
                         alt="Trusted partners"
                         width={1920}
                         height={1080}
@@ -29,7 +29,7 @@ export function TrustedBy() {
                     />
                     {/* Duplicate for seamless loop */}
                     <Image
-                        src="/group.svg"
+                        src="/newgroup.svg"
                         alt="Trusted partners"
                         width={1920}
                         height={1080}

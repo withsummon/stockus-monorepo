@@ -125,7 +125,7 @@ export default function PricingPage() {
                   asChild
                   className="bg-brand hover:bg-[#e06300] text-white rounded-full py-6 md:py-8 px-12 md:px-16 text-xl md:text-2xl font-bold font-montserrat w-full max-w-sm shadow-xl transition-transform hover:scale-105"
                 >
-                  <Link href="/auth/register">{t('pricing.joinNow')}</Link>
+                  <Link href="/checkout">{t('pricing.joinNow')}</Link>
                 </Button>
 
                 <p className="text-white/60 text-sm font-montserrat text-center">
@@ -140,15 +140,19 @@ export default function PricingPage() {
 
       {/* Ready For More - CTA Section */}
       <section className="relative py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-main-black overflow-hidden">
-        {/* SVG Pattern Background */}
-        <div className="absolute inset-0 z-0 opacity-[0.05]">
+        {/* SVG Pattern Background — matching membership section */}
+        <div className="absolute inset-0 z-0 opacity-[0.07]">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="cta-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <circle cx="20" cy="20" r="1" fill="#F96E00" />
+              <pattern id="cta-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#F96E00" strokeWidth="1" />
+              </pattern>
+              <pattern id="cta-dots" width="60" height="60" patternUnits="userSpaceOnUse">
+                <circle cx="30" cy="30" r="1.5" fill="#F96E00" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#cta-grid)" />
+            <rect width="100%" height="100%" fill="url(#cta-dots)" />
           </svg>
         </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand/10 blur-[200px] z-0" />

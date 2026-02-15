@@ -50,11 +50,6 @@ function ResearchHeroBackground() {
       <line x1="50" y1="200" x2="1150" y2="200" stroke="#F96E00" strokeWidth="0.5" opacity="0.04" strokeDasharray="8 12" />
       <line x1="50" y1="280" x2="1150" y2="280" stroke="#F96E00" strokeWidth="0.5" opacity="0.03" strokeDasharray="8 12" />
       <line x1="50" y1="360" x2="1150" y2="360" stroke="#F96E00" strokeWidth="0.5" opacity="0.03" strokeDasharray="8 12" />
-
-      {/* Large decorative circles for depth */}
-      <circle cx="150" cy="100" r="80" fill="#F96E00" opacity="0.03" />
-      <circle cx="1050" cy="120" r="120" fill="#F96E00" opacity="0.03" />
-      <circle cx="600" cy="450" r="150" fill="#F96E00" opacity="0.02" />
     </svg>
   )
 }
@@ -92,13 +87,13 @@ export default async function ResearchPage() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative">
-          <p className="text-sm font-semibold text-brand mb-4 tracking-wider uppercase font-montserrat">
+          <p className="text-sm font-semibold text-brand mb-4 tracking-wider uppercase font-montserrat animate-[fadeInUp_0.6s_ease-out_both]">
             Research & Watchlist
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-montserrat leading-tight mb-5 text-white">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-montserrat leading-tight mb-5 text-white animate-[fadeInUp_0.7s_ease-out_0.15s_both]">
             Stock Research for You
           </h1>
-          <p className="text-main-white opacity-75 text-base sm:text-lg max-w-2xl leading-relaxed font-light">
+          <p className="text-main-white opacity-75 text-base sm:text-lg max-w-2xl leading-relaxed font-light animate-[fadeInUp_0.7s_ease-out_0.3s_both]">
             Helping you spot opportunities and make investment decisions with measured risk management
           </p>
         </div>

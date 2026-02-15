@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import './globals.css'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
+import { LayoutShell } from '@/components/layout/LayoutShell'
 import { PublicProviders } from '@/components/layout/PublicProviders'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '@/lib/constants'
 
@@ -53,11 +52,7 @@ export default function RootLayout({
     <html lang="id">
       <body className={`${montserrat.className} ${montserrat.variable}`}>
         <PublicProviders>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <LayoutShell>{children}</LayoutShell>
         </PublicProviders>
       </body>
     </html>

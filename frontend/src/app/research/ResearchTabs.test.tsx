@@ -2,6 +2,14 @@ import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { ResearchTabs } from './ResearchTabs'
 
+// Mock framer-motion to render instantly
+vi.mock('framer-motion', () => ({
+  AnimatePresence: ({ children }: any) => children,
+  motion: {
+    div: ({ children, variants, initial, animate, exit, transition, ...props }: any) => <div {...props}>{children}</div>,
+  },
+}))
+
 // Mock next/image
 vi.mock('next/image', () => ({
   default: (props: any) => <img {...props} />,

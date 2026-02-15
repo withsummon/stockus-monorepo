@@ -9,10 +9,14 @@ import { MobileNav } from './MobileNav'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 import Image from 'next/image'
+import { User } from 'lucide-react'
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
 
 export function Header() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null)
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -29,6 +33,16 @@ export function Header() {
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [pathname])
+
+  // Check auth state
+  useEffect(() => {
+    fetch(`${API_URL}/auth/me`, { credentials: 'include' })
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data?.user) setUser(data.user)
+      })
+      .catch(() => {})
   }, [pathname])
 
   return (
@@ -77,25 +91,44 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <LanguageSwitcher scrolled={scrolled} />
-          <Button
-            variant="outline"
-            size="lg"
-            className="hidden lg:inline-flex rounded-[20px] border text-brand border-brand bg-transparent"
-            asChild
-          >
-            <Link href="/login" className="font-montserrat font-light">{t('nav.login')}</Link>
-          </Button>
-          <Button
-            size="lg"
-            variant="brand"
-            className="hidden lg:inline-flex rounded-[20px]"
-            asChild
-          >
-            <Link href="/pricing" className="font-montserrat font-light">{t('nav.signup')}</Link>
-          </Button>
+
+          {user ? (
+            /* Logged in: show profile button */
+            <Button
+              size="lg"
+              variant="brand"
+              className="hidden lg:inline-flex rounded-[20px] gap-2"
+              asChild
+            >
+              <Link href="/dashboard" className="font-montserrat font-light">
+                <User className="w-4 h-4" />
+                {user.name.split(' ')[0]}
+              </Link>
+            </Button>
+          ) : (
+            /* Not logged in: show login + sign up */
+            <>
+              <Button
+                variant="outline"
+                size="lg"
+                className="hidden lg:inline-flex rounded-[20px] border text-brand border-brand bg-transparent"
+                asChild
+              >
+                <Link href="/login" className="font-montserrat font-light">{t('nav.login')}</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="brand"
+                className="hidden lg:inline-flex rounded-[20px]"
+                asChild
+              >
+                <Link href="/pricing" className="font-montserrat font-light">{t('nav.signup')}</Link>
+              </Button>
+            </>
+          )}
 
           {/* Mobile Navigation */}
-          <MobileNav scrolled={scrolled} />
+          <MobileNav scrolled={scrolled} user={user} />
         </div>
       </div>
     </header>

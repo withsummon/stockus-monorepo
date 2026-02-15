@@ -16,6 +16,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'hero.subtitle': 'Learn how professionals analyse businesses, value companies, and build portfolios from a team that has helped manage more than $12 billion across global markets.',
     'hero.viewCurriculum': 'View Curriculum',
     'hero.joinCohort': 'Join the Next Cohort',
+    'hero.proofLabel': 'Our actual portfolio performance',
 
     // Trusted By
     'trustedBy.title': 'Trusted by Stock Company & Popular Universities',
@@ -216,6 +217,17 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // About Page
     'about.getToKnow': 'GET TO KNOW US',
+    'about.heroTag': 'ABOUT US',
+    'about.heroTitle': 'Empowering Smarter Investment Decisions',
+    'about.heroDescription': 'StockUs was founded with a simple mission: to make quality investment research and education accessible to everyone. We believe that understanding markets deeply — not just chasing tips — is the key to long-term wealth creation.',
+    'about.visionTitle': 'Our Vision',
+    'about.visionText': 'To be the most trusted platform for investment education and research in Southeast Asia, helping individuals build wealth through knowledge and discipline.',
+    'about.missionTitle': 'Our Mission',
+    'about.missionText': 'We combine real-world hedge fund experience with clear, actionable teaching to help you understand markets, manage risk, and compound your wealth over time.',
+    'about.whatWeDoTitle': 'What We Do',
+    'about.whatWeDoText': 'From in-depth stock research reports to structured courses and a curated watchlist, we provide the tools and insights you need to invest with confidence.',
+    'about.teamTitle': 'Meet the Team',
+    'about.teamSubtitle': 'The people behind StockUs',
 
     // Pricing Page
     'pricing.title': 'Join Our Membership',
@@ -348,6 +360,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'hero.subtitle': 'Pelajari cara profesional menganalisis bisnis, menilai perusahaan, dan membangun portofolio dari tim yang telah membantu mengelola lebih dari $12 miliar di pasar global.',
     'hero.viewCurriculum': 'Lihat Kurikulum',
     'hero.joinCohort': 'Gabung Kohort Berikutnya',
+    'hero.proofLabel': 'Performa portofolio kami yang sebenarnya',
 
     // Trusted By
     'trustedBy.title': 'Dipercaya oleh Perusahaan Sekuritas & Universitas Ternama',
@@ -548,6 +561,17 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // About Page
     'about.getToKnow': 'KENALI KAMI',
+    'about.heroTag': 'TENTANG KAMI',
+    'about.heroTitle': 'Memberdayakan Keputusan Investasi yang Lebih Cerdas',
+    'about.heroDescription': 'StockUs didirikan dengan misi sederhana: membuat riset dan edukasi investasi berkualitas dapat diakses oleh semua orang. Kami percaya bahwa memahami pasar secara mendalam — bukan sekadar mengikuti tips — adalah kunci penciptaan kekayaan jangka panjang.',
+    'about.visionTitle': 'Visi Kami',
+    'about.visionText': 'Menjadi platform terpercaya untuk edukasi dan riset investasi di Asia Tenggara, membantu individu membangun kekayaan melalui pengetahuan dan disiplin.',
+    'about.missionTitle': 'Misi Kami',
+    'about.missionText': 'Kami menggabungkan pengalaman hedge fund dunia nyata dengan pengajaran yang jelas dan actionable untuk membantu Anda memahami pasar, mengelola risiko, dan menumbuhkan kekayaan dari waktu ke waktu.',
+    'about.whatWeDoTitle': 'Apa yang Kami Lakukan',
+    'about.whatWeDoText': 'Dari laporan riset saham mendalam hingga kursus terstruktur dan watchlist terkurasi, kami menyediakan alat dan wawasan yang Anda butuhkan untuk berinvestasi dengan percaya diri.',
+    'about.teamTitle': 'Kenali Tim Kami',
+    'about.teamSubtitle': 'Orang-orang di balik StockUs',
 
     // Pricing Page
     'pricing.title': 'Gabung Keanggotaan Kami',

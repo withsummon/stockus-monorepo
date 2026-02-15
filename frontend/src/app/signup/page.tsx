@@ -63,29 +63,25 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex">
-        <div className="hidden lg:block lg:w-1/2 relative">
-          <Image src="/loginpage.png" alt="Sign up" fill className="object-cover" priority />
-        </div>
-        <div className="w-full lg:w-1/2 bg-main-white flex flex-col items-center justify-center px-6 md:px-16 py-12">
-          <div className="w-full max-w-md space-y-6 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl md:text-4xl font-bold font-montserrat text-main-black">
-                {t('signup.checkEmail')}
-              </h1>
-              <p className="text-slate-400 font-montserrat text-sm">
-                {t('signup.verificationSent')} <strong className="text-main-black">{email}</strong>.
-                {' '}{t('signup.verificationInstructions')}
-              </p>
-            </div>
-            <Button
-              onClick={() => router.push('/login')}
-              variant="outline"
-              className="w-full h-12 rounded-xl border-slate-200 font-montserrat font-semibold text-base transition-all duration-300 hover:scale-[1.02]"
-            >
-              {t('signup.backToLogin')}
-            </Button>
+      <div className="min-h-screen flex items-center justify-center bg-white px-6">
+        <div className="w-full max-w-md space-y-6 text-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto">
+            <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
           </div>
+          <h1 className="text-2xl sm:text-3xl font-bold font-montserrat text-main-black">
+            {t('signup.checkEmail')}
+          </h1>
+          <p className="text-slate-400 font-montserrat text-sm">
+            {t('signup.verificationSent')} <strong className="text-main-black">{email}</strong>.
+            {' '}{t('signup.verificationInstructions')}
+          </p>
+          <Button
+            onClick={() => router.push('/login')}
+            variant="outline"
+            className="w-full h-12 rounded-xl border-slate-200 font-montserrat font-semibold text-base"
+          >
+            {t('signup.backToLogin')}
+          </Button>
         </div>
       </div>
     )
@@ -93,34 +89,59 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left: Image */}
-      <div className="hidden lg:block lg:w-1/2 relative">
-        <Image
-          src="/loginpage.png"
-          alt="Sign up"
-          fill
-          className="object-cover"
-          priority
-        />
+      {/* Left: Gradient panel */}
+      <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-10 xl:p-14 overflow-hidden">
+        {/* Multi-layer mesh gradient background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-brand" />
+          <div className="absolute -top-[20%] -right-[25%] w-[80%] h-[70%] rounded-full bg-white/70 blur-[80px]" />
+          <div className="absolute top-[30%] left-[20%] w-[60%] h-[50%] rounded-full bg-[#c46a20]/60 blur-[70px]" />
+          <div className="absolute top-[25%] left-[5%] w-[45%] h-[35%] rounded-full bg-[#b85e15]/40 blur-[60px]" />
+          <div className="absolute bottom-[10%] right-[5%] w-[50%] h-[30%] rounded-full bg-[#e8944c]/40 blur-[50px]" />
+          <div className="absolute top-[5%] left-[10%] w-[40%] h-[25%] rounded-full bg-[#d97b30]/30 blur-[50px]" />
+          <div className="absolute bottom-[30%] right-[20%] w-[200px] h-[200px] rounded-full bg-white/10 blur-[70px]" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+        </div>
+
+        {/* Stockus logo — white */}
+        <div className="relative z-10">
+          <Image
+            src="/stockus.png"
+            alt="StockUs"
+            width={120}
+            height={48}
+            className="brightness-0 invert object-contain"
+          />
+        </div>
+
+        {/* Welcome text */}
+        <div className="relative z-10">
+          <h2 className="text-[42px] xl:text-[48px] font-bold text-white font-montserrat leading-[1.1] mb-4">
+            Join<br />StockUs
+          </h2>
+          <p className="text-white/75 text-sm xl:text-base font-montserrat font-light leading-relaxed max-w-[300px]">
+            Start your journey to smarter investing with institutional-grade research and education.
+          </p>
+        </div>
       </div>
 
       {/* Right: Form */}
-      <div className="w-full lg:w-1/2 bg-main-white flex flex-col items-center justify-center px-6 md:px-16 py-12">
-        <div className="w-full max-w-md space-y-8">
+      <div className="w-full lg:w-1/2 bg-white flex flex-col items-center justify-center px-6 sm:px-12 xl:px-20 py-12">
+        <div className="w-full max-w-md space-y-6">
           {/* Header */}
           <div className="space-y-2">
-            <h1 className="text-3xl md:text-4xl font-bold font-montserrat text-main-black">
+            <h1 className="text-2xl sm:text-3xl font-bold font-montserrat text-main-black">
               {t('signup.title')}
             </h1>
-            <p className="text-slate-400 font-montserrat text-sm">
+            <p className="text-slate-400 font-montserrat text-sm leading-relaxed">
               {t('signup.subtitle')}
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-main-black font-montserrat font-medium">
+              <Label htmlFor="name" className="text-main-black font-montserrat font-semibold text-sm">
                 {t('signup.fullName')}
               </Label>
               <Input
@@ -136,7 +157,7 @@ export default function SignupPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-main-black font-montserrat font-medium">
+              <Label htmlFor="email" className="text-main-black font-montserrat font-semibold text-sm">
                 {t('signup.email')}
               </Label>
               <Input
@@ -152,7 +173,7 @@ export default function SignupPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-main-black font-montserrat font-medium">
+              <Label htmlFor="password" className="text-main-black font-montserrat font-semibold text-sm">
                 {t('signup.password')}
               </Label>
               <Input
@@ -169,7 +190,7 @@ export default function SignupPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-main-black font-montserrat font-medium">
+              <Label htmlFor="confirmPassword" className="text-main-black font-montserrat font-semibold text-sm">
                 {t('signup.confirmPassword')}
               </Label>
               <Input
@@ -198,48 +219,14 @@ export default function SignupPage() {
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="relative flex items-center justify-center">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200"></div>
-            </div>
-            <span className="relative bg-main-white px-4 text-sm text-slate-400 font-montserrat">
-              {t('signup.orContinue')}
-            </span>
-          </div>
-
-          {/* Social Login */}
-          <div className="grid grid-cols-2 gap-4">
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 rounded-xl border-slate-200 bg-white hover:bg-slate-50 font-montserrat transition-all duration-300 hover:scale-[1.02]"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-              </svg>
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 rounded-xl border-slate-200 bg-white hover:bg-slate-50 font-montserrat transition-all duration-300 hover:scale-[1.02]"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-            </Button>
-          </div>
-
           {/* Footer Link */}
           <p className="text-center text-sm font-montserrat text-slate-500">
             {t('signup.hasAccount')}{' '}
             <Link href="/login" className="text-brand font-semibold hover:underline">
               {t('signup.login')}
             </Link>
-          </p>        </div>
+          </p>
+        </div>
       </div>
     </div>
   )
