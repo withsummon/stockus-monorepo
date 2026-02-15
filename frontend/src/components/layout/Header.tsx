@@ -80,7 +80,7 @@ export function Header() {
           <Button
             variant="outline"
             size="lg"
-            className="hidden md:inline-flex rounded-[20px] border text-brand border-brand"
+            className="hidden md:inline-flex rounded-[20px] border text-brand border-brand bg-transparent"
             asChild
           >
             <Link href="/login" className="font-montserrat font-light">{t('nav.login')}</Link>
