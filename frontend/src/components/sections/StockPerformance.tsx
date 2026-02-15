@@ -8,12 +8,12 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 const stocks = [
-    { ticker: 'NVDA', name: 'NVIDIA Corporation', gain: '+214.52%', price: '$142.50', icon: '/nvidia.webp' },
-    { ticker: 'AAPL', name: 'Apple Inc.', gain: '+48.23%', price: '$198.11', icon: '/apple.png' },
-    { ticker: 'AMZN', name: 'Amazon.com Inc.', gain: '+52.67%', price: '$186.40', icon: '/Amazon.png' },
-    { ticker: 'META', name: 'Meta Platforms Inc.', gain: '+73.41%', price: '$505.75', icon: '/meta.png' },
-    { ticker: 'MSFT', name: 'Microsoft Corp.', gain: '+31.89%', price: '$425.22', icon: '/microsoft.png' },
-    { ticker: 'NFLX', name: 'Netflix Inc.', gain: '+67.14%', price: '$628.30', icon: '/netflix.png' },
+    { ticker: 'V', name: 'Visa Inc.', gain: '+85.0%', buyPrice: '$176.70', currentPrice: '$327.00', icon: '/VISA.png' },
+    { ticker: 'FWONK', name: 'Formula One Group', gain: '+171.9%', buyPrice: '$31.50', currentPrice: '$85.80', icon: '/placeholder-stock.svg' },
+    { ticker: 'ADYEN', name: 'Adyen N.V.', gain: '+106.6%', buyPrice: '$646.90', currentPrice: '$1,336.60', icon: '/placeholder-stock.svg' },
+    { ticker: 'MSFT', name: 'Microsoft Corp.', gain: '+141.6%', buyPrice: '$199.70', currentPrice: '$482.60', icon: '/Microsoft.png' },
+    { ticker: 'NFLX', name: 'Netflix Inc.', gain: '+117.2%', buyPrice: '$47.50', currentPrice: '$103.20', icon: '/Netflix.png' },
+    { ticker: 'BRK.B', name: 'Berkshire Hathaway', gain: '+291.7%', buyPrice: '$128.50', currentPrice: '$503.20', icon: '/placeholder-stock.svg' },
 ]
 
 function MiniChart() {
@@ -134,13 +134,23 @@ export function StockPerformance() {
                                                 <MiniChart />
                                             </div>
 
-                                            {/* Price tag */}
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-1.5 text-green-600">
-                                                    <TrendingUp className="w-4 h-4" />
-                                                    <span className="text-sm font-montserrat font-semibold">{stock.price}</span>
+                                            {/* Price details */}
+                                            <div className="space-y-1.5">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-slate-400 font-montserrat">Avg Buy Price</span>
+                                                    <span className="text-sm font-montserrat font-medium text-slate-600">{stock.buyPrice}</span>
                                                 </div>
-                                                <span className="text-xs text-slate-400 font-montserrat">YTD Return</span>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-slate-400 font-montserrat">Current Price</span>
+                                                    <span className="text-sm font-montserrat font-semibold text-main-black">{stock.currentPrice}</span>
+                                                </div>
+                                                <div className="flex items-center justify-between pt-1 border-t border-slate-100">
+                                                    <span className="text-xs text-slate-400 font-montserrat">Total Return</span>
+                                                    <div className="flex items-center gap-1.5 text-green-600">
+                                                        <TrendingUp className="w-3.5 h-3.5" />
+                                                        <span className="text-sm font-montserrat font-bold">{stock.gain}</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </motion.div>
