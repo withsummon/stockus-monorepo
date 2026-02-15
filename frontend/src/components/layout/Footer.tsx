@@ -31,7 +31,7 @@ export function Footer() {
           <ScrollReveal variant="fadeRight" className="w-full md:w-7/12 space-y-6">
             <Link href="/" className="inline-block transition-transform hover:scale-105">
               <Image
-                src="/stockus.webp"
+                src="/stockus.png"
                 alt="StockUs Logo"
                 width={120}
                 height={40}

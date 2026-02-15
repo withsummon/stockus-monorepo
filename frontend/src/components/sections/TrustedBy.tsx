@@ -18,7 +18,7 @@ export function TrustedBy() {
                 <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-main-black to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-main-black to-transparent z-10 pointer-events-none" />
 
-                <div className="flex items-center -space-x-5 animate-marquee">
+                <div className="flex items-center -space-x-13 animate-marquee">
                     {/* First set of logos */}
                     <Image
                         src="/group.svg"

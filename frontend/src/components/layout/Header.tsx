@@ -42,7 +42,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-6 relative">
         <Link href="/" className="flex items-center space-x-2">
           <Image
-            src={scrolled ? '/stockus_black.png' : '/stockus.webp'}
+            src={scrolled ? '/stockus_black.png' : '/stockus.png'}
             alt="StockUs Logo"
             width={100}
             height={40}
