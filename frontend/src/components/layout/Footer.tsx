@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, Instagram } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 // Custom SVGs for Discord and WhatsApp for better design match
 const DiscordIcon = () => (
@@ -19,6 +20,8 @@ const WhatsAppIcon = () => (
 )
 
 export function Footer() {
+  const { t } = useTranslation()
+
   return (
     <footer className="bg-black text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto container">
@@ -37,10 +40,10 @@ export function Footer() {
             </Link>
             <div className="space-y-4 max-w-2xl">
               <p className="text-white font-montserrat text-sm md:text-base leading-relaxed">
-                StockUs is an education platform focused on global equity investing.
+                {t('footer.desc')}
               </p>
               <p className="text-white font-montserrat text-sm md:text-base leading-relaxed">
-                We do not provide personalised financial advice or portfolio management services. All content is for educational purposes only and does not constitute a recommendation to buy or sell any security.
+                {t('footer.disclaimer')}
               </p>
             </div>
           </ScrollReveal>
@@ -49,7 +52,7 @@ export function Footer() {
           <ScrollReveal variant="fadeLeft" delay={0.2} className="w-full md:w-4/12 flex flex-col items-start md:items-end">
             <div className="space-y-6">
               <h3 className="text-lg md:text-xl font-bold font-montserrat text-white md:text-right">
-                Contact Info
+                {t('footer.contactInfo')}
               </h3>
               <div className="flex items-center gap-6">
                 <Link href="mailto:hello@stockus.id" className="text-white hover:text-brand transition-all duration-300 hover:scale-110">
@@ -73,17 +76,17 @@ export function Footer() {
         <ScrollReveal variant="fadeUp" delay={0.3}>
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-slate-400 font-montserrat text-sm border-slate-800">
-              <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">{t('footer.terms')}</Link>
               <span className="hidden md:inline">|</span>
-              <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">{t('footer.privacy')}</Link>
               <span className="hidden md:inline">|</span>
-              <Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>
+              <Link href="/disclaimer" className="hover:text-white transition-colors">{t('footer.disclaimerLink')}</Link>
               <span className="hidden md:inline">|</span>
-              <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+              <Link href="/contact" className="hover:text-white transition-colors">{t('footer.contact')}</Link>
             </div>
 
             <p className="text-slate-400 font-montserrat text-sm text-center md:text-right">
-              &copy; {new Date().getFullYear()} StockUs. All rights reserved.
+              &copy; {new Date().getFullYear()} {t('footer.rights')}
             </p>
           </div>
         </ScrollReveal>

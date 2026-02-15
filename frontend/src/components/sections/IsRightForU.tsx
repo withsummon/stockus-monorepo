@@ -4,28 +4,18 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
-
-const steps = [
-    {
-        id: '01',
-        text: "You've been buying stocks or funds, but you don't really have a clear framework - you're still guessing.",
-    },
-    {
-        id: '02',
-        text: "You're curious about US and global markets but feel overwhelmed by information and content.",
-    },
-    {
-        id: '03',
-        text: "You're tired of groups that only talk about \"tips\", \"signals\", and short-term trading.",
-    },
-    {
-        id: '04',
-        text: "You want to understand businesses, not just tickers and charts.",
-    },
-]
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function IsRightForU() {
+    const { t } = useTranslation()
     const [activeIndex, setActiveIndex] = useState(0)
+
+    const steps = [
+        { id: '01', text: t('isRightForU.step1') },
+        { id: '02', text: t('isRightForU.step2') },
+        { id: '03', text: t('isRightForU.step3') },
+        { id: '04', text: t('isRightForU.step4') },
+    ]
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -49,17 +39,17 @@ export function IsRightForU() {
 
                         <ScrollReveal variant="fadeUp" delay={0.2}>
                             <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-main-black leading-tight">
-                                Is <span className="text-brand">StockUs</span> Right For <span className="text-brand">You?</span>
+                                {t('isRightForU.title.is')} <span className="text-brand">{t('isRightForU.title.stockus')}</span> {t('isRightForU.title.rightFor')} <span className="text-brand">{t('isRightForU.title.you')}</span>
                             </h2>
                         </ScrollReveal>
 
                         <ScrollReveal variant="fadeUp" delay={0.3}>
                             <div className="space-y-4 text-slate-700 font-light leading-relaxed">
                                 <p>
-                                    StockUs is built for Indonesians who want to take investing seriously. If any of these sound like you, you're in the right place.
+                                    {t('isRightForU.desc1')}
                                 </p>
                                 <p>
-                                    If you want to think more like a professional investor and less like a gambler, StockUs was built for you.
+                                    {t('isRightForU.desc2')}
                                 </p>
                             </div>
                         </ScrollReveal>

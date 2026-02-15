@@ -8,23 +8,26 @@ import { PremiumCommunity } from '@/components/sections/PremiumCommunity'
 import { CommunityGuidelines } from '@/components/sections/CommunityGuidelines'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
-
-const differences = [
-  {
-    title: "Learn, Don't Speculate",
-    description: "Focus on understanding businesses, not chasing prices",
-  },
-  {
-    title: "Think Long-Term",
-    description: "Build conviction through research, not momentum",
-  },
-  {
-    title: "Help Each Other",
-    description: "Share knowledge and learn from peers",
-  },
-]
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export default function CommunityPage() {
+  const { t } = useTranslation()
+
+  const differences = [
+    {
+      title: t('communityPage.diff1.title'),
+      description: t('communityPage.diff1.desc'),
+    },
+    {
+      title: t('communityPage.diff2.title'),
+      description: t('communityPage.diff2.desc'),
+    },
+    {
+      title: t('communityPage.diff3.title'),
+      description: t('communityPage.diff3.desc'),
+    },
+  ]
+
   return (
     <main className="bg-main-white min-h-screen">
       {/* Hero Section */}
@@ -32,13 +35,13 @@ export default function CommunityPage() {
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <ScrollReveal variant="fadeUp">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-montserrat text-main-black tracking-tight leading-tight">
-              StockUs Community
+              {t('communityPage.title')}
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="fadeUp" delay={0.15}>
             <p className="text-lg md:text-2xl text-slate-500 font-montserrat font-light leading-relaxed max-w-3xl mx-auto">
-              Learn together with serious investors who think long-term <br className="hidden md:block" />
-              No tips, no signals. Just real investing discussions
+              {t('communityPage.subtitle')} <br className="hidden md:block" />
+              {t('communityPage.subtitle2')}
             </p>
           </ScrollReveal>
         </div>
@@ -73,13 +76,13 @@ export default function CommunityPage() {
           <div className="text-center text-white space-y-6">
             <ScrollReveal variant="fadeUp">
               <h2 className="text-4xl md:text-5xl font-normal font-montserrat tracking-tight leading-tight">
-                What Makes <span className="font-extrabold">Our Community</span> Different?
+                {t('communityPage.differenceTitle')} <span className="font-extrabold">{t('communityPage.differenceTitleBold')}</span> {t('communityPage.differenceTitleEnd')}
               </h2>
             </ScrollReveal>
             <ScrollReveal variant="fadeUp" delay={0.15}>
               <p className="text-lg md:text-2xl font-montserrat font-light  mx-auto opacity-90 leading-relaxed">
-                Most investment groups are filled with "hot stock tips", hype, and noise. <br className="hidden md:block" />
-                StockUs community focuses on education, framework, and long-term thinking.
+                {t('communityPage.differenceSubtitle')} <br className="hidden md:block" />
+                {t('communityPage.differenceSubtitle2')}
               </p>
             </ScrollReveal>
           </div>

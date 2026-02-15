@@ -6,21 +6,22 @@ import { useEffect, useState } from 'react'
 import { NAV_LINKS } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import { MobileNav } from './MobileNav'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 import Image from 'next/image'
 
 export function Header() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
+  const { t } = useTranslation()
 
   useEffect(() => {
     const handleScroll = () => {
-      // Get the hero section height to know when to switch
       const hero = document.querySelector('[data-hero]')
       if (hero) {
         const heroBottom = hero.getBoundingClientRect().bottom
         setScrolled(heroBottom <= 80)
       } else {
-        // No hero on this page, always use white/scrolled style
         setScrolled(true)
       }
     }
@@ -68,20 +69,21 @@ export function Header() {
                       : 'text-white/80 hover:text-white'
                 }`}
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             )
           })}
         </nav>
 
         <div className="flex items-center gap-4">
+          <LanguageSwitcher scrolled={scrolled} />
           <Button
             variant="outline"
             size="lg"
             className="hidden md:inline-flex rounded-[20px] border text-brand border-brand"
             asChild
           >
-            <Link href="/login" className="font-montserrat font-light">Login</Link>
+            <Link href="/login" className="font-montserrat font-light">{t('nav.login')}</Link>
           </Button>
           <Button
             size="lg"
@@ -89,7 +91,7 @@ export function Header() {
             className="hidden md:inline-flex rounded-[20px]"
             asChild
           >
-            <Link href="/pricing" className="font-montserrat font-light">Sign Up</Link>
+            <Link href="/pricing" className="font-montserrat font-light">{t('nav.signup')}</Link>
           </Button>
 
           {/* Mobile Navigation */}

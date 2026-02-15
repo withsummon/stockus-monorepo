@@ -4,16 +4,19 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { MEMBERSHIP_PRICE_FORMATTED } from '@/lib/constants'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function JoinMembership() {
+    const { t } = useTranslation()
+
     const inclusions = [
-        '5 Days Of Live, Instructor-Led Sessions',
-        'Full Breakdown Of The StockUs Framework: Business, Industry, Valuation, And Portfolio Construction',
-        'Live Case Study On A Real Global Stock',
-        'Course Materials, Slides, And Templates',
-        'Investment Checklist, Valuation Template, And Journal Template (SOON!)',
-        'Access To Member Discussion Channels During The Cohort',
-        'Limited-Time Access To Session Recordings (T&C Applied)',
+        t('joinMembership.inclusion1'),
+        t('joinMembership.inclusion2'),
+        t('joinMembership.inclusion3'),
+        t('joinMembership.inclusion4'),
+        t('joinMembership.inclusion5'),
+        t('joinMembership.inclusion6'),
+        t('joinMembership.inclusion7'),
     ]
 
     return (
@@ -23,12 +26,12 @@ export function JoinMembership() {
                 <div className="text-center mb-16 md:mb-24 space-y-4">
                     <ScrollReveal variant="fadeUp">
                         <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-montserrat text-white leading-tight">
-                            Join Our Membership
+                            {t('joinMembership.title')}
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.1}>
                         <p className="text-white text-lg md:text-2xl font-montserrat">
-                            Get started to learn StockUs <span className="text-brand">Fundamentals Course</span>
+                            {t('joinMembership.subtitle')} <span className="text-brand">{t('joinMembership.subtitleHighlight')}</span>
                         </p>
                     </ScrollReveal>
                 </div>
@@ -40,17 +43,16 @@ export function JoinMembership() {
                         <div className="w-full lg:w-5/12 space-y-8 md:space-y-12">
                             <div className="space-y-4">
                                 <h3 className="text-3xl md:text-4xl lg:text-2xl font-bold font-montserrat text-white leading-tight">
-                                    StockUs Fundamentals <br />
-                                    5-Day Intensive
+                                    {t('joinMembership.cardTitle')}
                                 </h3>
                                 <p className="text-white/90 font-montserrat text-lg md:text-xl lg:text-lg font-light leading-relaxed max-w-xl">
-                                    A Concentrated, Institutional-Style Introduction To Global Stock Investing For Indonesian Investors
+                                    {t('joinMembership.cardDesc')}
                                 </p>
                             </div>
 
                             <div className="space-y-1">
                                 <p className="text-white text-xl md:text-2xl lg:text-lg font-bold font-montserrat">
-                                    Investment
+                                    {t('joinMembership.investment')}
                                 </p>
                                 <p className="text-white text-3xl md:text-5xl lg:text-4xl font-bold font-montserrat">
                                     IDR {MEMBERSHIP_PRICE_FORMATTED.replace('Rp ', '')}
@@ -61,11 +63,11 @@ export function JoinMembership() {
                                 <Button
                                     className="bg-white hover:bg-white/90 text-brand rounded-2xl py-6 md:py-8 px-10 md:px-12 text-xl md:text-2xl lg:text-lg font-bold font-montserrat w-full md:w-auto shadow-xl transition-transform hover:scale-105"
                                 >
-                                    Join StockUs Now
+                                    {t('joinMembership.joinNow')}
                                 </Button>
 
                                 <p className="text-white text-xl lg:text-lg font-medium font-montserrat text-center md:text-left cursor-pointer hover:underline">
-                                    Talk To Our Team
+                                    {t('joinMembership.talkToTeam')}
                                 </p>
                             </div>
                         </div>
@@ -73,7 +75,7 @@ export function JoinMembership() {
                         {/* Right Column */}
                         <div className="w-full lg:w-7/12 space-y-6 md:space-y-8">
                             <h4 className="text-2xl md:text-3xl lg:text-xl font-bold font-montserrat text-white mb-8">
-                                What's Included:
+                                {t('joinMembership.whatsIncluded')}
                             </h4>
                             <StaggerContainer staggerDelay={0.08} className="space-y-4 md:space-y-1">
                                 {inclusions.map((item, index) => (

@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function Hero() {
+  const { t } = useTranslation()
   return (
     <section data-hero className="relative overflow-hidden bg-main-black pt-8 sm:pt-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,7 +18,7 @@ export function Hero() {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="font-montserrat text-2xl sm:text-5xl font-semibold leading-none text-white"
           >
-            The Bridge Between Indonesian Investors And Global Stock Markets
+            {t('hero.title')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -24,7 +26,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             className="mt-6 text-sm sm:text-lg text-main-white opacity-75 font-light"
           >
-            Learn how professionals analyse businesses, value companies, and build portfolios from a team that has helped manage more than $12 billion across global markets.
+            {t('hero.subtitle')}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -34,12 +36,12 @@ export function Hero() {
           >
             <Button size="lg" variant="brand-outline" className="rounded-[15px] p-7 transition-all duration-300 hover:scale-105" asChild>
               <Link href="/courses" className='font-semibold'>
-                View Curriculum
+                {t('hero.viewCurriculum')}
               </Link>
             </Button>
             <Button size="lg" variant="brand" className="rounded-[15px] p-7 transition-all duration-300 hover:scale-105" asChild>
               <Link href="/pricing" className='font-semibold'>
-                Join the Next Cohort
+                {t('hero.joinCohort')}
               </Link>
             </Button>
           </motion.div>

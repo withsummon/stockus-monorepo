@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 interface ResourceItemProps {
     title: string
@@ -53,50 +54,22 @@ function ResourceCard({ title, items, delay = 0 }: ResourceCardProps) {
 }
 
 export function WhatYouGet() {
+    const { t } = useTranslation()
+
     const toolsAndTemplates = [
-        {
-            title: "Excel valuation model template",
-            description: "A flexible valuation model you can adapt to different companies, with new industry examples uploaded over time.",
-        },
-        {
-            title: "Stock screener framework",
-            description: "Criteria and filters you can plug into common screeners to surface better-quality ideas.",
-        },
-        {
-            title: "Investment checklist template",
-            description: "A standardised checklist you can use before every investment.",
-        },
-        {
-            title: "Investment report template",
-            description: "A clean structure to write up your research and archive your thinking.",
-        },
-        {
-            title: "Investment journal template",
-            description: "A simple way to document decisions, track your emotional state, and learn from your own history.",
-        },
+        { title: t('whatYouGet.tools.item1.title'), description: t('whatYouGet.tools.item1.desc') },
+        { title: t('whatYouGet.tools.item2.title'), description: t('whatYouGet.tools.item2.desc') },
+        { title: t('whatYouGet.tools.item3.title'), description: t('whatYouGet.tools.item3.desc') },
+        { title: t('whatYouGet.tools.item4.title'), description: t('whatYouGet.tools.item4.desc') },
+        { title: t('whatYouGet.tools.item5.title'), description: t('whatYouGet.tools.item5.desc') },
     ]
 
     const digitalLibrary = [
-        {
-            title: "Earnings packs",
-            description: "Curated summaries of key global earnings with commentary.",
-        },
-        {
-            title: "Market updates",
-            description: "Periodic updates on major moves in global markets.",
-        },
-        {
-            title: "Macro updates",
-            description: "Plain-English explanations of macro themes that actually matter to equity investors.",
-        },
-        {
-            title: "Stock deep dives",
-            description: "Detailed breakdowns of selected global companies.",
-        },
-        {
-            title: "Industry deep dives",
-            description: "Structured looks at sectors and themes, covering both opportunities and risks.",
-        },
+        { title: t('whatYouGet.library.item1.title'), description: t('whatYouGet.library.item1.desc') },
+        { title: t('whatYouGet.library.item2.title'), description: t('whatYouGet.library.item2.desc') },
+        { title: t('whatYouGet.library.item3.title'), description: t('whatYouGet.library.item3.desc') },
+        { title: t('whatYouGet.library.item4.title'), description: t('whatYouGet.library.item4.desc') },
+        { title: t('whatYouGet.library.item5.title'), description: t('whatYouGet.library.item5.desc') },
     ]
 
     return (
@@ -106,20 +79,20 @@ export function WhatYouGet() {
                 <div className="text-center mb-16 md:mb-24 space-y-4">
                     <ScrollReveal variant="fadeUp">
                         <h2 className="text-4xl md:text-5xl font-bold font-montserrat text-main-black leading-tight">
-                            <span className="text-brand">What You Get</span> <br />
-                            Beyond The Course
+                            <span className="text-brand">{t('whatYouGet.titleHighlight')}</span> <br />
+                            {t('whatYouGet.titleEnd')}
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.1}>
                         <p className="text-main-black font-normal text-lg md:text-xl max-w-3xl mx-auto container font-montserrat">
-                            Get access to tools, templates, and ongoing content as the community grows so you can stay in the game.
+                            {t('whatYouGet.subtitle')}
                         </p>
                     </ScrollReveal>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                    <ResourceCard title="Tools & Templates" items={toolsAndTemplates} delay={0} />
-                    <ResourceCard title="Digital Content Library" items={digitalLibrary} delay={0.2} />
+                    <ResourceCard title={t('whatYouGet.toolsTitle')} items={toolsAndTemplates} delay={0} />
+                    <ResourceCard title={t('whatYouGet.libraryTitle')} items={digitalLibrary} delay={0.2} />
                 </div>
             </div>
         </section>

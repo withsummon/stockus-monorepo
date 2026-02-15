@@ -2,25 +2,16 @@
 
 import React from 'react'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function CommunityGuidelines() {
+    const { t } = useTranslation()
+
     const principles = [
-        {
-            number: 1,
-            text: 'Be respectful and constructive in all discussions',
-        },
-        {
-            number: 2,
-            text: 'Share knowledge freely, but don\'t pressure others to buy/sell',
-        },
-        {
-            number: 3,
-            text: 'Focus on learning and frameworks, not "hot tips"',
-        },
-        {
-            number: 4,
-            text: 'Support fellow members on their investing journey',
-        },
+        { number: 1, text: t('guidelines.p1') },
+        { number: 2, text: t('guidelines.p2') },
+        { number: 3, text: t('guidelines.p3') },
+        { number: 4, text: t('guidelines.p4') },
     ]
 
     return (
@@ -30,8 +21,7 @@ export function CommunityGuidelines() {
                     {/* Left Column */}
                     <ScrollReveal variant="fadeRight" className="w-full lg:w-1/3">
                         <h2 className="text-4xl md:text-5xl lg:text-3xl font-bold font-montserrat text-main-black leading-tight text-wrap-balance">
-                            Community<br />
-                            Guidelines
+                            {t('guidelines.title')}
                         </h2>
                     </ScrollReveal>
 
@@ -39,7 +29,7 @@ export function CommunityGuidelines() {
                     <div className="w-full lg:w-2/3 space-y-8">
                         <ScrollReveal variant="fadeUp">
                             <h3 className="text-2xl font-bold font-montserrat text-main-black italic">
-                                Our Principles
+                                {t('guidelines.ourPrinciples')}
                             </h3>
                         </ScrollReveal>
                         <StaggerContainer staggerDelay={0.12} className="space-y-6">

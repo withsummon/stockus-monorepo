@@ -5,32 +5,19 @@ import { ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
-
-const faqs = [
-  {
-    question: "Who is StockUs for?",
-    answer: "StockUs is for Indonesian investors who want to seriously learn how to invest in global stocks - whether you're just starting or already investing but feel lost and want a proper framework."
-  },
-  {
-    question: "Do you give stock recommendations or signals?",
-    answer: "StockUs is for Indonesian investors who want to seriously learn how to invest in global stocks - whether you're just starting or already investing but feel lost and want a proper framework." // Reusing text from screenshot if possible, though it seems they might be placeholders
-  },
-  {
-    question: "I'm a complete beginner. Is this too advanced for me?",
-    answer: "The Fundamentals Course is designed to be accessible for everyone, starting from the very basics and building up to institutional-level frameworks."
-  },
-  {
-    question: "Will you cover brokers and tax for Indonesian investors?",
-    answer: "Yes, we discuss the practicalities of opening brokerage accounts and the tax implications for Indonesian residents investing globally."
-  },
-  {
-    question: "How long do I get access to the material?",
-    answer: "You will have lifetime access to the recorded sessions and all downloadable materials provided during the cohort."
-  }
-]
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function FAQ() {
+  const { t } = useTranslation()
   const [openIndex, setOpenIndex] = useState<number | null>(1) // Defaulting to the 2nd one as per screenshot
+
+  const faqs = [
+    { question: t('faq.q1'), answer: t('faq.a1') },
+    { question: t('faq.q2'), answer: t('faq.a2') },
+    { question: t('faq.q3'), answer: t('faq.a3') },
+    { question: t('faq.q4'), answer: t('faq.a4') },
+    { question: t('faq.q5'), answer: t('faq.a5') },
+  ]
 
   return (
     <section className="bg-main-white py-12 md:py-24 xl:py-32 px-4 sm:px-6 lg:px-8">
@@ -40,9 +27,9 @@ export function FAQ() {
             {/* Left Column: Title */}
             <ScrollReveal variant="fadeRight" className="w-full lg:w-5/12 xl:w-5/12">
               <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-[80px] font-bold font-montserrat text-main-black leading-[1.1]">
-                <span className="text-brand">Frequently</span> <br />
-                Asked <br />
-                Questions
+                <span className="text-brand">{t('faq.title1')}</span> <br />
+                {t('faq.title2')} <br />
+                {t('faq.title3')}
               </h2>
             </ScrollReveal>
 

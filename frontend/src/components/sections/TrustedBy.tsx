@@ -2,12 +2,14 @@
 
 import Image from "next/image"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function TrustedBy() {
+    const { t } = useTranslation()
     return (
         <div className="bg-main-black pt-4 sm:pt-6 pb-8 sm:pb-12 space-y-6 text-xl font-montserrat text-white font-semibold text-center overflow-hidden">
             <ScrollReveal variant="fadeUp" delay={0.1}>
-                <h2>Trusted by Stock Company & Popular Universities</h2>
+                <h2>{t('trustedBy.title')}</h2>
             </ScrollReveal>
 
             {/* Infinite Marquee using CSS animation for reliable auto-scroll */}

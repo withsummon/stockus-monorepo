@@ -5,51 +5,54 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function PremiumCommunity() {
+    const { t } = useTranslation()
+
     const features = [
         {
-            title: 'Advanced Discussions',
+            title: t('premiumCommunity.f1.title'),
             items: [
-                'Deep-dive investment thesis discussions with vetted members',
-                'Share research and analysis',
+                t('premiumCommunity.f1.item1'),
+                t('premiumCommunity.f1.item2'),
             ],
         },
         {
-            title: 'Direct Instructor Access',
+            title: t('premiumCommunity.f2.title'),
             items: [
-                'Ask question directly to Jefta and Yosua',
-                'Get feedback on your analysis',
+                t('premiumCommunity.f2.item1'),
+                t('premiumCommunity.f2.item2'),
             ],
         },
         {
-            title: 'Portfolio Reviews',
+            title: t('premiumCommunity.f3.title'),
             items: [
-                'Share your portfolio for constructive feedbacks',
-                'Learn from others approaches',
+                t('premiumCommunity.f3.item1'),
+                t('premiumCommunity.f3.item2'),
             ],
         },
         {
-            title: 'Exclusive Events',
+            title: t('premiumCommunity.f4.title'),
             items: [
-                'Live market analysis sessions',
-                'Guest speaker Q&A&apos;s',
-                'Member-only workshops',
+                t('premiumCommunity.f4.item1'),
+                t('premiumCommunity.f4.item2'),
+                t('premiumCommunity.f4.item3'),
             ],
         },
         {
-            title: 'Networking',
+            title: t('premiumCommunity.f5.title'),
             items: [
-                'Connect with serious investors industry professionals',
-                'Founders and operators',
+                t('premiumCommunity.f5.item1'),
+                t('premiumCommunity.f5.item2'),
             ],
         },
         {
-            title: 'Early Access',
+            title: t('premiumCommunity.f6.title'),
             items: [
-                'New research first',
-                'Beta features and tools',
-                'Priority support',
+                t('premiumCommunity.f6.item1'),
+                t('premiumCommunity.f6.item2'),
+                t('premiumCommunity.f6.item3'),
             ],
         },
     ]
@@ -69,17 +72,17 @@ export function PremiumCommunity() {
                     <div className="text-center space-y-6">
                         <ScrollReveal variant="fadeUp" delay={0.1}>
                             <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white text-[#F96E00] font-montserrat font-bold text-sm tracking-widest uppercase shadow-sm">
-                                STOCKUS MEMBER <Image src="/crown.svg" alt="Crown" width={20} height={18} />
+                                {t('premiumCommunity.badge')} <Image src="/crown.svg" alt="Crown" width={20} height={18} />
                             </div>
                         </ScrollReveal>
                         <ScrollReveal variant="fadeUp" delay={0.2}>
                             <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-white tracking-tight">
-                                Premium Community
+                                {t('premiumCommunity.title')}
                             </h2>
                         </ScrollReveal>
                         <ScrollReveal variant="fadeUp" delay={0.3}>
                             <p className="text-lg md:text-xl text-white/80 font-montserrat font-light max-w-2xl mx-auto">
-                                Exclusive access for enrolled students and inactive members
+                                {t('premiumCommunity.subtitle')}
                             </p>
                         </ScrollReveal>
                     </div>
@@ -115,7 +118,7 @@ export function PremiumCommunity() {
                             <Button
                                 className="bg-brand hover:bg-[#e06300] text-white rounded-[40px] py-8 text-2xl md:text-3xl font-bold font-montserrat shadow-xl transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] w-full"
                             >
-                                Become A Member
+                                {t('premiumCommunity.becomeAMember')}
                             </Button>
                         </div>
                     </ScrollReveal>

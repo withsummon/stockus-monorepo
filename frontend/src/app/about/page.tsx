@@ -4,6 +4,7 @@ import { SITE_NAME } from '@/lib/constants'
 import Image from 'next/image'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 const team = [
   {
@@ -27,6 +28,8 @@ const team = [
 ]
 
 export default function AboutPage() {
+  const { t } = useTranslation()
+
   return (
     <main className="bg-main-white min-h-screen py-12 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -56,7 +59,7 @@ export default function AboutPage() {
                     <div className="space-y-4">
                       <ScrollReveal variant="fadeUp" delay={0.3}>
                         <span className="text-sm md:text-base font-medium tracking-widest opacity-80 font-montserrat uppercase">
-                          GET TO KNOW US
+                          {t('about.getToKnow')}
                         </span>
                       </ScrollReveal>
                       <StaggerContainer staggerDelay={0.1} className="space-y-6">
@@ -88,7 +91,7 @@ export default function AboutPage() {
                     <div className="space-y-4">
                       <ScrollReveal variant="fadeUp" delay={0.3}>
                         <span className="text-sm md:text-base font-medium tracking-widest opacity-80 font-montserrat uppercase">
-                          GET TO KNOW US
+                          {t('about.getToKnow')}
                         </span>
                       </ScrollReveal>
                       <StaggerContainer staggerDelay={0.1} className="space-y-6">

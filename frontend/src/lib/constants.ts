@@ -11,9 +11,9 @@ export const COLORS = {
 } as const
 
 export const NAV_LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About us' },
-  { href: '/research', label: 'Research' },
-  { href: '/community', label: 'Community' },
-  { href: "/pricing", label: "Membership" },
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/about', labelKey: 'nav.about' },
+  { href: '/research', labelKey: 'nav.research' },
+  { href: '/community', labelKey: 'nav.community' },
+  { href: '/pricing', labelKey: 'nav.membership' },
 ]

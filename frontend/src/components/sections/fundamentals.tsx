@@ -6,34 +6,7 @@ import Link from 'next/link'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
-
-const dayContent = [
-    {
-        day: "Day 1",
-        title: "Why do we invest in global equity markets?",
-        desc: "Understand the historical returns of different asset classes and why stocks are the best engine for long-term wealth creation.",
-    },
-    {
-        day: "Day 2",
-        title: "What do we actually own when we buy a stock?",
-        desc: "On Day 2, we move from \"stock\" to business. You learn how to read and understand the engine that drives long-term returns.",
-    },
-    {
-        day: "Day 3",
-        title: "Where does this business compete and why can it win?",
-        desc: "Learn how to identify businesses with durable competitive advantages (moats) that can survive and thrive in any market.",
-    },
-    {
-        day: "Day 4",
-        title: "What is it worth and how much should we own?",
-        desc: "Master the art of valuation. Learn how to estimate the intrinsic value of a business and how to think about margin of safety.",
-    },
-    {
-        day: "Day 5",
-        title: "How do we build and manage a portfolio?",
-        desc: "Pulling it all together. Learn the principles of portfolio construction, diversification, and the psychology of long-term investing.",
-    }
-]
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 function DayCard({ day, title, desc, isActive, onClick }: {
     day: string,
@@ -42,6 +15,7 @@ function DayCard({ day, title, desc, isActive, onClick }: {
     isActive: boolean,
     onClick: () => void
 }) {
+    const { t } = useTranslation()
     const [isHovered, setIsHovered] = useState(false)
 
     return (
@@ -102,14 +76,23 @@ function DayCard({ day, title, desc, isActive, onClick }: {
                     isActive ? "text-brand" : "text-main-black"
                 )}
             >
-                Learn More..
+                {t('fundamentals.learnMore')}
             </Link>
         </motion.div>
     )
 }
 
 export function Fundamentals() {
+    const { t } = useTranslation()
     const [activeIndex, setActiveIndex] = useState(1) // Default to Day 2 as in image
+
+    const dayContent = [
+        { day: "Day 1", title: t('fundamentals.day1.title'), desc: t('fundamentals.day1.desc') },
+        { day: "Day 2", title: t('fundamentals.day2.title'), desc: t('fundamentals.day2.desc') },
+        { day: "Day 3", title: t('fundamentals.day3.title'), desc: t('fundamentals.day3.desc') },
+        { day: "Day 4", title: t('fundamentals.day4.title'), desc: t('fundamentals.day4.desc') },
+        { day: "Day 5", title: t('fundamentals.day5.title'), desc: t('fundamentals.day5.desc') },
+    ]
 
     return (
         <section className="bg-brand">
@@ -119,14 +102,14 @@ export function Fundamentals() {
                         {/* Heading Side */}
                         <ScrollReveal variant="fadeRight" className="w-full">
                             <h2 className="font-montserrat text-3xl md:text-4xl font-bold text-white leading-tight">
-                                5-Day Fundamentals <br></br>of <span className="font-thin font-montserrat">Global Stock Investing</span>
+                                {t('fundamentals.title')} <br></br>of <span className="font-thin font-montserrat">{t('fundamentals.titleThin')}</span>
                             </h2>
                         </ScrollReveal>
 
                         {/* Description Side */}
                         <ScrollReveal variant="fadeLeft" delay={0.2} className="w-full">
                             <p className="text-white text-lg md:text-xl font-light leading-relaxed  font-montserrat max-w-lg leading-[1px]">
-                                The StockUs Fundamentals Course Is An Intensive, Cohort-Based Program That Compresses Years Of Learning Into Five Focused Days. Each Day Answers One Key Question
+                                {t('fundamentals.subtitle')}
                             </p>
                         </ScrollReveal>
                     </div>

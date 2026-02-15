@@ -10,6 +10,7 @@ import { Suspense } from 'react'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
 
@@ -21,6 +22,7 @@ function LoginContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect') || '/dashboard'
+  const { t } = useTranslation()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -68,10 +70,10 @@ function LoginContent() {
             {/* Header */}
             <div className="space-y-2">
               <h1 className="text-2xl md:text-3xl font-bold font-montserrat text-main-black">
-                Login to your account
+                {t('login.title')}
               </h1>
               <p className="text-slate-400 font-montserrat text-sm">
-                Sign in to access your StockUs account
+                {t('login.subtitle')}
               </p>
             </div>
 
@@ -79,7 +81,7 @@ function LoginContent() {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-main-black font-montserrat font-medium">
-                  Email
+                  {t('login.email')}
                 </Label>
                 <Input
                   id="email"
@@ -95,7 +97,7 @@ function LoginContent() {
 
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-main-black font-montserrat font-medium">
-                  Password
+                  {t('login.password')}
                 </Label>
                 <Input
                   id="password"
@@ -118,7 +120,7 @@ function LoginContent() {
                 disabled={loading}
                 className="w-full h-12 bg-brand hover:bg-[#e06300] text-white rounded-xl font-montserrat font-semibold text-base transition-all duration-300 hover:scale-[1.02]"
               >
-                {loading ? 'Processing...' : 'Login to Dashboard'}
+                {loading ? t('login.processing') : t('login.submit')}
               </Button>
             </form>
 
@@ -128,7 +130,7 @@ function LoginContent() {
                 <div className="w-full border-t border-slate-200"></div>
               </div>
               <span className="relative bg-white px-4 text-sm text-slate-400 font-montserrat">
-                or continue with
+                {t('login.orContinue')}
               </span>
             </div>
 
@@ -159,9 +161,9 @@ function LoginContent() {
 
             {/* Footer Link */}
             <p className="text-center text-sm font-montserrat text-slate-500">
-              Don't have an account?{' '}
+              {t('login.noAccount')}{' '}
               <Link href="/signup" className="text-brand font-semibold hover:underline">
-                Enroll Now
+                {t('login.enrollNow')}
               </Link>
             </p>
           </div>
@@ -169,7 +171,7 @@ function LoginContent() {
           {/* SSL Notice */}
           <div className="flex items-center justify-center gap-2 mt-6 text-white/70 text-sm font-montserrat">
             <Lock className="w-4 h-4" />
-            <span>Secure login protected by SSL Encryption</span>
+            <span>{t('login.sslNotice')}</span>
           </div>
         </motion.div>
       </ScrollReveal>

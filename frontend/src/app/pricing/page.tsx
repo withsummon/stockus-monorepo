@@ -12,62 +12,11 @@ import { SITE_NAME, MEMBERSHIP_PRICE, MEMBERSHIP_PRICE_FORMATTED } from '@/lib/c
 import { FAQ } from '@/components/sections/FAQ'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
-
-const features = {
-  courses: {
-    title: 'Kursus',
-    icon: '📚',
-    free: ['Video intro gratis', 'Materi dasar terbatas'],
-    member: ['Akses semua video kursus', 'Materi lengkap & mendalam', 'Certificate of completion', 'Lifetime access'],
-  },
-  research: {
-    title: 'Research',
-    icon: '📊',
-    free: ['Research preview terbatas'],
-    member: ['Semua research reports', 'In-depth analysis', 'Stock recommendations', 'Monthly market outlook'],
-  },
-  templates: {
-    title: 'Templates',
-    icon: '📋',
-    free: ['Template dasar gratis'],
-    member: ['Semua investment templates', 'Financial models', 'Portfolio trackers', 'Due diligence checklists'],
-  },
-  community: {
-    title: 'Community',
-    icon: '👥',
-    free: ['-'],
-    member: ['Private Discord community', 'Monthly live Q&A', 'Networking dengan investors', 'Exclusive webinars'],
-  },
-}
-
-const faqs = [
-  {
-    question: 'Apa yang membedakan StockUs dengan platform lain?',
-    answer: 'StockUs fokus pada pendekatan terstruktur untuk investasi saham global. Kami tidak hanya memberikan tips atau rekomendasi saham, tapi mengajarkan framework berpikir dan analisis yang bisa digunakan seumur hidup.',
-  },
-  {
-    question: 'Apakah cocok untuk pemula?',
-    answer: 'Ya! Kursus kami dirancang dari level fundamental. Anda akan dipandu step-by-step mulai dari konsep dasar hingga analisis mendalam.',
-  },
-  {
-    question: 'Berapa lama akses membership berlaku?',
-    answer: 'Membership berlaku 1 tahun sejak tanggal pembayaran. Semua konten yang sudah diakses bisa dilihat kembali selama periode aktif.',
-  },
-  {
-    question: 'Apakah ada garansi uang kembali?',
-    answer: 'Ya, kami memberikan 14 hari garansi uang kembali. Jika dalam 14 hari pertama Anda merasa program ini tidak sesuai, kami akan mengembalikan 100% pembayaran Anda.',
-  },
-  {
-    question: 'Bagaimana cara pembayaran?',
-    answer: 'Kami menerima berbagai metode pembayaran melalui Midtrans: transfer bank, kartu kredit, e-wallet (GoPay, OVO, Dana), dan Indomaret/Alfamart.',
-  },
-  {
-    question: 'Apakah bisa konsultasi langsung?',
-    answer: 'Member bisa bertanya di Discord community dan mengikuti monthly live Q&A session. Untuk konsultasi portfolio pribadi, tersedia add-on service terpisah.',
-  },
-]
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export default function PricingPage() {
+  const { t } = useTranslation()
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -92,6 +41,16 @@ export default function PricingPage() {
     },
   }
 
+  const inclusions = [
+    t('joinMembership.inclusion1'),
+    t('joinMembership.inclusion2'),
+    t('joinMembership.inclusion3'),
+    t('joinMembership.inclusion4'),
+    t('joinMembership.inclusion5'),
+    t('joinMembership.inclusion6'),
+    t('joinMembership.inclusion7'),
+  ]
+
   return (
     <>
       <script
@@ -110,12 +69,12 @@ export default function PricingPage() {
           <div className="text-center mb-16 space-y-4">
             <ScrollReveal variant="fadeUp">
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-montserrat text-white leading-tight tracking-tight text-wrap-balance">
-                Join Our Membership
+                {t('pricing.title')}
               </h1>
             </ScrollReveal>
             <ScrollReveal variant="fadeUp" delay={0.15}>
               <p className="text-white text-lg md:text-2xl font-montserrat font-light text-wrap-balance">
-                Get started to learn StockUs <span className="text-[#F96E00] font-bold">Fundamentals Course</span>
+                {t('pricing.subtitle')} <span className="text-[#F96E00] font-bold">{t('pricing.subtitleHighlight')}</span>
               </p>
             </ScrollReveal>
           </div>
@@ -132,12 +91,12 @@ export default function PricingPage() {
                 <div className="text-center space-y-2">
                   <ScrollReveal variant="fadeUp" delay={0.3}>
                     <h2 className="text-3xl md:text-5xl font-bold font-montserrat text-main-black tracking-tight">
-                      StockUs Fundamentals
+                      {t('pricing.cardTitle')}
                     </h2>
                   </ScrollReveal>
                   <ScrollReveal variant="fadeUp" delay={0.4}>
                     <p className="text-slate-500 text-lg md:text-xl font-montserrat italic font-light">
-                      5-Day Intensive
+                      {t('pricing.cardSubtitle')}
                     </p>
                   </ScrollReveal>
                 </div>
@@ -155,19 +114,11 @@ export default function PricingPage() {
                 <div className="w-full max-w-2xl space-y-6">
                   <ScrollReveal variant="fadeUp" delay={0.5}>
                     <h3 className="text-xl md:text-2xl font-bold font-montserrat text-main-black">
-                      What&apos;s Included:
+                      {t('pricing.whatsIncluded')}
                     </h3>
                   </ScrollReveal>
                   <StaggerContainer staggerDelay={0.08} className="space-y-4">
-                    {[
-                      '5 Days Of Live, Instructor-Led Sessions',
-                      'Full Breakdown Of The StockUs Framework: Business, Industry, Valuation, And Portfolio Construction',
-                      'Live Case Study On A Real Global Stock',
-                      'Course Materials, Slides, And Templates',
-                      'Investment Checklist, Valuation Template, And Journal Template (SOON!)',
-                      'Access To Member Discussion Channels During The Cohort',
-                      'Limited-Time Access To Session Recordings (T&C Applied)',
-                    ].map((item, index) => (
+                    {inclusions.map((item, index) => (
                       <StaggerItem key={index} variant="fadeLeft">
                         <li className="flex gap-4 text-slate-600 text-base md:text-lg font-light leading-snug font-montserrat list-none">
                           <span className="flex-shrink-0 mt-2.5 w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
@@ -185,10 +136,10 @@ export default function PricingPage() {
                       asChild
                       className="bg-brand hover:bg-[#e06300] text-white rounded-[20px] py-8 px-12 text-xl md:text-2xl font-bold font-montserrat shadow-xl transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] w-full max-w-md"
                     >
-                      <Link href="/auth/register">Join StockUs Now</Link>
+                      <Link href="/auth/register">{t('pricing.joinNow')}</Link>
                     </Button>
                     <p className="text-slate-400 text-sm md:text-base font-montserrat font-light">
-                      Limited Seats Per Cohort To Keep Sessions Interactive
+                      {t('pricing.limitedSeats')}
                     </p>
                   </div>
                 </ScrollReveal>
@@ -241,15 +192,15 @@ export default function PricingPage() {
             >
               <div className="space-y-2">
                 <h2 className="text-3xl md:text-5xl font-bold font-montserrat text-brand tracking-tight leading-tight">
-                  Ready For More?
+                  {t('pricing.readyForMore')}
                 </h2>
                 <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-montserrat text-main-black tracking-tight">
-                  Advanced Investing Course
+                  {t('pricing.advancedCourse')}
                 </h3>
               </div>
 
               <p className="text-slate-500 text-base md:text-lg lg:text-xl font-montserrat font-light leading-relaxed">
-                We offer an Advanced course covering complex valuation, sector specialization, and portfolio construction for graduates ready for the next level.
+                {t('pricing.advancedDesc')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -257,12 +208,12 @@ export default function PricingPage() {
                   variant="outline"
                   className="border-brand text-brand hover:bg-brand/5 rounded-full py-7 px-8 text-base md:text-lg font-bold font-montserrat flex-1 shadow-sm transition-all duration-300 hover:scale-105"
                 >
-                  Talk To Our Team
+                  {t('pricing.talkToTeam')}
                 </Button>
                 <Button
                   className="bg-brand hover:bg-[#e06300] text-white rounded-full py-7 px-8 text-base md:text-lg font-bold font-montserrat flex-1 shadow-md transition-all duration-300 hover:scale-105"
                 >
-                  Email Us
+                  {t('pricing.emailUs')}
                 </Button>
               </div>
             </motion.div>

@@ -3,8 +3,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function WhosBehind() {
+    const { t } = useTranslation()
     return (
         <section className="bg-white py-12 md:py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto container">
@@ -12,8 +14,8 @@ export function WhosBehind() {
                 <div className="text-center mb-16 md:mb-20">
                     <ScrollReveal variant="fadeUp">
                         <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-montserrat text-main-black leading-tight">
-                            Who's Behind <br />
-                            <span className="text-brand">StockUs?</span>
+                            {t('whosBehind.title')} <br />
+                            <span className="text-brand">{t('whosBehind.titleHighlight')}</span>
                         </h2>
                     </ScrollReveal>
                 </div>
@@ -36,15 +38,15 @@ export function WhosBehind() {
                     <ScrollReveal variant="fadeLeft" delay={0.2} className="w-full lg:w-1/2 space-y-8 md:space-y-12">
                         <div className="space-y-9">
                             <p className="text-main-black font-montserrat text-lg md:text-xl leading-relaxed">
-                                <span className="text-brand font-bold">StockUs</span> Was Created To Close The Gap Between How Professionals Think About Investing And What Retail Investors Usually See On Social Media. Our Goal Is Simple: Give Indonesian Investors A Clear, Honest, And Practical Way To Approach Global Stock Markets.
+                                <span className="text-brand font-bold">StockUs</span> {t('whosBehind.p1')}
                             </p>
 
                             <p className="text-slate-600 font-montserrat text-lg md:text-xl font-light leading-relaxed">
-                                The Curriculum Is Led By A Team With 10+ Years Of Hands-On Experience Across The Hedge Fund Industry, Family Offices, Private Equity, Superannuation, Investment Banking, And Crypto Asset Markets. Collectively, We've Been Involved In Managing Over $12 Billion In Funds Across Different Strategies And Market Cycles.
+                                {t('whosBehind.p2')}
                             </p>
 
                             <p className="text-slate-600 font-montserrat text-lg md:text-xl font-light leading-relaxed">
-                                All Of That Experience Is Boiled Down Into A Process You Can Actually Use As An Individual Investor: How To Think About Businesses, How To Judge Industries, How To Value Companies, And How To Build A Portfolio That Fits Your Goals.
+                                {t('whosBehind.p3')}
                             </p>
                         </div>
                     </ScrollReveal>

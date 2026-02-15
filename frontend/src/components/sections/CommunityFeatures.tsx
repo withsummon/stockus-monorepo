@@ -6,41 +6,44 @@ import { Check, Crown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
-
-const features = [
-  {
-    title: 'Member-only discussion channels',
-    description: 'Share ideas, ask questions, and learn from others at different stages of their journey',
-    isPremium: false,
-  },
-  {
-    title: 'Networking',
-    description: 'Connect with investors, founders, and professionals who share an interest in global markets.',
-    isPremium: false,
-  },
-  {
-    title: 'Live events & workshops',
-    description: 'Regular sessions where we break down earnings, macro events, and individual stocks.',
-    isPremium: false,
-  },
-  {
-    title: 'Private Review Session',
-    description: 'Get structured feedback on your portfolio framework and positioning.',
-    isPremium: true,
-  },
-  {
-    title: 'Guest speakers',
-    description: 'Hear from global fund managers and practitioners who manage real portfolios and navigate markets.',
-    isPremium: false,
-  },
-  {
-    title: 'AMA & Q&A sessions',
-    description: 'Bring your questions about process, mindset, or specific challenges and get them answered live.',
-    isPremium: true,
-  },
-]
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function CommunityFeatures() {
+  const { t } = useTranslation()
+
+  const features = [
+    {
+      title: t('communityFeatures.feature1.title'),
+      description: t('communityFeatures.feature1.desc'),
+      isPremium: false,
+    },
+    {
+      title: t('communityFeatures.feature2.title'),
+      description: t('communityFeatures.feature2.desc'),
+      isPremium: false,
+    },
+    {
+      title: t('communityFeatures.feature3.title'),
+      description: t('communityFeatures.feature3.desc'),
+      isPremium: false,
+    },
+    {
+      title: t('communityFeatures.feature4.title'),
+      description: t('communityFeatures.feature4.desc'),
+      isPremium: true,
+    },
+    {
+      title: t('communityFeatures.feature5.title'),
+      description: t('communityFeatures.feature5.desc'),
+      isPremium: false,
+    },
+    {
+      title: t('communityFeatures.feature6.title'),
+      description: t('communityFeatures.feature6.desc'),
+      isPremium: true,
+    },
+  ]
+
   return (
     <section className="bg-main-black py-12 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto container">
@@ -48,7 +51,7 @@ export function CommunityFeatures() {
         <div className="text-center space-y-8 mb-16 md:mb-24">
           <ScrollReveal variant="fadeUp">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white">
-              Community Features
+              {t('communityFeatures.title')}
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fadeIn" delay={0.2}>
@@ -97,7 +100,7 @@ export function CommunityFeatures() {
               className="w-full border-brand bg-transparent py-8 text-2xl font-montserrat font-semibold text-brand border-2 rounded-[30px] transition-all duration-300 hover:bg-brand hover:text-white hover:scale-[1.02]"
               asChild
             >
-              <Link href="/community">Learn More</Link>
+              <Link href="/community">{t('communityFeatures.learnMore')}</Link>
             </Button>
           </div>
         </ScrollReveal>

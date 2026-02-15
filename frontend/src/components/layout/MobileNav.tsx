@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu } from 'lucide-react'
+import { Menu, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -13,10 +13,13 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { NAV_LINKS, SITE_NAME } from '@/lib/constants'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
+import type { Locale } from '@/lib/i18n/translations'
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const { t, locale, setLocale } = useTranslation()
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -44,16 +47,35 @@ export function MobileNav() {
                   isActive ? 'text-brand' : 'text-slate-600'
                 }`}
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             )
           })}
+
+          {/* Language Toggle */}
+          <div className="flex items-center gap-2 pt-2">
+            <Globe className="h-4 w-4 text-slate-500" />
+            {(['en', 'id'] as Locale[]).map((code) => (
+              <button
+                key={code}
+                onClick={() => setLocale(code)}
+                className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+                  locale === code
+                    ? 'bg-brand text-white'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                {code.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
           <div className="mt-4 flex flex-col gap-2">
             <Button variant="outline" asChild>
-              <Link href="/login" onClick={() => setOpen(false)}>Masuk</Link>
+              <Link href="/login" onClick={() => setOpen(false)}>{t('mobileNav.login')}</Link>
             </Button>
             <Button asChild>
-              <Link href="/pricing" onClick={() => setOpen(false)}>Daftar</Link>
+              <Link href="/pricing" onClick={() => setOpen(false)}>{t('mobileNav.signup')}</Link>
             </Button>
           </div>
         </nav>

@@ -6,18 +6,21 @@ import { Button } from '@/components/ui/button'
 import { FaDiscord } from 'react-icons/fa'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 export function OpenCommunity() {
+    const { t } = useTranslation()
+
     const inclusions = [
-        'General investing discussion',
-        'Market update notifications',
-        'Basic Q&A with community',
+        t('openCommunity.inclusion1'),
+        t('openCommunity.inclusion2'),
+        t('openCommunity.inclusion3'),
     ]
 
     const steps = [
-        { number: 1, text: 'Click "Join Free Community"' },
-        { number: 2, text: 'Accept Discord Invite' },
-        { number: 3, text: 'Read Community Guidelines' },
+        { number: 1, text: t('openCommunity.step1') },
+        { number: 2, text: t('openCommunity.step2') },
+        { number: 3, text: t('openCommunity.step3') },
     ]
 
     return (
@@ -27,17 +30,17 @@ export function OpenCommunity() {
                 <div className="text-center space-y-4">
                     <ScrollReveal variant="fadeUp">
                         <div className="inline-block px-6 py-2 rounded-full border border-[#F96E00] text-[#F96E00] font-montserrat font-bold text-sm tracking-widest uppercase">
-                            Free to Join
+                            {t('openCommunity.badge')}
                         </div>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.1}>
                         <h2 className="text-4xl md:text-5xl font-bold font-montserrat text-main-black tracking-tight text-wrap-balance">
-                            Open Community
+                            {t('openCommunity.title')}
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.2}>
                         <p className="text-lg md:text-xl text-slate-600 font-montserrat font-light max-w-2xl mx-auto">
-                            Anyone can join our open Discord Community
+                            {t('openCommunity.subtitle')}
                         </p>
                     </ScrollReveal>
                 </div>
@@ -57,7 +60,7 @@ export function OpenCommunity() {
                             {/* What's Included */}
                             <ScrollReveal variant="fadeRight" delay={0.3}>
                                 <div className="bg-[#333C44] rounded-2xl p-8 text-white space-y-6 max-w-md shadow-lg">
-                                    <h3 className="text-xl font-bold font-montserrat">What&apos;s Included:</h3>
+                                    <h3 className="text-xl font-bold font-montserrat">{t('openCommunity.whatsIncluded')}</h3>
                                     <StaggerContainer staggerDelay={0.1} className="space-y-4">
                                         {inclusions.map((item, idx) => (
                                             <StaggerItem key={idx} variant="fadeLeft">
@@ -74,7 +77,7 @@ export function OpenCommunity() {
                             {/* How to Join */}
                             <ScrollReveal variant="fadeUp" delay={0.4}>
                                 <div className="space-y-6">
-                                    <h3 className="text-2xl font-bold font-montserrat text-main-black">How to Join?</h3>
+                                    <h3 className="text-2xl font-bold font-montserrat text-main-black">{t('openCommunity.howToJoin')}</h3>
                                     <StaggerContainer staggerDelay={0.1} className="space-y-4">
                                         {steps.map((step) => (
                                             <StaggerItem key={step.number} variant="fadeUp">
@@ -105,7 +108,7 @@ export function OpenCommunity() {
                                         className="bg-[#F96E00]  hover:bg-[#e06300] text-white rounded-[40px] py-8 px-10 text-xl font-bold font-montserrat shadow-lg transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] flex items-center gap-3 w-full "
                                     >
                                         <FaDiscord className="w-6 h-6" />
-                                        Join Our Channel
+                                        {t('openCommunity.joinChannel')}
                                     </Button>
                                 </div>
                             </ScrollReveal>

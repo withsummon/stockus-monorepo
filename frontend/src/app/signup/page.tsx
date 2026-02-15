@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
+import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
 
@@ -21,6 +22,7 @@ export default function SignupPage() {
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { t } = useTranslation()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,13 +30,13 @@ export default function SignupPage() {
     setError('')
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match')
+      setError(t('signup.passwordMismatch'))
       setLoading(false)
       return
     }
 
     if (password.length < 8) {
-      setError('Password must be at least 8 characters')
+      setError(t('signup.passwordMinLength'))
       setLoading(false)
       return
     }
@@ -79,11 +81,11 @@ export default function SignupPage() {
             <div className="bg-white rounded-[30px] shadow-2xl p-8 md:p-10 space-y-6 text-center">
               <div className="space-y-2">
                 <h1 className="text-2xl md:text-3xl font-bold font-montserrat text-main-black">
-                  Check your email
+                  {t('signup.checkEmail')}
                 </h1>
                 <p className="text-slate-400 font-montserrat text-sm">
-                  We've sent a verification email to <strong className="text-main-black">{email}</strong>.
-                  Please check your inbox and click the verification link to activate your account.
+                  {t('signup.verificationSent')} <strong className="text-main-black">{email}</strong>.
+                  {' '}{t('signup.verificationInstructions')}
                 </p>
               </div>
 
@@ -92,7 +94,7 @@ export default function SignupPage() {
                 variant="outline"
                 className="w-full h-12 rounded-xl border-slate-200 font-montserrat font-semibold text-base transition-all duration-300 hover:scale-[1.02]"
               >
-                Back to Login
+                {t('signup.backToLogin')}
               </Button>
             </div>
           </motion.div>
@@ -119,10 +121,10 @@ export default function SignupPage() {
             {/* Header */}
             <div className="space-y-2">
               <h1 className="text-2xl md:text-3xl font-bold font-montserrat text-main-black">
-                Become a member
+                {t('signup.title')}
               </h1>
               <p className="text-slate-400 font-montserrat text-sm">
-                Sign up to get full access to member perks
+                {t('signup.subtitle')}
               </p>
             </div>
 
@@ -130,7 +132,7 @@ export default function SignupPage() {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-main-black font-montserrat font-medium">
-                  Full Name
+                  {t('signup.fullName')}
                 </Label>
                 <Input
                   id="name"
@@ -146,7 +148,7 @@ export default function SignupPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-main-black font-montserrat font-medium">
-                  Email
+                  {t('signup.email')}
                 </Label>
                 <Input
                   id="email"
@@ -162,7 +164,7 @@ export default function SignupPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-main-black font-montserrat font-medium">
-                  Password
+                  {t('signup.password')}
                 </Label>
                 <Input
                   id="password"
@@ -179,7 +181,7 @@ export default function SignupPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword" className="text-main-black font-montserrat font-medium">
-                  Confirm Password
+                  {t('signup.confirmPassword')}
                 </Label>
                 <Input
                   id="confirmPassword"
@@ -203,7 +205,7 @@ export default function SignupPage() {
                 disabled={loading}
                 className="w-full h-12 bg-brand hover:bg-[#e06300] text-white rounded-xl font-montserrat font-semibold text-base transition-all duration-300 hover:scale-[1.02]"
               >
-                {loading ? 'Processing...' : 'Get Started'}
+                {loading ? t('signup.processing') : t('signup.submit')}
               </Button>
             </form>
 
@@ -213,7 +215,7 @@ export default function SignupPage() {
                 <div className="w-full border-t border-slate-200"></div>
               </div>
               <span className="relative bg-white px-4 text-sm text-slate-400 font-montserrat">
-                or continue with
+                {t('signup.orContinue')}
               </span>
             </div>
 
@@ -244,9 +246,9 @@ export default function SignupPage() {
 
             {/* Footer Link */}
             <p className="text-center text-sm font-montserrat text-slate-500">
-              Already have an account?{' '}
+              {t('signup.hasAccount')}{' '}
               <Link href="/login" className="text-brand font-semibold hover:underline">
-                Login
+                {t('signup.login')}
               </Link>
             </p>
           </div>
@@ -254,7 +256,7 @@ export default function SignupPage() {
           {/* SSL Notice */}
           <div className="flex items-center justify-center gap-2 mt-6 text-white/70 text-sm font-montserrat">
             <Lock className="w-4 h-4" />
-            <span>Secure signup protected by SSL Encryption</span>
+            <span>{t('signup.sslNotice')}</span>
           </div>
         </motion.div>
       </ScrollReveal>
