@@ -18,6 +18,8 @@ export default defineConfig({
     './src/db/schema/promo-codes.ts',
     './src/db/schema/referrals.ts',
     './src/db/schema/videos.ts',
+    './src/db/schema/watchlist.ts',
+    './src/db/schema/portfolio.ts',
   ],
   dialect: 'postgresql',
   dbCredentials: {

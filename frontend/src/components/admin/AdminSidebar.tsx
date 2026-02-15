@@ -10,6 +10,8 @@ import {
   Users,
   CreditCard,
   ArrowLeft,
+  BarChart3,
+  Briefcase,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
@@ -24,6 +26,8 @@ const navigation = [
   { name: 'Courses', href: '/admin/courses', icon: BookOpen },
   { name: 'Research', href: '/admin/research', icon: FileText },
   { name: 'Templates', href: '/admin/templates', icon: FileSpreadsheet },
+  { name: 'Watchlist', href: '/admin/watchlist', icon: BarChart3 },
+  { name: 'Portfolio', href: '/admin/portfolio', icon: Briefcase },
   { name: 'Users', href: '/admin/users', icon: Users },
   { name: 'Orders', href: '/admin/orders', icon: CreditCard },
 ]

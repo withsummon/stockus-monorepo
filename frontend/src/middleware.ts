@@ -12,7 +12,6 @@ const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET)
 const PROTECTED_ROUTES = [
   '/dashboard',
   '/courses',
-  '/research',
   '/downloads',
   '/cohorts',
   '/profile',

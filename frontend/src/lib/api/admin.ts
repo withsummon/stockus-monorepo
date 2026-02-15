@@ -183,6 +183,114 @@ export async function deleteResearch(id: string) {
   })
 }
 
+// Watchlist types
+export interface WatchlistStock {
+  id: string
+  stockSymbol: string
+  stockName: string
+  logoUrl: string | null
+  category: 'swing' | 'short_term' | 'long_term'
+  entryPrice: number | null
+  targetPrice: number | null
+  stopLoss: number | null
+  currentPrice: number | null
+  analystRating: string | null
+  notes: string | null
+  sortOrder: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface WatchlistFormData {
+  stockSymbol: string
+  stockName: string
+  logoUrl?: string
+  category: 'swing' | 'short_term' | 'long_term'
+  entryPrice?: number
+  targetPrice?: number
+  stopLoss?: number
+  currentPrice?: number
+  analystRating?: string
+  notes?: string
+  sortOrder?: number
+}
+
+export async function getAdminWatchlist() {
+  const data = await clientFetchAPI<{ stocks: WatchlistStock[] }>('/watchlist')
+  return data.stocks
+}
+
+export async function createWatchlistStock(data: WatchlistFormData) {
+  return clientFetchAPI('/watchlist', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function updateWatchlistStock(id: string, data: Partial<WatchlistFormData>) {
+  return clientFetchAPI(`/watchlist/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function deleteWatchlistStock(id: string) {
+  return clientFetchAPI(`/watchlist/${id}`, {
+    method: 'DELETE',
+  })
+}
+
+// Portfolio types
+export interface PortfolioHolding {
+  id: string
+  stockSymbol: string
+  stockName: string
+  logoUrl: string | null
+  avgBuyPrice: string
+  currentPrice: string
+  totalShares: number
+  allocationPercent: string
+  sortOrder: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface PortfolioFormData {
+  stockSymbol: string
+  stockName: string
+  logoUrl?: string
+  avgBuyPrice: string
+  currentPrice: string
+  totalShares: number
+  allocationPercent: string
+  sortOrder?: number
+}
+
+export async function getAdminPortfolio() {
+  const data = await clientFetchAPI<{ holdings: PortfolioHolding[] }>('/portfolio')
+  return data.holdings
+}
+
+export async function createPortfolioHolding(data: PortfolioFormData) {
+  return clientFetchAPI('/portfolio', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function updatePortfolioHolding(id: string, data: Partial<PortfolioFormData>) {
+  return clientFetchAPI(`/portfolio/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function deletePortfolioHolding(id: string) {
+  return clientFetchAPI(`/portfolio/${id}`, {
+    method: 'DELETE',
+  })
+}
+
 // Admin-specific types
 export interface AdminUser {
   id: string  // ULID

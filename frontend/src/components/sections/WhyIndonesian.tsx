@@ -280,6 +280,7 @@ export function WhyIndonesian() {
                         <div className="bg-slate-50/80 rounded-2xl border border-slate-100 p-6 md:p-8 w-full">
                             <p className="text-xs font-montserrat font-semibold text-slate-400 uppercase tracking-wider mb-5">Speaker Backgrounds</p>
                             <CompanyLogos companies={keynoteCompanies} />
+                            <p className="text-center text-sm font-montserrat text-slate-400 mt-5 italic">And many other..</p>
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,8 @@ import {
   cohorts,
   cohortSessions,
   referrals,
+  watchlistStocks,
+  portfolioHoldings,
 } from './schema/index.js'
 import { ulid } from 'ulid'
 import argon2 from 'argon2'
@@ -148,65 +150,107 @@ async function seed() {
 
   console.log('Course sessions created')
 
-  // Create research reports
+  // Create research reports (US Stocks)
   await db.insert(researchReports).values([
     {
-      title: 'Analisis BBCA: Bank Terbesar Indonesia',
-      slug: 'analisis-bbca-bank-terbesar',
-      summary: 'Review mendalam tentang Bank Central Asia, performa keuangan, dan prospek ke depan.',
-      content: `<h2>Bank Central Asia (BBCA)</h2>
-<p>BBCA adalah bank swasta terbesar di Indonesia dengan kapitalisasi pasar terbesar di sektor perbankan.</p>
-<h3>Highlight Keuangan</h3>
+      title: 'AAPL: Apple Deep Dive Analysis',
+      slug: 'aapl-apple-deep-dive',
+      summary: 'Comprehensive analysis of Apple Inc - hardware ecosystem, services growth, and AI integration outlook.',
+      content: `<h2>Apple Inc (AAPL)</h2>
+<p>Apple remains the most valuable company globally with a dominant hardware-software ecosystem.</p>
+<h3>Key Financials</h3>
 <ul>
-  <li>ROE: 20%+</li>
-  <li>NIM: 5.5%</li>
-  <li>NPL: < 2%</li>
+  <li>Revenue: $383B (TTM)</li>
+  <li>Gross Margin: 46%</li>
+  <li>Services Revenue: $96B growing 15% YoY</li>
+  <li>Free Cash Flow: $110B</li>
 </ul>
-<h3>Kesimpulan</h3>
-<p>BBCA tetap menjadi pilihan utama untuk investasi jangka panjang di sektor perbankan Indonesia.</p>`,
-      stockSymbol: 'BBCA',
-      stockName: 'Bank Central Asia Tbk',
+<h3>Thesis</h3>
+<p>Apple's services segment continues to drive margin expansion while AI features create upgrade cycles.</p>`,
+      stockSymbol: 'AAPL',
+      stockName: 'Apple Inc',
       analystRating: 'Buy',
-      targetPrice: 10500,
+      targetPrice: 250,
       status: 'published',
       isFreePreview: true,
     },
     {
-      title: 'Sektor Consumer: Outlook 2026',
-      slug: 'sektor-consumer-outlook-2026',
-      summary: 'Analisis sektor consumer goods Indonesia dan rekomendasi saham pilihan.',
-      content: `<h2>Sektor Consumer Indonesia</h2>
-<p>Sektor consumer goods tetap menarik dengan pertumbuhan kelas menengah Indonesia.</p>
-<h3>Saham Pilihan</h3>
+      title: 'NVDA: The AI Infrastructure King',
+      slug: 'nvda-ai-infrastructure-king',
+      summary: 'Why NVIDIA dominates the AI chip market and the sustainability of its growth trajectory.',
+      content: `<h2>NVIDIA (NVDA)</h2>
+<p>NVIDIA holds 80%+ market share in AI training chips with Blackwell architecture ramping.</p>
+<h3>Growth Drivers</h3>
 <ul>
-  <li>UNVR - Market leader FMCG</li>
-  <li>ICBP - Dominasi mie instan</li>
-  <li>MYOR - Diversifikasi produk</li>
+  <li>Data center revenue up 200%+ YoY</li>
+  <li>Blackwell GPU demand exceeding supply</li>
+  <li>Expanding TAM into sovereign AI</li>
 </ul>`,
+      stockSymbol: 'NVDA',
+      stockName: 'NVIDIA Corp',
+      analystRating: 'Strong Buy',
+      targetPrice: 180,
       status: 'published',
       isFreePreview: false,
     },
     {
-      title: 'Tech Stocks: GOTO vs BUKA',
-      slug: 'tech-stocks-goto-vs-buka',
-      summary: 'Perbandingan dua tech giant Indonesia: GoTo dan Bukalapak.',
-      content: `<h2>Pertarungan E-commerce</h2>
-<p>Analisis komprehensif antara GOTO dan BUKA dalam persaingan e-commerce Indonesia.</p>
-<h3>GOTO</h3>
+      title: 'MSFT vs GOOGL: Cloud Wars 2026',
+      slug: 'msft-vs-googl-cloud-wars',
+      summary: 'Head-to-head comparison of Microsoft Azure and Google Cloud in the enterprise AI race.',
+      content: `<h2>Cloud Wars: Azure vs GCP</h2>
+<p>Microsoft and Google are in a fierce battle for enterprise AI workloads.</p>
+<h3>Microsoft (MSFT)</h3>
 <ul>
-  <li>GMV terbesar</li>
-  <li>Ekosistem lengkap (Gojek + Tokopedia)</li>
-  <li>Path to profitability lebih jelas</li>
+  <li>Azure growing 30%+ YoY</li>
+  <li>OpenAI partnership advantage</li>
+  <li>Copilot monetization ramping</li>
 </ul>
-<h3>BUKA</h3>
+<h3>Alphabet (GOOGL)</h3>
 <ul>
-  <li>Fokus pada UKM</li>
-  <li>Cash position kuat</li>
-  <li>Valuasi lebih murah</li>
+  <li>Gemini AI integration across products</li>
+  <li>GCP gaining enterprise share</li>
+  <li>YouTube ad revenue resilient</li>
 </ul>`,
-      stockSymbol: 'GOTO',
-      stockName: 'GoTo Gojek Tokopedia Tbk',
+      stockSymbol: 'MSFT',
+      stockName: 'Microsoft Corp',
+      analystRating: 'Buy',
+      targetPrice: 500,
+      status: 'published',
+      isFreePreview: false,
+    },
+    {
+      title: 'AMZN: Beyond E-commerce',
+      slug: 'amzn-beyond-ecommerce',
+      summary: 'Amazon\'s transformation from e-commerce to cloud, advertising, and AI powerhouse.',
+      content: '<h2>Amazon (AMZN)</h2><p>AWS and advertising are driving margin expansion beyond retail.</p>',
+      stockSymbol: 'AMZN',
+      stockName: 'Amazon.com Inc',
+      analystRating: 'Buy',
+      targetPrice: 240,
+      status: 'published',
+      isFreePreview: false,
+    },
+    {
+      title: 'TSLA: Robotaxi and Energy Storage',
+      slug: 'tsla-robotaxi-energy-storage',
+      summary: 'Tesla\'s pivot from automaker to autonomous driving and energy infrastructure company.',
+      content: '<h2>Tesla (TSLA)</h2><p>FSD progress and Megapack demand reshaping the investment thesis.</p>',
+      stockSymbol: 'TSLA',
+      stockName: 'Tesla Inc',
       analystRating: 'Hold',
+      targetPrice: 350,
+      status: 'published',
+      isFreePreview: false,
+    },
+    {
+      title: 'META: Social Media to AI Platform',
+      slug: 'meta-social-media-ai',
+      summary: 'Meta\'s massive AI investment and its impact on ad targeting, Reels monetization, and the metaverse.',
+      content: '<h2>Meta Platforms (META)</h2><p>Llama AI models and Reality Labs creating long-term optionality.</p>',
+      stockSymbol: 'META',
+      stockName: 'Meta Platforms Inc',
+      analystRating: 'Buy',
+      targetPrice: 680,
       status: 'published',
       isFreePreview: false,
     },
@@ -368,6 +412,168 @@ async function seed() {
   ]).onConflictDoNothing()
 
   console.log('Cohort sessions created')
+
+  // Create watchlist stocks (US Stocks)
+  await db.insert(watchlistStocks).values([
+    {
+      stockSymbol: 'NVDA',
+      stockName: 'NVIDIA Corp',
+      category: 'swing',
+      entryPrice: 120,
+      targetPrice: 180,
+      stopLoss: 105,
+      currentPrice: 142,
+      analystRating: 'Strong Buy',
+      notes: 'AI chip leader, Blackwell ramp',
+      sortOrder: 0,
+    },
+    {
+      stockSymbol: 'AAPL',
+      stockName: 'Apple Inc',
+      category: 'long_term',
+      entryPrice: 195,
+      targetPrice: 250,
+      stopLoss: 180,
+      currentPrice: 228,
+      analystRating: 'Buy',
+      notes: 'Services growth, AI features driving upgrades',
+      sortOrder: 1,
+    },
+    {
+      stockSymbol: 'MSFT',
+      stockName: 'Microsoft Corp',
+      category: 'long_term',
+      entryPrice: 380,
+      targetPrice: 500,
+      stopLoss: 350,
+      currentPrice: 425,
+      analystRating: 'Buy',
+      notes: 'Azure + Copilot monetization',
+      sortOrder: 2,
+    },
+    {
+      stockSymbol: 'AMZN',
+      stockName: 'Amazon.com Inc',
+      category: 'swing',
+      entryPrice: 178,
+      targetPrice: 240,
+      stopLoss: 165,
+      currentPrice: 205,
+      analystRating: 'Buy',
+      notes: 'AWS margin expansion, ad revenue growth',
+      sortOrder: 3,
+    },
+    {
+      stockSymbol: 'TSLA',
+      stockName: 'Tesla Inc',
+      category: 'short_term',
+      entryPrice: 280,
+      targetPrice: 350,
+      stopLoss: 250,
+      currentPrice: 310,
+      analystRating: 'Hold',
+      notes: 'Robotaxi catalyst, energy storage growth',
+      sortOrder: 4,
+    },
+    {
+      stockSymbol: 'META',
+      stockName: 'Meta Platforms Inc',
+      category: 'short_term',
+      entryPrice: 520,
+      targetPrice: 680,
+      stopLoss: 480,
+      currentPrice: 590,
+      analystRating: 'Buy',
+      notes: 'AI-driven ad targeting, Reels monetization',
+      sortOrder: 5,
+    },
+    {
+      stockSymbol: 'GOOGL',
+      stockName: 'Alphabet Inc',
+      category: 'swing',
+      entryPrice: 155,
+      targetPrice: 200,
+      stopLoss: 140,
+      currentPrice: 175,
+      analystRating: 'Buy',
+      notes: 'Search + Cloud + YouTube trifecta',
+      sortOrder: 6,
+    },
+    {
+      stockSymbol: 'AVGO',
+      stockName: 'Broadcom Inc',
+      category: 'long_term',
+      entryPrice: 165,
+      targetPrice: 220,
+      stopLoss: 150,
+      currentPrice: 195,
+      analystRating: 'Buy',
+      notes: 'Custom AI chips, VMware integration',
+      sortOrder: 7,
+    },
+  ]).onConflictDoNothing()
+
+  console.log('Watchlist stocks created')
+
+  // Create portfolio holdings (US Stocks)
+  await db.insert(portfolioHoldings).values([
+    {
+      stockSymbol: 'AAPL',
+      stockName: 'Apple Inc',
+      avgBuyPrice: '195.00',
+      currentPrice: '228.00',
+      totalShares: 50,
+      allocationPercent: '28.00',
+      sortOrder: 0,
+    },
+    {
+      stockSymbol: 'NVDA',
+      stockName: 'NVIDIA Corp',
+      avgBuyPrice: '120.00',
+      currentPrice: '142.00',
+      totalShares: 40,
+      allocationPercent: '22.00',
+      sortOrder: 1,
+    },
+    {
+      stockSymbol: 'MSFT',
+      stockName: 'Microsoft Corp',
+      avgBuyPrice: '380.00',
+      currentPrice: '425.00',
+      totalShares: 15,
+      allocationPercent: '20.00',
+      sortOrder: 2,
+    },
+    {
+      stockSymbol: 'AMZN',
+      stockName: 'Amazon.com Inc',
+      avgBuyPrice: '178.00',
+      currentPrice: '205.00',
+      totalShares: 20,
+      allocationPercent: '15.00',
+      sortOrder: 3,
+    },
+    {
+      stockSymbol: 'META',
+      stockName: 'Meta Platforms Inc',
+      avgBuyPrice: '520.00',
+      currentPrice: '590.00',
+      totalShares: 8,
+      allocationPercent: '10.00',
+      sortOrder: 4,
+    },
+    {
+      stockSymbol: 'GOOGL',
+      stockName: 'Alphabet Inc',
+      avgBuyPrice: '155.00',
+      currentPrice: '175.00',
+      totalShares: 15,
+      allocationPercent: '5.00',
+      sortOrder: 5,
+    },
+  ]).onConflictDoNothing()
+
+  console.log('Portfolio holdings created')
 
   // Create referral code for member
   await db.insert(referrals).values({

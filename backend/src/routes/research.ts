@@ -3,7 +3,7 @@ import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import { db } from '../db/index.js'
 import { researchReports } from '../db/schema/index.js'
-import { authMiddleware, requireAdmin, AuthEnv } from '../middleware/auth.js'
+import { authMiddleware, optionalAuthMiddleware, requireAdmin, AuthEnv } from '../middleware/auth.js'
 import { generateSlug, createUniqueSlug } from '../utils/slug.js'
 import { eq, desc, isNull, and } from 'drizzle-orm'
 
@@ -30,7 +30,7 @@ const updateReportSchema = createReportSchema.partial()
  * List all published research reports
  * Auth required
  */
-research.get('/', authMiddleware, async (c) => {
+research.get('/', optionalAuthMiddleware, async (c) => {
   const userTier = c.get('userTier')
 
   // Query published, non-deleted reports
@@ -42,12 +42,28 @@ research.get('/', authMiddleware, async (c) => {
     orderBy: [desc(researchReports.publishedAt)],
   })
 
-  // For non-members, mark restricted reports
+  const isMember = userTier === 'member'
+
+  // For non-members: first report is unlocked, rest are restricted
+  let unlockedCount = 0
   const reports = allReports.map(report => {
-    if (!report.isFreePreview && userTier !== 'member') {
+    const isUnlocked = isMember || report.isFreePreview || unlockedCount === 0
+    if (!isMember && !report.isFreePreview && unlockedCount === 0) {
+      unlockedCount++
+    }
+
+    if (!isUnlocked) {
       return {
-        ...report,
-        content: undefined, // Hide content
+        id: report.id,
+        title: report.title,
+        slug: report.slug,
+        summary: report.summary,
+        publishedAt: report.publishedAt,
+        status: report.status,
+        isFreePreview: report.isFreePreview,
+        stockSymbol: report.stockSymbol,
+        stockName: report.stockName,
+        content: undefined,
         restricted: true,
       }
     }

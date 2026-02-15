@@ -11,6 +11,8 @@ import { paymentRoutes } from './payments.js'
 import { webhookRoutes } from './webhooks.js'
 import { videoRoutes } from './videos.js'
 import { adminRoutes } from './admin.js'
+import { watchlistRoutes } from './watchlist.js'
+import { portfolioRoutes } from './portfolio.js'
 
 const routes = new Hono()
 
@@ -46,6 +48,12 @@ routes.route('/webhooks', webhookRoutes)
 
 // Video routes (admin upload, member playback)
 routes.route('/videos', videoRoutes)
+
+// Watchlist routes (public read, admin write)
+routes.route('/watchlist', watchlistRoutes)
+
+// Portfolio routes (public read, admin write)
+routes.route('/portfolio', portfolioRoutes)
 
 // Admin routes (metrics, users, orders)
 routes.route('/admin', adminRoutes)
