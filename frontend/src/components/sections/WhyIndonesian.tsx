@@ -81,14 +81,14 @@ export function WhyIndonesian() {
                 <div className="container mx-auto px-4">
                     <div className="bg-white rounded-[30px] md:rounded-[40px] shadow-sm border border-slate-100 overflow-hidden">
                         {/* Tabs */}
-                        <div className="border-b border-slate-200">
-                            <div className="flex overflow-x-auto scrollbar-hide">
+                        <div className="border-b border-slate-200 px-4 md:px-8">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
                                 {tabs.map((tab, index) => (
                                     <button
                                         key={index}
                                         onClick={() => setActiveTab(index)}
                                         className={cn(
-                                            "flex-1 min-w-[200px] px-6 py-5 md:py-6 text-sm md:text-base font-montserrat font-semibold text-center transition-all duration-300 relative whitespace-nowrap",
+                                            "px-4 py-5 md:py-6 text-sm md:text-base font-montserrat font-semibold text-center transition-all duration-300 relative",
                                             activeTab === index
                                                 ? "text-brand"
                                                 : "text-slate-400 hover:text-slate-600"
@@ -98,7 +98,7 @@ export function WhyIndonesian() {
                                         {activeTab === index && (
                                             <motion.div
                                                 layoutId="activeTab"
-                                                className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand rounded-full"
+                                                className="absolute bottom-0 left-2 right-2 h-[3px] bg-brand rounded-full"
                                                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                             />
                                         )}

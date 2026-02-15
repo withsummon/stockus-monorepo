@@ -63,6 +63,11 @@ const translations: Record<Locale, Record<string, string>> = {
     'whyIndonesian.tab4.bullet4': 'Recorded sessions available on-demand for members',
     'whyIndonesian.tab4.bullet5': 'Networking opportunities with speakers and fellow investors',
 
+    // Stock Performance
+    'stockPerformance.title': 'Real Results From',
+    'stockPerformance.titleHighlight': 'Global Markets',
+    'stockPerformance.subtitle': 'Our members learn to identify opportunities like these across global equity markets.',
+
     // Fundamentals
     'fundamentals.title': '5-Day Fundamentals',
     'fundamentals.titleThin': 'of Global Stock Investing',
@@ -366,6 +371,11 @@ const translations: Record<Locale, Record<string, string>> = {
     'whyIndonesian.tab4.bullet5': 'Kesempatan networking dengan pembicara dan sesama investor',
 
     // Fundamentals
+    // Stock Performance
+    'stockPerformance.title': 'Hasil Nyata Dari',
+    'stockPerformance.titleHighlight': 'Pasar Global',
+    'stockPerformance.subtitle': 'Anggota kami belajar mengidentifikasi peluang seperti ini di pasar ekuitas global.',
+
     'fundamentals.title': 'Fundamental 5 Hari',
     'fundamentals.titleThin': 'Investasi Saham Global',
     'fundamentals.subtitle': 'Kursus Fundamental StockUs Adalah Program Intensif Berbasis Kohort Yang Memadatkan Pembelajaran Bertahun-Tahun Menjadi Lima Hari Terfokus. Setiap Hari Menjawab Satu Pertanyaan Kunci',
