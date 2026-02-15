@@ -57,19 +57,19 @@ export function WhatYouGet() {
     const { t } = useTranslation()
 
     const toolsAndTemplates = [
-        { title: t('whatYouGet.tools.item1.title'), description: t('whatYouGet.tools.item1.desc') },
-        { title: t('whatYouGet.tools.item2.title'), description: t('whatYouGet.tools.item2.desc') },
-        { title: t('whatYouGet.tools.item3.title'), description: t('whatYouGet.tools.item3.desc') },
-        { title: t('whatYouGet.tools.item4.title'), description: t('whatYouGet.tools.item4.desc') },
-        { title: t('whatYouGet.tools.item5.title'), description: t('whatYouGet.tools.item5.desc') },
+        { title: t('whatYouGet.tools1.title'), description: t('whatYouGet.tools1.desc') },
+        { title: t('whatYouGet.tools2.title'), description: t('whatYouGet.tools2.desc') },
+        { title: t('whatYouGet.tools3.title'), description: t('whatYouGet.tools3.desc') },
+        { title: t('whatYouGet.tools4.title'), description: t('whatYouGet.tools4.desc') },
+        { title: t('whatYouGet.tools5.title'), description: t('whatYouGet.tools5.desc') },
     ]
 
     const digitalLibrary = [
-        { title: t('whatYouGet.library.item1.title'), description: t('whatYouGet.library.item1.desc') },
-        { title: t('whatYouGet.library.item2.title'), description: t('whatYouGet.library.item2.desc') },
-        { title: t('whatYouGet.library.item3.title'), description: t('whatYouGet.library.item3.desc') },
-        { title: t('whatYouGet.library.item4.title'), description: t('whatYouGet.library.item4.desc') },
-        { title: t('whatYouGet.library.item5.title'), description: t('whatYouGet.library.item5.desc') },
+        { title: t('whatYouGet.library1.title'), description: t('whatYouGet.library1.desc') },
+        { title: t('whatYouGet.library2.title'), description: t('whatYouGet.library2.desc') },
+        { title: t('whatYouGet.library3.title'), description: t('whatYouGet.library3.desc') },
+        { title: t('whatYouGet.library4.title'), description: t('whatYouGet.library4.desc') },
+        { title: t('whatYouGet.library5.title'), description: t('whatYouGet.library5.desc') },
     ]
 
     return (
@@ -79,8 +79,8 @@ export function WhatYouGet() {
                 <div className="text-center mb-16 md:mb-24 space-y-4">
                     <ScrollReveal variant="fadeUp">
                         <h2 className="text-4xl md:text-5xl font-bold font-montserrat text-main-black leading-tight">
-                            <span className="text-brand">{t('whatYouGet.titleHighlight')}</span> <br />
-                            {t('whatYouGet.titleEnd')}
+                            <span className="text-brand">{t('whatYouGet.title')}</span> <br />
+                            {t('whatYouGet.titleLine2')}
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.1}>

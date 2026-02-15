@@ -13,33 +13,33 @@ export function CommunityFeatures() {
 
   const features = [
     {
-      title: t('communityFeatures.feature1.title'),
-      description: t('communityFeatures.feature1.desc'),
+      title: t('communityFeatures.f1.title'),
+      description: t('communityFeatures.f1.desc'),
       isPremium: false,
     },
     {
-      title: t('communityFeatures.feature2.title'),
-      description: t('communityFeatures.feature2.desc'),
+      title: t('communityFeatures.f2.title'),
+      description: t('communityFeatures.f2.desc'),
       isPremium: false,
     },
     {
-      title: t('communityFeatures.feature3.title'),
-      description: t('communityFeatures.feature3.desc'),
+      title: t('communityFeatures.f3.title'),
+      description: t('communityFeatures.f3.desc'),
       isPremium: false,
     },
     {
-      title: t('communityFeatures.feature4.title'),
-      description: t('communityFeatures.feature4.desc'),
+      title: t('communityFeatures.f4.title'),
+      description: t('communityFeatures.f4.desc'),
       isPremium: true,
     },
     {
-      title: t('communityFeatures.feature5.title'),
-      description: t('communityFeatures.feature5.desc'),
+      title: t('communityFeatures.f5.title'),
+      description: t('communityFeatures.f5.desc'),
       isPremium: false,
     },
     {
-      title: t('communityFeatures.feature6.title'),
-      description: t('communityFeatures.feature6.desc'),
+      title: t('communityFeatures.f6.title'),
+      description: t('communityFeatures.f6.desc'),
       isPremium: true,
     },
   ]
