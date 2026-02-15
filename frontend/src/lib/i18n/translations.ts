@@ -110,7 +110,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'community.titleHighlight': 'More Than A Course.',
     'community.titleLine2': "It's A Community.",
     'community.desc': "Learning is easier when you're not doing it alone. StockUs members join a community of investors who are serious about improving their process and thinking long term.",
-    'community.joinChannel': 'Join Our Channel',
+    'community.joinChannel': 'Join Our Discord',
 
     // Community Features
     'communityFeatures.title': 'Community Features',
@@ -230,7 +230,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'openCommunity.step1': 'Click "Join Free Community"',
     'openCommunity.step2': 'Accept Discord Invite',
     'openCommunity.step3': 'Read Community Guidelines',
-    'openCommunity.joinChannel': 'Join Our Channel',
+    'openCommunity.joinChannel': 'Join Our Discord',
 
     // Premium Community
     'premiumCommunity.badge': 'STOCKUS MEMBER',
@@ -412,7 +412,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'community.titleHighlight': 'Lebih Dari Sekadar Kursus.',
     'community.titleLine2': 'Ini Adalah Komunitas.',
     'community.desc': 'Belajar lebih mudah saat Anda tidak melakukannya sendiri. Anggota StockUs bergabung dengan komunitas investor yang serius dalam meningkatkan proses dan berpikir jangka panjang.',
-    'community.joinChannel': 'Gabung Channel Kami',
+    'community.joinChannel': 'Gabung Discord Kami',
 
     // Community Features
     'communityFeatures.title': 'Fitur Komunitas',
@@ -532,7 +532,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'openCommunity.step1': 'Klik "Gabung Komunitas Gratis"',
     'openCommunity.step2': 'Terima Undangan Discord',
     'openCommunity.step3': 'Baca Panduan Komunitas',
-    'openCommunity.joinChannel': 'Gabung Channel Kami',
+    'openCommunity.joinChannel': 'Gabung Discord Kami',
 
     // Premium Community
     'premiumCommunity.badge': 'ANGGOTA STOCKUS',

@@ -52,7 +52,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation - Absolutely centered */}
-        <nav className="hidden md:flex md:items-center md:gap-6 absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden lg:flex lg:items-center lg:gap-6 absolute left-1/2 -translate-x-1/2">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href ||
               (link.href !== '/' && pathname.startsWith(link.href))
@@ -80,7 +80,7 @@ export function Header() {
           <Button
             variant="outline"
             size="lg"
-            className="hidden md:inline-flex rounded-[20px] border text-brand border-brand bg-transparent"
+            className="hidden lg:inline-flex rounded-[20px] border text-brand border-brand bg-transparent"
             asChild
           >
             <Link href="/login" className="font-montserrat font-light">{t('nav.login')}</Link>
@@ -88,14 +88,14 @@ export function Header() {
           <Button
             size="lg"
             variant="brand"
-            className="hidden md:inline-flex rounded-[20px]"
+            className="hidden lg:inline-flex rounded-[20px]"
             asChild
           >
             <Link href="/pricing" className="font-montserrat font-light">{t('nav.signup')}</Link>
           </Button>
 
           {/* Mobile Navigation */}
-          <MobileNav />
+          <MobileNav scrolled={scrolled} />
         </div>
       </div>
     </header>

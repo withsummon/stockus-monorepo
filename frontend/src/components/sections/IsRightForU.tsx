@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
@@ -31,10 +32,13 @@ export function IsRightForU() {
                     {/* Left Content */}
                     <div className="w-full md:w-1/2 space-y-6">
                         <ScrollReveal variant="fadeUp" delay={0.1}>
-                            <div className="w-16 h-16 bg-main-black rounded-2xl flex items-center justify-center p-3">
-                                {/* Using a styled S if logo isn't exact, or stockus logo */}
-                                <span className="text-3xl font-bold text-brand italic">S</span>
-                            </div>
+                            <Image
+                                src="/stockus_black.png"
+                                alt="StockUs"
+                                width={120}
+                                height={40}
+                                className="h-10 w-auto"
+                            />
                         </ScrollReveal>
 
                         <ScrollReveal variant="fadeUp" delay={0.2}>

@@ -103,14 +103,12 @@ export function OpenCommunity() {
 
                             {/* CTA Button */}
                             <ScrollReveal variant="fadeUp" delay={0.5}>
-                                <div className='max-w-sm'>
-                                    <Button
-                                        className="bg-[#F96E00]  hover:bg-[#e06300] text-white rounded-[40px] py-8 px-10 text-xl font-bold font-montserrat shadow-lg transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] flex items-center gap-3 w-full "
-                                    >
-                                        <FaDiscord className="w-6 h-6" />
-                                        {t('openCommunity.joinChannel')}
-                                    </Button>
-                                </div>
+                                <Button
+                                    className="bg-[#F96E00] hover:bg-[#e06300] text-white rounded-full py-6 px-8 text-base md:text-lg font-bold font-montserrat shadow-lg transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] inline-flex items-center gap-3"
+                                >
+                                    <FaDiscord className="w-5 h-5" />
+                                    {t('openCommunity.joinChannel')}
+                                </Button>
                             </ScrollReveal>
                         </div>
 

@@ -16,7 +16,7 @@ import { NAV_LINKS, SITE_NAME } from '@/lib/constants'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 import type { Locale } from '@/lib/i18n/translations'
 
-export function MobileNav() {
+export function MobileNav({ scrolled = true }: { scrolled?: boolean }) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const { t, locale, setLocale } = useTranslation()
@@ -24,8 +24,8 @@ export function MobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className={`lg:hidden ${scrolled ? 'text-main-black' : 'text-white'}`}>
+          <Menu className="h-6 w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
