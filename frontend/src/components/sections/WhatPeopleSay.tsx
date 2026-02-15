@@ -29,17 +29,17 @@ const testimonials = [
 export function WhatPeopleSay() {
     const { t } = useTranslation()
     return (
-        <section className="bg-main-black py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+        <section className="bg-brand py-12 md:py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto container">
                 {/* Header */}
                 <div className="text-center mb-16 md:mb-24 space-y-4">
                     <ScrollReveal variant="fadeUp">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat text-white leading-tight">
-                            <span className="text-brand">{t('whatPeopleSay.title')}</span> {t('whatPeopleSay.titleEnd')}
+                            {t('whatPeopleSay.title')} {t('whatPeopleSay.titleEnd')}
                         </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="fadeUp" delay={0.1}>
-                        <p className="text-slate-300 font-montserrat text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-white/80 font-montserrat text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
                             {t('whatPeopleSay.subtitle')}
                         </p>
                     </ScrollReveal>

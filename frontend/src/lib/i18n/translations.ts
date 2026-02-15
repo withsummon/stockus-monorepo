@@ -112,9 +112,9 @@ const translations: Record<Locale, Record<string, string>> = {
     // Who's Behind
     'whosBehind.title': "Who's Behind",
     'whosBehind.titleHighlight': 'StockUs?',
-    'whosBehind.p1': 'Was Created To Close The Gap Between How Professionals Think About Investing And What Retail Investors Usually See On Social Media. Our Goal Is Simple: Give Indonesian Investors A Clear, Honest, And Practical Way To Approach Global Stock Markets.',
-    'whosBehind.p2': "The Curriculum Is Led By A Team With 10+ Years Of Hands-On Experience Across The Hedge Fund Industry, Family Offices, Private Equity, Superannuation, Investment Banking, And Crypto Asset Markets. Collectively, We've Been Involved In Managing Over $12 Billion In Funds Across Different Strategies And Market Cycles.",
-    'whosBehind.p3': 'All Of That Experience Is Boiled Down Into A Process You Can Actually Use As An Individual Investor: How To Think About Businesses, How To Judge Industries, How To Value Companies, And How To Build A Portfolio That Fits Your Goals.',
+    'whosBehind.p1': 'was created to close the gap between how professionals think about investing and what retail investors usually see on social media. Our goal is simple: give Indonesian investors a clear, honest, and practical way to approach global stock markets.',
+    'whosBehind.p2': "The curriculum is led by a team with 10+ years of hands-on experience across the hedge fund industry, family offices, private equity, superannuation, investment banking, and crypto asset markets. Collectively, we've been involved in managing over $12 billion in funds across different strategies and market cycles.",
+    'whosBehind.p3': 'All of that experience is boiled down into a process you can actually use as an individual investor: how to think about businesses, how to judge industries, how to value companies, and how to build a portfolio that fits your goals.',
 
     // Join Membership
     'joinMembership.title': 'Join Our Membership',
@@ -390,9 +390,9 @@ const translations: Record<Locale, Record<string, string>> = {
     // Who's Behind
     'whosBehind.title': 'Siapa Di Balik',
     'whosBehind.titleHighlight': 'StockUs?',
-    'whosBehind.p1': 'Diciptakan Untuk Menutup Kesenjangan Antara Cara Profesional Berpikir Tentang Investasi Dan Apa Yang Biasanya Dilihat Investor Ritel Di Media Sosial. Tujuan Kami Sederhana: Memberikan Investor Indonesia Cara Yang Jelas, Jujur, Dan Praktis Untuk Mendekati Pasar Saham Global.',
-    'whosBehind.p2': 'Kurikulum Dipimpin Oleh Tim Dengan Pengalaman Langsung 10+ Tahun Di Industri Hedge Fund, Family Office, Private Equity, Superannuation, Investment Banking, Dan Pasar Aset Kripto. Secara Kolektif, Kami Telah Terlibat Dalam Mengelola Lebih Dari $12 Miliar Dana Di Berbagai Strategi Dan Siklus Pasar.',
-    'whosBehind.p3': 'Semua Pengalaman Itu Diringkas Menjadi Proses Yang Benar-Benar Dapat Anda Gunakan Sebagai Investor Individu: Cara Berpikir Tentang Bisnis, Cara Menilai Industri, Cara Menilai Perusahaan, Dan Cara Membangun Portofolio Yang Sesuai Dengan Tujuan Anda.',
+    'whosBehind.p1': 'diciptakan untuk menutup kesenjangan antara cara profesional berpikir tentang investasi dan apa yang biasanya dilihat investor ritel di media sosial. Tujuan kami sederhana: memberikan investor Indonesia cara yang jelas, jujur, dan praktis untuk mendekati pasar saham global.',
+    'whosBehind.p2': 'Kurikulum dipimpin oleh tim dengan pengalaman langsung 10+ tahun di industri hedge fund, family office, private equity, superannuation, investment banking, dan pasar aset kripto. Secara kolektif, kami telah terlibat dalam mengelola lebih dari $12 miliar dana di berbagai strategi dan siklus pasar.',
+    'whosBehind.p3': 'Semua pengalaman itu diringkas menjadi proses yang benar-benar dapat Anda gunakan sebagai investor individu: cara berpikir tentang bisnis, cara menilai industri, cara menilai perusahaan, dan cara membangun portofolio yang sesuai dengan tujuan Anda.',
 
     // Join Membership
     'joinMembership.title': 'Gabung Keanggotaan Kami',
