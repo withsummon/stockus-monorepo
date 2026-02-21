@@ -28,7 +28,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'proof.disclaimer': 'Past performance is not indicative of future results. This is shown for educational purposes only and does not constitute financial advice.',
 
     // Trusted By
-    'trustedBy.title': 'Trusted by Stock Company & Popular Universities',
+    'trustedBy.title': 'Trained Across Global Firms & Institutions',
 
     // Is Right For U
     'isRightForU.title.is': 'Is',
@@ -381,7 +381,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'proof.disclaimer': 'Kinerja masa lalu tidak menjamin hasil di masa depan. Ditampilkan hanya untuk tujuan edukasi dan bukan merupakan saran keuangan.',
 
     // Trusted By
-    'trustedBy.title': 'Dipercaya oleh Perusahaan Sekuritas & Universitas Ternama',
+    'trustedBy.title': 'Terlatih di Firma & Institusi Global',
 
     // Is Right For U
     'isRightForU.title.is': 'Apakah',
