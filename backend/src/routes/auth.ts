@@ -37,12 +37,38 @@ const resetPasswordSchema = z.object({
   newPassword: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
+// Extract root domain from FRONTEND_URL for cross-subdomain cookies
+// e.g. https://stockus.id -> .stockus.id, https://stockus.withsummon.com -> .withsummon.com
+function getCookieDomain(): string | undefined {
+  try {
+    const url = new URL(env.FRONTEND_URL)
+    const hostname = url.hostname
+    // Skip localhost
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return undefined
+    }
+    const parts = hostname.split('.')
+    // For 2-part domains (stockus.id), use .stockus.id
+    if (parts.length === 2) {
+      return '.' + hostname
+    }
+    // For 3+ parts (api.stockus.id, stockus.withsummon.com), use root domain
+    if (parts.length >= 3) {
+      return '.' + parts.slice(-2).join('.')
+    }
+    return undefined
+  } catch {
+    return undefined
+  }
+}
+
 // Cookie configuration
 const COOKIE_CONFIG = {
   httpOnly: true,
   secure: env.NODE_ENV === 'production',
-  sameSite: 'Strict' as const,
+  sameSite: 'None' as const,
   path: '/',
+  domain: getCookieDomain(),
 }
 
 export const auth = new Hono<AuthEnv>()
@@ -210,8 +236,8 @@ auth.post('/logout', authMiddleware, async (c) => {
   }
 
   // Clear cookies
-  deleteCookie(c, 'access_token', { path: '/' })
-  deleteCookie(c, 'refresh_token', { path: '/auth/refresh' })
+  deleteCookie(c, 'access_token', { path: '/', domain: getCookieDomain() })
+  deleteCookie(c, 'refresh_token', { path: '/auth/refresh', domain: getCookieDomain() })
 
   return c.json({ message: 'Logged out successfully' })
 })
@@ -239,8 +265,8 @@ auth.post('/refresh', async (c) => {
 
   if (!session) {
     // Clear potentially invalid cookies
-    deleteCookie(c, 'access_token', { path: '/' })
-    deleteCookie(c, 'refresh_token', { path: '/auth/refresh' })
+    deleteCookie(c, 'access_token', { path: '/', domain: getCookieDomain() })
+    deleteCookie(c, 'refresh_token', { path: '/auth/refresh', domain: getCookieDomain() })
     return c.json({ error: 'Invalid or expired refresh token' }, 401)
   }
 
