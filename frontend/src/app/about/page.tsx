@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { ScrollReveal } from '@/components/ui/scroll-reveal'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 
 const team = [
@@ -24,105 +25,173 @@ Coupled with university level teaching experience, Yosua brings a combination of
   },
 ]
 
+function CrossMarker({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" strokeWidth="1" />
+      <line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" strokeWidth="1" />
+    </svg>
+  )
+}
 
 export default function AboutPage() {
   const { t } = useTranslation()
 
   return (
-    <main className="bg-custom-secondary min-h-screen font-montserrat">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-main-black py-20 md:py-28">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] right-[10%] w-[400px] h-[400px] rounded-full bg-brand/10 blur-[120px]" />
-          <div className="absolute bottom-[10%] left-[20%] w-[300px] h-[300px] rounded-full bg-brand/5 blur-[100px]" />
-        </div>
+    <main className="min-h-screen font-montserrat">
+      {/* ── Section 1: Hero (dark) ── */}
+      <section className="relative overflow-hidden bg-main-black pt-24 md:pt-32 pb-14 md:pb-20 px-4 sm:px-6 lg:px-8">
+        {/* Dot pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+        {/* Cross markers */}
+        <CrossMarker className="absolute top-6 left-6 text-white/10" />
+        <CrossMarker className="absolute top-6 right-6 text-white/10" />
+        <CrossMarker className="absolute bottom-6 left-6 text-white/10" />
+        <CrossMarker className="absolute bottom-6 right-6 text-white/10" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative">
+        <div className="container mx-auto max-w-6xl relative">
           <ScrollReveal variant="fadeUp">
-            <p className="text-sm font-semibold text-brand mb-4 tracking-wider uppercase">
+            <span className="inline-block px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase font-montserrat mb-6">
               {t('about.heroTag')}
-            </p>
+            </span>
           </ScrollReveal>
           <ScrollReveal variant="fadeUp" delay={0.1}>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6 text-white max-w-3xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold font-montserrat leading-[1.1] tracking-tight text-white max-w-3xl">
               {t('about.heroTitle')}
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="fadeUp" delay={0.2}>
-            <p className="text-main-white opacity-70 text-base sm:text-lg max-w-2xl leading-relaxed font-light">
+            <p className="mt-6 text-base md:text-lg text-white/50 font-montserrat font-light max-w-2xl leading-relaxed">
               {t('about.heroDescription')}
             </p>
           </ScrollReveal>
         </div>
-      </div>
+      </section>
 
-      {/* Team Section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl pb-16 md:pb-24">
-        <ScrollReveal variant="fadeUp">
-          <div className="text-center mb-10 md:mb-14">
-            <p className="text-sm font-semibold text-brand mb-3 tracking-wider uppercase">
+      {/* ── Section 2: Team (light) ── */}
+      <section className="relative py-14 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#f4f4f5] overflow-hidden">
+
+        <div className="container mx-auto max-w-6xl relative">
+          <ScrollReveal variant="fadeUp">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand/30 bg-brand/5 text-brand text-xs font-bold tracking-[0.15em] uppercase font-montserrat">
+              <span className="text-brand">&#x2727;</span>
               {t('about.teamTitle')}
-            </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-main-black">
+            </span>
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" delay={0.1}>
+            <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-bold font-montserrat text-main-black tracking-tight mb-12 md:mb-16">
               {t('about.teamSubtitle')}
             </h2>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
 
-        <div className="space-y-10 md:space-y-14">
-          {team.map((member, index) => {
-            const isReversed = index % 2 !== 0
-            return (
-              <ScrollReveal key={index} variant={isReversed ? 'fadeLeft' : 'fadeRight'} delay={index * 0.15}>
-                <motion.div
-                  className="bg-brand rounded-[24px] md:rounded-[32px] overflow-hidden shadow-xl"
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
-                    {/* Text side */}
-                    <div className="w-full lg:w-1/2 p-8 md:p-10 lg:p-14 flex flex-col justify-between">
-                      <div>
-                        <span className="text-xs sm:text-sm font-medium tracking-[0.2em] text-white/70 uppercase">
-                          {t('about.getToKnow')}
-                        </span>
-                        <div className="mt-5 sm:mt-6 space-y-5">
-                          {member.description.split('\n\n').map((para, i) => (
-                            <p key={i} className="text-white/90 text-base sm:text-lg leading-relaxed font-light">
-                              {para.trim()}
-                            </p>
-                          ))}
+          <div className="space-y-6 md:space-y-8">
+            {team.map((member, index) => {
+              const isReversed = index % 2 !== 0
+              return (
+                <ScrollReveal key={index} variant="fadeUp" delay={index * 0.1}>
+                  <motion.div
+                    className="group relative bg-[#111318] rounded-2xl border border-white/[0.06] overflow-hidden"
+                    whileHover={{ backgroundColor: '#161a21' }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Dot pattern inside card */}
+                    <div
+                      className="absolute inset-0 opacity-[0.03]"
+                      style={{
+                        backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
+                        backgroundSize: '24px 24px',
+                      }}
+                    />
+                    {/* Cross markers */}
+                    <CrossMarker className="absolute top-3 left-3 text-white/10" />
+                    <CrossMarker className="absolute top-3 right-3 text-white/10" />
+                    <CrossMarker className="absolute bottom-3 right-3 text-white/10" />
+
+                    <div className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+                      {/* Text side */}
+                      <div className="relative w-full lg:w-1/2 p-8 md:p-10 lg:p-14 flex flex-col justify-between">
+                        <div>
+                          <span className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase font-montserrat">
+                            {t('about.getToKnow')}
+                          </span>
+                          <div className="mt-5 space-y-4">
+                            {member.description.split('\n\n').map((para, i) => (
+                              <p key={i} className="text-white/60 text-sm sm:text-base leading-relaxed font-light font-montserrat">
+                                {para.trim()}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="mt-8 lg:mt-10 pt-6 border-t border-white/[0.08]">
+                          <h3 className="text-2xl sm:text-3xl font-bold text-white font-montserrat">
+                            {member.name}
+                          </h3>
+                          <p className="text-brand text-sm sm:text-base mt-1.5 font-medium font-montserrat">
+                            {member.role}
+                          </p>
                         </div>
                       </div>
-                      <div className="mt-8 lg:mt-10 pt-6 border-t border-white/15">
-                        <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                          {member.name}
-                        </h3>
-                        <p className="text-white/70 text-sm sm:text-base mt-1.5 font-light">
-                          {member.role}
-                        </p>
+
+                      {/* Image side */}
+                      <div className="w-full lg:w-1/2 relative min-h-[350px] sm:min-h-[420px] lg:min-h-0">
+                        <div className="absolute inset-0 lg:inset-4 lg:my-4 rounded-none lg:rounded-[16px] overflow-hidden bg-[#1a1d24]">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                            priority
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Image side */}
-                    <div className="w-full lg:w-1/2 relative min-h-[350px] sm:min-h-[420px] lg:min-h-0">
-                      <div className="absolute inset-0 lg:inset-4 lg:my-4 rounded-none lg:rounded-[20px] overflow-hidden bg-slate-200">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          className="object-cover object-top transition-transform duration-700 hover:scale-105"
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            )
-          })}
+                    {/* Hover accent line at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand/0 group-hover:bg-brand/30 transition-all duration-500" />
+                  </motion.div>
+                </ScrollReveal>
+              )
+            })}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── Section 3: CTA (dark) ── */}
+      <section className="relative py-14 md:py-20 px-4 sm:px-6 lg:px-8 bg-main-black overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+        <div className="container mx-auto max-w-6xl text-center relative">
+          <ScrollReveal variant="fadeUp">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-montserrat text-white tracking-tight">
+              {t('about.ctaTitle')}
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" delay={0.1}>
+            <p className="mt-4 text-base sm:text-lg text-white/50 font-montserrat font-light max-w-xl mx-auto leading-relaxed">
+              {t('about.ctaText')}
+            </p>
+          </ScrollReveal>
+          <ScrollReveal variant="fadeUp" delay={0.2}>
+            <Link
+              href="/community"
+              className="mt-8 inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand text-white font-bold font-montserrat text-sm tracking-wide hover:bg-brand/90 transition-colors duration-200"
+            >
+              {t('about.ctaButton')}
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
     </main>
   )
 }

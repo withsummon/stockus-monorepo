@@ -8,6 +8,14 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scr
 import { motion } from 'framer-motion'
 import { useTranslation } from '@/lib/i18n/LanguageContext'
 
+function IconCheck({ className }: { className?: string }) {
+    return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+    )
+}
+
 export function OpenCommunity() {
     const { t } = useTranslation()
 
@@ -24,111 +32,102 @@ export function OpenCommunity() {
     ]
 
     return (
-        <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-main-white">
-            <div className="container mx-auto space-y-12">
-                {/* Header */}
-                <div className="text-center space-y-4">
-                    <ScrollReveal variant="fadeUp">
-                        <div className="inline-block px-6 py-2 rounded-full border border-[#F96E00] text-[#F96E00] font-montserrat font-bold text-sm tracking-widest uppercase">
-                            {t('openCommunity.badge')}
-                        </div>
-                    </ScrollReveal>
-                    <ScrollReveal variant="fadeUp" delay={0.1}>
-                        <h2 className="text-4xl md:text-5xl font-bold font-montserrat text-main-black tracking-tight text-wrap-balance">
-                            {t('openCommunity.title')}
-                        </h2>
-                    </ScrollReveal>
-                    <ScrollReveal variant="fadeUp" delay={0.2}>
-                        <p className="text-lg md:text-xl text-slate-600 font-montserrat font-light max-w-2xl mx-auto">
-                            {t('openCommunity.subtitle')}
-                        </p>
-                    </ScrollReveal>
-                </div>
+        <section className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#f4f4f5]">
+            <div className="container mx-auto max-w-6xl">
+                {/* Section label */}
+                <ScrollReveal variant="fadeUp">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand/30 bg-brand/5 text-brand text-xs font-bold tracking-[0.15em] uppercase font-montserrat mb-6">
+                        {t('openCommunity.badge')}
+                    </span>
+                </ScrollReveal>
+                <ScrollReveal variant="fadeUp" delay={0.1}>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-montserrat text-main-black tracking-tight mb-3">
+                        {t('openCommunity.title')}
+                    </h2>
+                </ScrollReveal>
+                <ScrollReveal variant="fadeUp" delay={0.15}>
+                    <p className="text-base md:text-lg text-slate-500 font-montserrat font-light max-w-xl mb-10">
+                        {t('openCommunity.subtitle')}
+                    </p>
+                </ScrollReveal>
 
-                {/* Main Card */}
-                <ScrollReveal variant="scale" delay={0.2}>
-                    <motion.div
-                        className="rounded-[40px] overflow-hidden shadow-xl flex flex-col lg:flex-row relative min-h-[600px]"
-                        style={{
-                            background: 'radial-gradient(89.81% 130.7% at 95.86% 105.24%, #F96E00 0%, #FFFFFF 74.69%)'
-                        }}
-                        whileHover={{ scale: 1.01 }}
-                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                        {/* Left Content */}
-                        <div className="w-full lg:w-1/2 p-8 md:p-16 flex flex-col justify-center space-y-12 z-10">
-                            {/* What's Included */}
-                            <ScrollReveal variant="fadeRight" delay={0.3}>
-                                <div className="bg-[#333C44] rounded-2xl p-8 text-white space-y-6 max-w-md shadow-lg">
-                                    <h3 className="text-xl font-bold font-montserrat">{t('openCommunity.whatsIncluded')}</h3>
-                                    <StaggerContainer staggerDelay={0.1} className="space-y-4">
-                                        {inclusions.map((item, idx) => (
-                                            <StaggerItem key={idx} variant="fadeLeft">
-                                                <li className="flex items-center gap-3 font-montserrat text-lg font-light list-none">
-                                                    <span className="w-2 h-2 bg-white rounded-full flex-shrink-0" />
-                                                    {item}
-                                                </li>
-                                            </StaggerItem>
-                                        ))}
-                                    </StaggerContainer>
-                                </div>
-                            </ScrollReveal>
-
-                            {/* How to Join */}
-                            <ScrollReveal variant="fadeUp" delay={0.4}>
-                                <div className="space-y-6">
-                                    <h3 className="text-2xl font-bold font-montserrat text-main-black">{t('openCommunity.howToJoin')}</h3>
-                                    <StaggerContainer staggerDelay={0.1} className="space-y-4">
-                                        {steps.map((step) => (
-                                            <StaggerItem key={step.number} variant="fadeUp">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-8 h-8 rounded-full bg-[#F96E00] text-white flex items-center justify-center font-bold font-montserrat text-sm flex-shrink-0">
-                                                        {step.number}
-                                                    </div>
-                                                    <span className="text-lg md:text-xl text-main-black font-montserrat font-medium">
-                                                        {step.text.includes('"') ? (
-                                                            <>
-                                                                {step.text.split('"')[0]}
-                                                                <span className="italic font-bold">&ldquo;{step.text.split('"')[1]}&rdquo;</span>
-                                                                {step.text.split('"')[2]}
-                                                            </>
-                                                        ) : step.text}
-                                                    </span>
-                                                </div>
-                                            </StaggerItem>
-                                        ))}
-                                    </StaggerContainer>
-                                </div>
-                            </ScrollReveal>
-
-                            {/* CTA Button */}
-                            <ScrollReveal variant="fadeUp" delay={0.5}>
+                {/* Bento-style card */}
+                <ScrollReveal variant="fadeUp" delay={0.2}>
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                        {/* Left — Discord preview (takes 3 cols) */}
+                        <motion.div
+                            className="lg:col-span-3 relative rounded-3xl overflow-hidden bg-main-black min-h-[320px] lg:min-h-[420px] group"
+                            whileHover={{ scale: 1.01 }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            <Image
+                                src="/community.webp"
+                                alt="Discord Community Preview"
+                                fill
+                                className="object-cover object-center opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                                sizes="(max-width: 1024px) 100vw, 60vw"
+                                loading="lazy"
+                            />
+                            {/* Overlay gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                            <div className="absolute bottom-6 left-6 right-6">
                                 <Button
-                                    className="bg-[#F96E00] hover:bg-[#e06300] text-white rounded-full py-6 px-8 text-base md:text-lg font-bold font-montserrat shadow-lg transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] inline-flex items-center gap-3"
+                                    variant="brand"
+                                    className="rounded-full py-5 px-6 text-sm font-bold font-montserrat inline-flex items-center gap-2.5 shadow-xl"
                                 >
-                                    <FaDiscord className="w-5 h-5" />
+                                    <FaDiscord className="w-4 h-4" />
                                     {t('openCommunity.joinChannel')}
                                 </Button>
-                            </ScrollReveal>
-                        </div>
+                            </div>
+                        </motion.div>
 
-                        {/* Right Image */}
-                        <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-full">
-                            <div className="absolute inset-0 lg:left-[-10%] z-0 scale-300 2xl:scale-250">
-                                <Image
-                                    src="/community.webp"
-                                    alt="Discord Community Preview"
-                                    fill
-                                    className="object-contain object-right translate-y-[3%] translate-x-[7%] 2xl:translate-y-[4%]"
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                        {/* Right — info stack (takes 2 cols) */}
+                        <div className="lg:col-span-2 flex flex-col gap-4">
+                            {/* What's Included card */}
+                            <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-6 flex-1">
+                                <h3 className="text-sm font-bold font-montserrat text-main-black uppercase tracking-wider mb-4">{t('openCommunity.whatsIncluded')}</h3>
+                                <StaggerContainer staggerDelay={0.06} className="space-y-3">
+                                    {inclusions.map((item, idx) => (
+                                        <StaggerItem key={idx} variant="fadeLeft">
+                                            <li className="flex items-start gap-2.5 font-montserrat text-[15px] text-slate-600 font-light list-none">
+                                                <span className="mt-0.5 w-5 h-5 rounded-md bg-brand/10 flex items-center justify-center flex-shrink-0">
+                                                    <IconCheck className="w-3 h-3 text-brand" />
+                                                </span>
+                                                {item}
+                                            </li>
+                                        </StaggerItem>
+                                    ))}
+                                </StaggerContainer>
+                            </div>
 
-                                    loading="lazy"
-                                />
+                            {/* How to Join card */}
+                            <div className="bg-main-black rounded-2xl p-6 flex-1">
+                                <h3 className="text-sm font-bold font-montserrat text-white uppercase tracking-wider mb-4">{t('openCommunity.howToJoin')}</h3>
+                                <StaggerContainer staggerDelay={0.08} className="space-y-3.5">
+                                    {steps.map((step) => (
+                                        <StaggerItem key={step.number} variant="fadeUp">
+                                            <div className="flex items-start gap-3">
+                                                <div className="w-6 h-6 rounded-full bg-brand text-white flex items-center justify-center font-bold font-montserrat text-[11px] flex-shrink-0 mt-0.5">
+                                                    {step.number}
+                                                </div>
+                                                <span className="text-[15px] text-white/75 font-montserrat font-light leading-snug">
+                                                    {step.text.includes('"') ? (
+                                                        <>
+                                                            {step.text.split('"')[0]}
+                                                            <span className="font-semibold text-white">&ldquo;{step.text.split('"')[1]}&rdquo;</span>
+                                                            {step.text.split('"')[2]}
+                                                        </>
+                                                    ) : step.text}
+                                                </span>
+                                            </div>
+                                        </StaggerItem>
+                                    ))}
+                                </StaggerContainer>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </ScrollReveal>
             </div>
-        </section >
+        </section>
     )
 }
