@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+# Run database migrations
+echo "Running database migrations..."
+node dist/db/migrate.js || { echo "Migration failed!"; exit 1; }
+echo "Migrations complete."
+
 # Check if database has been seeded by looking for any users
 NEEDS_SEED=$(node -e "
 const { db } = require('./dist/db/index.js');

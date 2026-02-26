@@ -41,6 +41,9 @@ COPY --from=prod-deps --chown=hono:nodejs /app/node_modules ./node_modules
 # Copy built application from build stage
 COPY --from=build --chown=hono:nodejs /app/dist ./dist
 
+# Copy drizzle migrations for runtime migration
+COPY --from=build --chown=hono:nodejs /app/drizzle ./drizzle
+
 # Copy package.json for runtime
 COPY --from=build --chown=hono:nodejs /app/package.json ./
 

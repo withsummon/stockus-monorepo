@@ -39,5 +39,3 @@ coverage
 README.md
 LICENSE
 
-# Database migrations (copied separately if needed)
-drizzle/*.sql
