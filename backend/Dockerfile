@@ -1,5 +1,5 @@
 # Stage 1: Install production dependencies only
-FROM node:20-slim AS prod-deps
+FROM node:22.23.4-slim AS prod-deps
 WORKDIR /app
 
 # Copy package files
@@ -9,7 +9,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --only=production
 
 # Stage 2: Build TypeScript application
-FROM node:20-slim AS build
+FROM node:22.23.4-slim AS build
 WORKDIR /app
 
 # Copy package files
@@ -25,7 +25,7 @@ COPY . .
 RUN npm run build
 
 # Stage 3: Production runtime
-FROM node:20-slim AS runner
+FROM node:22.23.4-slim AS runner
 WORKDIR /app
 
 # Set production environment
